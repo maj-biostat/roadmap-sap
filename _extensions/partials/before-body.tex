@@ -1,0 +1,36 @@
+\makeatletter
+\begin{titlepage}
+  \begin{center}
+    \includegraphics[width=0.7\linewidth, height=0.4\linewidth, keepaspectratio]{etc/logo.png}\\[4ex]
+    {\huge \bfseries  \@title{} }\\[2ex]
+    {\LARGE \bfseries  \@subtitle{} }\\[2ex]
+    {$description$}\\[2ex]
+    {\large Version: $version$}\\[2ex]
+    {\large Date: \@date}\\[2ex]
+    {
+      $if(by-author/allbutlast)$
+      $for(by-author/allbutlast)$
+      {Authors: \large{$by-author.name.literal$}}$sep$, 
+      $endfor$
+      $for(by-author/last)$
+      {and \large{$by-author.name.literal$}}
+      $endfor$
+      $else$
+      Author: ${by-author/last}
+      $endif$
+    }\\[10ex]
+    \fbox{\begin{tabular}{p{0.30\linewidth}p{0.5\linewidth}}
+        Sponsor:               & $sponsor$      \\
+                               &                \\
+        Registration (ANZCTR): & $registration$ \\
+                               &                \\
+        HREC                   & $hrec$         \\
+                               &                \\
+        Chief Investigator(s): & $ci1$           \\
+                               & $ci2$           \\
+      \end{tabular}}
+  \end{center}
+\end{titlepage}
+\makeatother
+\thispagestyle{empty}
+\newpage

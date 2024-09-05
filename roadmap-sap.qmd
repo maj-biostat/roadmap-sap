@@ -1,0 +1,217 @@
+---
+title: Statistical Analysis Plan
+subtitle: |
+    ROADMAP: RandOmised Arthroplasty infection worlDwide Multidomain Adaptive Platform trial
+description: |
+    Investigator initiated, Randomised Embedded Multifactorial Adaptive Platform (REMAP) trial, conducted across multiple hospitals in several regions of the world.
+date: last-modified
+date-format: "D MMMM YYYY"
+author: 
+  - name: Mark Jones
+    id: mj
+    email: mark.jones1@sydney.edu.au
+  - name: James Totterdell
+    id: jt
+    email: james.totterdell@sydney.edu.au
+version: 0.1
+sponsor: University of Newcastle, NSW, Australia
+protocol-number: Version 1.1  01AUG2024
+registration: todo
+hrec: todo
+ci1: Professor Joshua Davis  
+ci2: Professor Laurens Manning
+editor: source
+bibliography: etc/refs.bib
+csl: etc/elsevier-harvard.csl
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE
+)
+```
+
+```{r, echo = F}
+#| echo: false
+
+# uml digs
+suppressPackageStartupMessages(library(nomnoml))
+suppressPackageStartupMessages(library(ggplot2))
+suppressPackageStartupMessages(library(data.table))
+suppressPackageStartupMessages(library(kableExtra))
+suppressPackageStartupMessages(library(qs))
+suppressPackageStartupMessages(library(git2r))
+```
+
+{{< pagebreak >}}
+
+::: summary
+|     |        |
+|:----|:------------|
+|Study title:  |  ROADMAP: RandOmised Arthroplasty infection worlDwide Multidomain Adaptive Platform trial |
+|Intervention: |  Surgery type, backbone antibiotic duration, extended prophylaxis, antibiotic type |   
+|Study design:  |   Randomised Embedded Multifactorial Adaptive Platform trial | 
+|Sponsor:  |    University of Newcastle, NSW, Australia | 
+Protocol: |  Version 1.1  01AUG2024 |
+|Registration:  |    TODO | 
+|HREC:  |   TODO | 
+|Study date of first consent:  |   TODO | 
+|Principal coordinating investigators:  |   Professor Joshua Davis  and Professor Laurens Manning | 
+:::
+
+<!-- 
+Note that the above relies on the pandoc extension implemented in the lua file 
+in the etc directory. It additionally relies on the presence of a custom style
+in word called study summary. It will currently only work for word (because I
+cannot be bothered to implement it in anything else at the moment).
+-->
+
+
+{{< pagebreak >}}
+
+# Version history {.unlisted .unnumbered}
+
+| Version    |   Date     | Change    |   Reason     |
+|:----|:------------|:----|:------------|
+| 0.1 | 9/2024 | First version | N/A |
+
+
+{{< pagebreak >}}
+
+# Repository status {.unlisted .unnumbered}
+
+```{r}
+#| echo: false
+repo <- repository(path = ".")
+summary(repo)
+```
+
+
+{{< pagebreak >}}
+
+# Introduction
+
+ROADMAP is a project for evaluating the efficacy of a range of interventions used in the treatment of prosthetic joint infection (PJI) and is primarily intended to inform clinical decision making at point of care. 
+It is an international study run in Australia, New Zealand, Canada and the UK with multiple partners from the academia sector and is intended to be a perpetual platform, implying a single Master Protocol dictating the study conduct. 
+Each domain-level combination of interventions that enter the platform study is documented within separate Domain Specific Appendix (DSA) to the Master Protocol. 
+Conclusions and reports will be produced separately even though some placebo treated participants may contribute to several of the reports.
+All DSAs will be evalauated under a single model specification.
+
+
+## Background motivating research question(s)
+
+ROADMAP is motivated by several high-level questions related to the management of artificial joint infections^[Italics in the bullet list indicate updates that might be required for protocol.], specifically:
+
+1. For *late-acute* post-operative infections, is it better to keep the existing artificial joint and clean the infection or to replace the joint entirely?
+2. What is the most effective duration of backbone antibiotics after *one-stage revision* surgery?
+3. Is it better to include rifampicin in the backbone antibiotic treatment regimen?
+
+## Objectives, Endpoints and Estimand
+
+The main objective of the ROADMAP trial is to examine the effect of a range of interventions in patients with PJI (defined by the eligibility criteria) on treatment success where 
+this is defined as the patient being alive with clinical cure, not taking antibiotics for PJI and with the destination prothesis in place and is assessed at 12 months.
+@tbl-obj provides a summary of the domain-level objectives and further detail can be found in the protocol.
+
+| Domain | Objective    |   Endpoint     |
+|:----|:----|:------------|
+| Surgical | Determine whether revision (one or two-stage) is more effective than debridement in curing prosthetic joint infections in late-silo units.  | Treatment success at 12 months (alive, clinical cure, no antibiotics for PJI, destination prothesis in place). |
+| Antibiotic duration | Determine whether 6 weeks of backbone antibiotic is non-inferior to 12 weeks in curing prosthetic joint infections in units receiving one-stage revision. | Treatment success at 12 months. |
+| Extended prophylaxis | Determine whether 12 weeks of ext-prophylaxis is more effective than none in curing prosthetic joint infections in units receiving two-stage revision. | Treatment success at 12 months. |
+| Antibiotic choice | Determine whether the addition of rifampicin is more effective than not in curing prosthetic joint infections in units where one or more of the causative organisms is Gram-positive of interest (or infection is culture negative). | Treatment success at 12 months. |
+
+: ROADMAP domain-level analytic objectives {#tbl-obj tbl-colwidths="[20,45,35]"}
+
+
+The estimands are detailed in the protocol (references below correspond to those in the protocol).
+Estimands emphasise what is being estimated rather than how the estimation is undertaken.
+Below we add detail to the specification provided in the protocol with a focus on the interventions, population summaries and intercurrent events in an attempt to further clarify what is being estimated.
+
+
+### Primary estimand {#sec-html-tables}
+
+See estimand A.1 in the master protocol, which has been extended to classify each comparison.
+
+::: {.callout-note}
+While death (occurring prior, during or after the occurrence of the intervention) would ordinarily be considered an intercurrent event in this setting, it has been accounted for by its inclusion in the primary outcome definition, i.e. we implicitly adopt a composite strategy for death.
+Similarly, secondary or rescue surgery leading to the removal of a prosthetic is accounted for by its inclusion in the primary outcome definition, again being handled via a composite strategy.  
+
+Each of the treatment specific ICEs detailed may occur for a given unit in isolation or in conjunction with ICEs associated with treatment arms in other domains, e.g. a patient switches from DAIR to revision due to loose joint and discontinues extended prophylaxis due to adverse reaction.
+In such instances, it is possible that the approach for addressing the combination of ICEs may not be clearly defined unless the same strategy is intended for each of the ICEs.
+:::
+
+#### Estimand A.1.1 (surgical intervention)
+
+**High-level overview:**
+
+The estimand considers the effect of removing the infected joint relative to cleaning and leaving in place on treatment success at 12 months.
+
+**Treatment condition:**
+
+The protocol definitions of the surgical interventions are provided in the DSA for the Surgical strategy domain (late acute silo).
+These definitions give the detail on the setting and what needs to occur for each interventions for it to be considered to align with the protocol.
+For example, at a minimum and amongst other things, debridement and implant retentioin (DAIR) must include an open approach, exchange of modular components.
+The randomised treatment arms comprise DAIR and revision with the clinician permitted to self-select the type of revision (one or two-stage) to be used when a patient is assigned to the revision group.
+Likely intercurrent events and the approaches used to handle them are summarised in @tbl-ice1 where the treatment policy ICE strategy aims to establish the effect of initially randomised treatment.
+
+::: {.callout-note}
+Other ICEs are probably relevant such as withdrawal due to clinician perspective on patient best interest with regards to involvement in roadmap. However,  it may be acceptable to continue to collect data on such a patient, in which case the treatment policy would still be acceptable. Deviations from assigned treatment in terms of variations in procedures per the protocol definitions but not leading to switching would also constitute an ICE that impact the interpretation of the treatment effects. An example of this may be secondary surgery that does not lead to replacement of prosthetic, i.e. not handled via the composite strategy. Another example may be deviation from any protocol timings (are there any, e.g. is a dair at 1 week after randomisation the same as a dair 10 weeks after randomisation?) for the surgery to take place. These would also be handled via treatment policy.
+:::
+
+| ID | Arm |   ICE     |  Class | Strategy | 
+|:----:|:----|:------------|:------------|:------------|
+| A.1.1(i1) | DAIR  | If prosthesis is found to be loose when the joint is opened, the surgeon would routinely override allocation and do a revision. | Switchover | Treatment policy |
+| A.1.1(i2) | Revision  | If the patient becomes clinically unstable prior to or during the operation, the surgeon may abandon the attempt at revision and revert to a DAIR. | Switchover | Treatment policy |
+| A.1.1(i3) | Revision  | If one or more components of the prosthesis are too difficult to remove, the surgeon may abandon the attempt at revision and revert to a DAIR. This is more likely with a non-cemented hip than with a cemented hip or a knee. | Switchover | Treatment policy |
+
+: Surgery domain intercurrent events {#tbl-ice1 tbl-colwidths="[8,8,50,17,17]" .striped}
+
+Under a treatment policy strategy, the treatment regimen considered is, in fact, the initial randomized treatment with discontinuation or switch of treatment and/or alterations in background therapy, changes in medication and rescue therapy at any point in time.
+As such, this ICE strategy is not associated with a specific single treatment regimen, but rather yields a view of the average effects of a mix of regimens aligned to those that commonly occur in practice when undertaking DAIR or revision.
+
+Switchover will not generally result in the outcome variable being missing (assuming the patient followup continues to completion) but does affect the interpretation of the result due to dilution of the treatment effect.
+For example, in a two-arm trial, if the majority of units assigned to the first treatment switched over to the second treatment and none of the units assigned to the second treatment switched then an ITT/treatment policy approach would be comparing groups of units that effectively received the same treatment.
+
+**Population summary:**
+
+The population-level summary measure is the conditional odds ratio for revision relative to DAIR.
+
+Given the structure of the study, specifically, the desire to permit clinicians free choice of revision type and the dependency between specific revision types and entry into the antibiotic duration and extended prophylaxis domain, the population-level summary is constructed as a weighted conditional log odds ratio where the weights adopted would be those observed in the study sample.
+
+#### Estimand A.1.2 (antibiotic duration intervention)
+
+**High-level overview:**
+
+The estimand considers the effect of the duration of backbone antibiotics, specifically whether 6 weeks of backbone antibiotic is non-inferior to 12 weeks in patients receiving one-stage revision.
+
+**Treatment condition:**
+
+The protocol definitions of the surgical interventions are provided in the DSA for the Antibiotic duration domain following single stage revision.
+Potential intercurrent events and the approaches used to handle them are summarised in @tbl-ice2 where the treatment policy ICE strategy aims to establish the effect of initially randomised treatment.
+
+| ID | Arm |   ICE     |  Class | Strategy | 
+|:----:|:----|:------------|:------------|:------------|
+| A.1.2(i1) | 6 wk  | If patient has slow improvement, recrudescence of infection or need to return to theatre then clinicians may choose to prolong antibiotic therapy. | Extended therapy | Treatment policy |
+| A.1.2(i2) | 12 wk  | Adverse effects of antibiotics or patient discharge/relocation may lead to early termination of therapy. | Discontinuation | Treatment policy |
+
+: Antibiotic duration domain intercurrent events {#tbl-ice2 tbl-colwidths="[8,8,50,17,17]" .striped}
+
+Extended therapy in the 6 week group would make the responses more similar to the 12 week group leading to increase likelihood of non-inferiority decision, i.e. conclusions may anti-conservative. 
+Equally, early termination in the 12 week group would make the responses more similar to the 6 week group.
+
+**Population summary:**
+
+The population-level summary measure is the conditional odds ratio for revision relative to DAIR.
+
+Given the structure of the study, specifically, the desire to permit clinicians free choice of revision type and the dependency between specific revision types and entry into the antibiotic duration and extended prophylaxis domain, the population-level summary is constructed as a weighted conditional log odds ratio where the weights adopted would be those observed in the study sample.
+
+
+## Study design
+
+[@gelman1996a]
+
+# References
+
+<!-- Needs to have a citation for this to work otherwise you will get the old \end{CSLReferences} error  -->
+
+::: {#refs}
+:::

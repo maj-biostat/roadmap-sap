@@ -1,0 +1,44 @@
+project:
+  output-dir: docs
+  execute-dir: project
+
+toc: true
+toc-depth: 3
+toc-title: "Table of contents"
+number-sections: true
+highlight-style: github
+link-citations: true
+
+format:
+  pdf: 
+    pdf-engine: xelatex
+    documentclass: scrreprt
+    papersize: a4
+    fontsize: 11pt
+    mainfont: Libertinus Serif
+    sansfont: Libertinus Sans
+    monofont: Libertinus Mono
+    # mathfont: Asana Math
+    mathfont: Libertinus Math
+    linestretch: 1.25
+    template-partials: 
+      - _extensions/partials/before-body.tex
+    include-in-header:
+      text: |
+       \setkomafont{chapter}{\fontsize{16}{18}\selectfont}
+       \setkomafont{section}{\fontsize{14}{16}\selectfont}
+
+  docx:
+    reference-doc: etc/template-qmd.docx
+    number-sections: true
+    filters:
+    - _extensions/study-summary.lua
+    - _extensions/color-comment.lua
+    
+  html: default
+
+execute: 
+  message: false
+  warning: false
+  echo: false
+  
