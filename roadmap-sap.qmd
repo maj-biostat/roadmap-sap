@@ -130,13 +130,17 @@ Below we add detail to the specification provided in the protocol with a focus o
 ### Primary estimand {#sec-html-tables}
 
 See estimand A.1 in the master protocol, which has been extended to classify each comparison.
+A.1 approximates a *"pure-ITT"* approach in that all ICEs are currently handled by a treatment policy strategy.
+However, the outcome definition encapsulates a composite strategy for death and replacement of desination prothesis ICEs.
+Nevertheless, the additional detail is provided as it may be useful for context as the treatment policy strategy has particular consequences, especially when non-inferiority is a quantity of interest.
 
 ::: {.callout-note}
 While death (occurring prior, during or after the occurrence of the intervention) would ordinarily be considered an intercurrent event in this setting, it has been accounted for by its inclusion in the primary outcome definition, i.e. we implicitly adopt a composite strategy for death.
 Similarly, secondary or rescue surgery leading to the removal of a prosthetic is accounted for by its inclusion in the primary outcome definition, again being handled via a composite strategy.  
 
 Each of the treatment specific ICEs detailed may occur for a given unit in isolation or in conjunction with ICEs associated with treatment arms in other domains, e.g. a patient switches from DAIR to revision due to loose joint and discontinues extended prophylaxis due to adverse reaction.
-In such instances, it is possible that the approach for addressing the combination of ICEs may not be clearly defined unless the same strategy is intended for each of the ICEs.
+In such instances, the ICEs are still handled by their applicable strategy for the estimand under consideration.
+However, in instances where multiple ICEs (e.g. adverse event followed by discontinuation due to relocation) occur within a given unit for a given treatment, the approach for handling them may be vaguely defined.
 :::
 
 #### Estimand A.1.1 (surgical intervention)
@@ -187,14 +191,17 @@ Given the structure of the study, specifically, the desire to permit clinicians 
 
 **Missing data:**
 
-Missing data is possible due to inability to identify clinical records, formal requests to completely withdraw from the study (including use of data), loss to follow up due to relocation.
+Missing data is possible/inevitable(?) due to inability to identify clinical records, formal requests to completely withdraw from the study (including use of data), loss to follow up due to relocation.
 Additionally, components of the composite outcome may not be available in the clinical records (e.g. ongoing use of antibiotic).
-Missingness is assumed to be at random across all variables and variable components.
-This does not bias treatment effect estimation for logistic regression so long as the missingness is not dependent on the outcome and exposure, imply validity of complete-case analysis.
+Missingness is assumed to likely be low and at random across all variables and variable components.
+Under these assumptions, missingness imputation is not technically required and a complete-case analysis will yield unbiased estimates providing the missingness is not simultaneously dependent on the outcome and exposure.
+As such, imputation will not be adopted for the primary outcome variable.
+Where it exists, missingness in covariates will be addressed by deduction (where possible) or fixed imputation scheme (if reasonable).
 
 **Sensitivity:**
 
 Tipping point sensitivity analysis may be considered.
+Multiple imputation may be implemented.
 
 #### Estimand A.1.2 (antibiotic duration intervention)
 
@@ -294,7 +301,122 @@ Other sections are as above.
 
 ## Study design
 
-[@gelman1996a]
+ROADMAP is an investigator-initiated, phase IV (open label), multicentre, pragmatic, randomised embedded multifactorial adaptive platform (REMAP) formulated to investigate the efficacy of multiple study interventions simultaneously in cohorts of patients with confirmed or likely prosthetic joint infection in a large joint (hip, knee) with no age restriction.
+ROADMAP includes the development of a registry, however, that will not be discussed here.
+
+Bayesian methods were selected for gains model flexibility, ease of uncertainty quantification and incorparating adaptive elements, regularisation of parameter estimates and simplicity in interpretation.
+
+Initial treatment modality groups (domains) examine surgery type, antibiotic duration, extended prophylaxis and antibiotic choice.
+New interventions are permitted to enter into existing domains and new domains are also permitted subject to steering committee and ethics review.
+
+ROADMAP will be conducted sequentially (cohorts of 500 patients) with decision rules evaluated on parameter estimates of interest, driving domain-level stopping rules and platform conclusions.
+Early stopping is permitted under pre-specified conditions, specifically for superiority, non-inferiority and futility as applicable to the given domain.
+
+### Randomisation
+
+Units will be randomised (under fixed complete randomisation, i.e. non-adaptive and without restriction through blocking or stratification etc) to one arm within each domain for which they are eligible [@Rosenberger2016].
+However, given that entry into two of the domains are dependent on the status of the surgical intervention, some subtleties arise.
+For example, only units in receipt of one-stage revision can enter into randomised assignment for antibiotic duration and which prevents entry into extended prophylaxis.
+Similarly, only units in receipt of two-stage revision can enter into randomised assignment for extended prophylaxis. 
+A practical way to operationalise this is to simply randomise each unit to all available domains and then reveal the allocation as necessary.
+For example, a unit within any of the early, late or chronic silo would be allocated interventions for all domains.
+However, for early silo units, the surgical interventions are irrelevant and so never revealed, the antibiotic duration interventions would only be revealed if one-stage was received, the extended prophylaxis would only be revealed if two-stage was received and so on.
+
+### Sample size
+
+The initial trial funding and infrastructure has sufficient resources to enrol up to 2,500 participants into the platform.
+Thus, the sample size is initially constrained by the current resources and the desired structure, however, the study is intended to be perpetual and will seek funding to ensure recruitment beyond the initial sample size if necessary.
+Implications of the initial sample size on the amount of uncertainty that can be resolved under assumptions about the cohort population, the present design and assumed effects have been evaluated by simulation, see results later.
+
+### Data management
+
+An overview is provided in the Master Protocol.
+However, we note that the data storage approach will be decomposed into redcap components and (out-sourced) spiral platform components, the latter also being responsible for the randomisation processes.
+
+::: {.callout-note}
+Check on how this functionality is being decomposed. 
+What are the redcap parts and what belongs to spiral?
+:::
+
+# Statistical principles
+
+## Analysis sets
+
+The intent to treat (ITT) principle covers what units to include and what data to include on each unit.
+A strict interpretation of ITT demands collection and analysis of all data, but deviations from this are routinely accepted.
+
+Estimand A.1.* approximates an ITT view and the analysis population used for this estimand will include all units that were randomised and revealed to at least one of the domain-level interventions and have passed the primary endpoint of 12-months with their primary endpoint status known or known to be missing.
+Per the treatment policy strategy, all randomised patients will be included and analysed according to the regimen to which they were initially allocated irrespective of any deviations from this regimen or any other protocol deviations.
+
+Participants that have reached follow up, but for whom information has not yet been gathered will be treated as missing until the data has been entered.
+Participants who have been randomised, but have not yet reached the primary endpoint, will be excluded.
+
+
+
+## Description
+
+Consort
+
+screening
+
+eligibility
+
+recruitment
+
+withdrawal (level of withdrawal)
+
+baseline characteristics
+
+## Sequential analyses
+
+
+## Primary analysis
+
+what methods used, how will the trt effects be presented
+
+priors
+
+adjustment for cov
+
+missing data
+
+assumption checks
+
+variations
+
+
+
+sensitivity
+
+subgroups
+
+
+
+## Secondary analyses
+
+## Estimation
+
+Bayesian 
+
+## Missing data
+
+
+## Software
+
+versions etc
+
+# Statistical quantities
+
+# Decision processes
+
+
+# Adaptation
+
+
+# Simulation results
+
+## Enrolment progression at sequential analyses
+
 
 # References
 
