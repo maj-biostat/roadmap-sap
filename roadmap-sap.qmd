@@ -145,6 +145,8 @@ However, in instances where multiple ICEs (e.g. adverse event followed by discon
 
 #### Estimand A.1.1 (surgical intervention)
 
+In all cases, interest is in the main effects.
+
 **High-level overview:**
 
 The estimand considers the effect of removing the infected joint relative to cleaning and leaving in place on treatment success at 12 months.
@@ -304,7 +306,7 @@ Other sections are as above.
 ROADMAP is an investigator-initiated, phase IV (open label), multicentre, pragmatic, randomised embedded multifactorial adaptive platform (REMAP) formulated to investigate the efficacy of multiple study interventions simultaneously in cohorts of patients with confirmed or likely prosthetic joint infection in a large joint (hip, knee) with no age restriction.
 ROADMAP includes the development of a registry, however, that will not be discussed here.
 
-Bayesian methods were selected for gains model flexibility, ease of uncertainty quantification and incorparating adaptive elements, regularisation of parameter estimates and simplicity in interpretation.
+Bayesian methods were selected for its inherent model flexibility, ease of uncertainty quantification and incorparating adaptive elements, regularisation of parameter estimates and simplicity in interpretation.
 
 Initial treatment modality groups (domains) examine surgery type, antibiotic duration, extended prophylaxis and antibiotic choice.
 New interventions are permitted to enter into existing domains and new domains are also permitted subject to steering committee and ethics review.
@@ -351,11 +353,51 @@ Per the treatment policy strategy, all randomised patients will be included and 
 Participants that have reached follow up, but for whom information has not yet been gathered will be treated as missing until the data has been entered.
 Participants who have been randomised, but have not yet reached the primary endpoint, will be excluded.
 
+## Subgroups
+
+Subgroup populations (and analyses) enable effect heterogeneity to be explored.
+Only additive effects are included in the primary analysis linear predictor.
+Subgroup populations will explore heterogeneity by:
+
++ site of infection (joint - knee/hip)
+
+
+1.	Duration of symptoms at domain entry in days
+2.	At least one causative organism is S. aureus versus not
+3.	Serum C-reactive protein (CRP) at platform entry >100 versus <=100
+4.	Time from implantation of the index prosthesis to domain entry in days 
+5.	In those who are allocated to revision surgery: one stage versus two stage revision
+
+
+druation a
+
+1.	Silo is early, late acute or chronic
+2.	At least one causative organism is known at the time of domain eligibility assessment to be Staphylococcus aureus versus not
+3.	The revision procedure comprised all elements of an ‘ideal’ procedure vs.  not (section 7.2.1)
+
+
+druation b
+
+1.	Silo is early, late acute or chronic
+2.	At least one causative organism is known at the time of domain eligibility assessment to be Staphylococcus aureus versus none 
+3.	Duration between first-stage and reimplantation procedure 
+4.	Duration of antibiotic treatment between first-stage and reimplantation procedure 
+
+
+choice
+
+1.	Main surgical strategy was debridement, antibiotics and implant retention (DAIR), one-stage revision or two-stage revision.
+2.	At least one causative organism is a Staphylococcus (any species) versus none are. 
+
+
 
 
 ## Description
 
-Consort
+A CONSORT diagram will 
+When reporting on scheduled analyses (and other reporting when deemed necessary), a CONSORT-style flow diagram will illustrate patient progression through the platform and domains. Number (percentage) of participants randomised to each domain and intervention will be given for all randomised participants. Reasons for ineligibility will be presented by platform, domain, and intervention. Reasons for study withdrawal will be presented by intervention group.
+Cumulative randomisation charts will be presented overall and by study site.
+
 
 screening
 
@@ -370,7 +412,43 @@ baseline characteristics
 ## Sequential analyses
 
 
+## Analysis approach
+
+Analyses will be conducted within a Bayesian framework with a focus on the estimation of estimands as detailed earlier.
+Parameter estimates will be computed via Markov chain Monte Carlo (MCMC) using Hamiltonian Monte Carlo (HMC).
+Posterior summaries will be reported as posterior means and medians with 95% credible intervals.
+Convergence will be assessed visually and with reference to appropriate statistics. 
+Model fit will be considered with reference to posterior predictive checks. 
+
 ## Primary analysis
+
+The primary analysis model for ROADMAP will adjust for silo, joint, preference for revision type, region, site, time period of recruitment and baseline characteristics, adopting the following form:
+
+<!-- see the latex physics manual for vb notation -->
+
+$$
+\begin{aligned}
+Y &\sim \text{Bernoulli}(p) \\
+\text{logit}(p) &= \mu + \lambda_s + \rho_j + \phi_q + \sum_{d \in \mathcal{D}} \vb{x}_{d}^\top \vb*{\beta}_{d} + \psi_r + \zeta_{z(r)} + \tau_t + \vb{w}^\top \vb*{\gamma}
+\end{aligned}
+$$
+
+where $Y$ is a binary variable representing unit level treatment success with probability $p$ and the linear predictor terms are as follows:
+
++ $\mu$	reference level log-odds of a successful outcome
++ $\lambda_s$ shift attributable to membership in silo $s$
++	$\rho_j$ shift attributable site of infection $j$
++	$\phi_q$ shift attributable to preference for type of revision surgery $q$
++	$\vb*{\beta}_{d}$ shift attributable to each vector of treatment effects (including non-participation effects) as indicated by the row vector $\vb{x}$ for domain $d$ in the set of available domains $\mathcal{D}$ 
++	$\psi_r$ shift attributable to region $r$ 
++	$\zeta_{z(r)}$ shift attributable to site $z$ nested within region $r$
++	$\tau_t$ shift attributable to randomisation period $t$
++	$\vb*{\gamma}$ shift attributable to baseline characteristics as indicated by the row vector $\vb{w}$
+
+All treatment effects will be derived using g-computation.
+For the surgical domain, we will compute
+
+
 
 what methods used, how will the trt effects be presented
 
@@ -386,9 +464,9 @@ variations
 
 
 
-sensitivity
+### Sensitivity analysis
 
-subgroups
+### Subgroup considerations
 
 
 

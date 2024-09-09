@@ -25,6 +25,7 @@ format:
       - _extensions/partials/before-body.tex
     include-in-header:
       text: |
+       \usepackage{physics}
        \setkomafont{chapter}{\fontsize{16}{18}\selectfont}
        \setkomafont{section}{\fontsize{14}{16}\selectfont}
 
