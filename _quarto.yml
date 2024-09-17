@@ -1,6 +1,13 @@
 project:
   output-dir: docs
   execute-dir: project
+  # The "*.qmd" is necessary to describe which files should be rendered, 
+  # so if you've got some .Rmd files as well, you need to add another line 
+  # with "*.Rmd" to make sure they are rendered (if you want them to be).
+  # Plus the !refs/ explicitly excludes that folder from the render.
+  render: 
+    - "*.qmd"
+    - "!refs/"
 
 toc: true
 toc-depth: 3

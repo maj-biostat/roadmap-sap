@@ -445,7 +445,15 @@ where $Y$ is a binary variable representing unit level treatment success with pr
 +	$\tau_t$ shift attributable to randomisation period $t$
 +	$\vb*{\gamma}$ shift attributable to baseline characteristics as indicated by the row vector $\vb{w}$
 
-All treatment effects will be derived using g-computation.
+
+
+
+
+
+We use g-computation to implement the g-formula 
+
+
+
 For the surgical domain, we will compute
 
 
@@ -484,6 +492,72 @@ Bayesian
 versions etc
 
 # Statistical quantities
+
+## Treatment effects
+
+Interest lies primarily in the conditional effects of treatments under the various analyses.
+In general, treatment is randomised so the groups are exchangeable (i.e. the potential outcome associated with any treatment is independent of the treatment that was assigned).
+For the surgical domain, the choice of revision is left to the clinician and those groups are not exchangeable.
+
+::: {.callout-note}
+To expand on the above, assume that when a unit is randomised to revision and the clinical decision of what type of revision to do is based solely on disease severity with more severe units receiving one-stage and those that are less severe receive two-stage.
+This violates the exchangeability assumption in that if $\mathbb{E}[Y|T = 1] = y_1$ and $\mathbb{E}[Y|T = 2] = y_2$ (with $Y$ denoting the observed outcomes and $T = 1$, $T = 2$ denoting receipt of one and two-stage) then we would not obtain the same expectations if the sets of treatment units were switched.
+In other words, $\mathbb{E}[Y(1) | T = 1] \ne \mathbb{E}[Y(1) | T = 2] \ne \mathbb{E}[Y(1)]$ and $\mathbb{E}[Y(2) | T = 1] \ne \mathbb{E}[Y(2) | T = 2] \ne \mathbb{E}[Y(2)]$.
+To remedy this, we adjust for a covariate set (in this example, disease severity but in the primary analysis we adjust for revision type preference and additional patient characteristics) with the goal of achieving conditional exchangeability.
+:::
+
+
+### Primary analysis
+
+In the primary analysis we calculate the treatment effects (conditional log-odds-ratios) for all domains using g-computation and a Bayesian bootstrap to characterise the uncertainty in the covariate distribution.
+
+#### Surgical domain 
+
+For the surgical domain, we calculate the effect of revision relative to debridement as the difference between a weighted sum of the log-odds of treatment success under one-stage and two-stage revision minus the log-odds of treatment success under debridement.
+
+Specifically, we approximate the following integrals based on the fitted values for the patients in the late-acute silo:
+
+$$
+\begin{aligned}
+\mathbb{E}[\hat{\eta}(d_1 = 1, d_2 = 1, d_3 = 1, l)] &= \int_{\mathcal{L}} \hat{\eta}(d_1 = 1, d_2 = 1, d_3 = 1, l) d \hat{P}_L(l) \\
+\mathbb{E}[\hat{\eta}(d_1 = 2, d_2 = 1, d_3 = 1, r = 1, l)] &= \int_{\mathcal{L}} \hat{\eta}(d_1 = 2, d_2 = 1, d_3 = 1, r = 1, l) d\hat{P}_L(l) \\
+\mathbb{E}[\hat{\eta}(d_1 = 3, d_2 = 1, d_3 = 1, r = 2, l)] &= \int_{\mathcal{L}} \hat{\eta}(d_1 = 3, d_2 = 1, d_3 = 1, r = 2, l) d\hat{P}_L(l) \\
+\end{aligned}
+$$
+
+where $\hat{\eta}$ denotes the linear predictor function, $d_k$ denotes the interventions in the surgical ($k=1$), duration ($k=2$) and extended prophylaxis domains ($k=3$), $r$ denotes the preference when revision is assigned and $l$ denotes the remaining covariate set including preference where it is not explicitly conditioned on and **other domain level interventions** not fixed for the purposes of the comparison, site, time effects etc.
+We then compute the effect of revision relative to debridement as:
+
+$$
+\begin{aligned}
+\Delta_{d_1} &= \mathbb{E}[\hat{\eta}(d_1 = 2, d_2 = 1, d_3 = 1, r = 1, l)]\mathbb{E}[r = 1] + \\ 
+  & \quad \mathbb{E}[\hat{\eta}(d_1 = 3, d_2 = 1, d_3 = 1, r = 2, l)]\mathbb{E}[r = 2]  - \\ 
+  & \quad \mathbb{E}[\hat{\eta}(d_1 = 1, d_2 = 1, d_3 = 1, l)]
+\end{aligned}
+$$
+
+where $\mathbb{E}[r = 1]$ and $\mathbb{E}[r = 2]$ are the relevant weights based on the observed distribution of preference for revision type in the sample.
+
+::: {.callout-note}
+Question - Would it be more sensible to compute $\mathbb{E}[Y|\dots]$ from the inverse linke transformed linear predictor and then compute the log-odds ratios from there or is the above acceptable???
+:::
+
+#### Antibiotic duration domain 
+
+The antibiotic duration domain is simpler in that we calculate the effect of 6 weeks of backbone antibiotic relative to 12 weeks.
+We use analogous methods to those detailed above restricting to the subset revealed to randomised antibiotic duration, all of which would have received a one-stage revision and who would therefore have not entered into the extended prophylaxis domain.
+
+#### Extended prophylaxis domain 
+
+For the extended prophylaxis domain we calculate the effect of 12 weeks of extended prophylaxis relative to none again using analogous methods to those detailed above.
+The estimate is restricted to the subset revealed to randomised extended prophylaxis, all of which would have received a two-stage revision and who would therefore have not entered into the antibiotic duration domain.
+
+#### Antibiotic choice domain
+
+For the extended prophylaxis domain we calculate the effect of the addition of rifampacin relative to none again using analogous methods to those detailed above.
+The estimate is restricted to the subset revealed to randomised antibiotic choice, with no restrictions on the entry into the other domains.
+
+
 
 # Decision processes
 
