@@ -35,12 +35,13 @@ knitr::opts_chunk$set(
 #| echo: false
 
 # uml digs
-suppressPackageStartupMessages(library(nomnoml))
-suppressPackageStartupMessages(library(ggplot2))
+library(nomnoml)
+library(ggplot2)
 suppressPackageStartupMessages(library(data.table))
-suppressPackageStartupMessages(library(kableExtra))
+library(tibble)
+library(kableExtra)
 suppressPackageStartupMessages(library(qs))
-suppressPackageStartupMessages(library(git2r))
+library(git2r)
 ```
 
 {{< pagebreak >}}
@@ -317,7 +318,7 @@ Early stopping is permitted under pre-specified conditions, specifically for sup
 ### Randomisation
 
 Units will be randomised (under fixed complete randomisation, i.e. non-adaptive and without restriction through blocking or stratification etc) to one arm within each domain for which they are eligible [@Rosenberger2016].
-However, given that entry into two of the domains are dependent on the status of the surgical intervention, some subtleties arise.
+As entry into the duration domains are dependent on the status of the surgical intervention, some subtleties arise.
 For example, only units in receipt of one-stage revision can enter into randomised assignment for antibiotic duration and which prevents entry into extended prophylaxis.
 Similarly, only units in receipt of two-stage revision can enter into randomised assignment for extended prophylaxis. 
 A practical way to operationalise this is to simply randomise each unit to all available domains and then reveal the allocation as necessary.
@@ -424,14 +425,17 @@ Model fit will be considered with reference to posterior predictive checks.
 
 The primary analysis model for ROADMAP will adjust for silo, joint, preference for revision type, region, site, time period of recruitment and baseline characteristics, adopting the following form:
 
-<!-- see the latex physics manual for vb notation -->
+<!-- see the latex physics manual for vector va, vb notation -->
+<!-- in brief, for greek letters you need the * -->
 
 $$
 \begin{aligned}
 Y &\sim \text{Bernoulli}(p) \\
-\text{logit}(p) &= \mu + \lambda_s + \rho_j + \phi_q + \sum_{d \in \mathcal{D}} \vb{x}_{d}^\top \vb*{\beta}_{d} + \psi_r + \zeta_{z(r)} + \tau_t + \vb{w}^\top \vb*{\gamma}
+\text{logit}(p) &= \mu + \lambda_s + \rho_j + \phi_q + \sum_{d \in \mathcal{D}} \va{x}_{d}^\prime \va*{\beta}_{d} + \psi_r + \zeta_{z(r)} + \tau_t + \va{w}^\prime \va*{\gamma}
 \end{aligned}
 $$
+
+<!-- alternatively for transpose use \va{x}_{d}^\top -->
 
 where $Y$ is a binary variable representing unit level treatment success with probability $p$ and the linear predictor terms are as follows:
 
@@ -439,28 +443,55 @@ where $Y$ is a binary variable representing unit level treatment success with pr
 + $\lambda_s$ shift attributable to membership in silo $s$
 +	$\rho_j$ shift attributable site of infection $j$
 +	$\phi_q$ shift attributable to preference for type of revision surgery $q$
-+	$\vb*{\beta}_{d}$ shift attributable to each vector of treatment effects (including non-participation effects) as indicated by the row vector $\vb{x}$ for domain $d$ in the set of available domains $\mathcal{D}$ 
++	$\va*{\beta}_{d}$ shift attributable to each vector of treatment effects (including non-participation effects) as indicated by the row vector $\va{x}$ for domain $d$ in the set of available domains $\mathcal{D}$ 
 +	$\psi_r$ shift attributable to region $r$ 
 +	$\zeta_{z(r)}$ shift attributable to site $z$ nested within region $r$
 +	$\tau_t$ shift attributable to randomisation period $t$
-+	$\vb*{\gamma}$ shift attributable to baseline characteristics as indicated by the row vector $\vb{w}$
++	$\va*{\gamma}$ shift attributable to baseline characteristics as indicated by the row vector $\va{w}$
+
+
+In order to estimate the treatment effects of interest we use g-computation as described in @sec-statistical-quantities.
+Parameters estimates will be reported as point and interval summaries of the posterior.
+
+### Priors
+
+In general we will use weakly informative priors that will not overly constrain the results, but will  be consistent with the belief that extreme treatment effects are unlikely.
+
+The prior for $\mu$ will be set to
+
+$$
+\mu \sim \text{Logistic}(0, 1)
+$$
+
+which is centred on zero with 90% of its mass between $\pm 3$ on the log-odds scale and uniform on the probability scale.
+
+The priors for all main effects will be set to 
+
+$$
+(\lambda_s, \rho_j, \phi_q, \va*{\beta}_d, \va*{\gamma}) \sim \text{Normal}(0, 2)
+$$
+
+which are centred on zero with 90% of its mass between $\pm 3.3$ on the log-odds scale.
+
+Noting that some domains may vary their active set of interventions over time, a first-order random walk will be used to model temporal variation in the background response which has the following structure
+
+$$
+\begin{aligned}
+\tau_1 &= 0 \\
+\tau_i &= \text{Normal}(\tau_{i-1}, \sigma_\tau) \quad \forall \ i > 1 \\
+\sigma_\tau &\sim \text{Exponential}(1)
+\end{aligned}
+$$
+
+with indexes aligned with analyses the $\tau_1$ term representing the most recent analysis.
+
+::: {.callout-note}
+Question - Would it be preferable/more sensible to model on a finer granularity, i.e. monthly, quarterly etc?
+:::
 
 
 
 
-
-
-We use g-computation to implement the g-formula 
-
-
-
-For the surgical domain, we will compute
-
-
-
-what methods used, how will the trt effects be presented
-
-priors
 
 adjustment for cov
 
@@ -474,7 +505,7 @@ variations
 
 ### Sensitivity analysis
 
-### Subgroup considerations
+### Subgroup analysis
 
 
 
@@ -489,9 +520,11 @@ Bayesian
 
 ## Software
 
-versions etc
+Analyses will be implemented in R and Bayesian models will be implemented in Stan with posterior distributions approximated using Markov chain Monte Carlo.
 
-# Statistical quantities
+
+
+# Statistical quantities {#sec-statistical-quantities}
 
 ## Treatment effects
 
@@ -507,15 +540,14 @@ To remedy this, we adjust for a covariate set (in this example, disease severity
 :::
 
 
-### Primary analysis
+The following descriptions relate to the calculation of treatment effects (conditional log-odds-ratios) for the primary analysis.
+All domains using g-computation and a Bayesian bootstrap to characterise the uncertainty in the covariate distribution.
 
-In the primary analysis we calculate the treatment effects (conditional log-odds-ratios) for all domains using g-computation and a Bayesian bootstrap to characterise the uncertainty in the covariate distribution.
-
-#### Surgical domain 
+### Surgical domain 
 
 For the surgical domain, we calculate the effect of revision relative to debridement as the difference between a weighted sum of the log-odds of treatment success under one-stage and two-stage revision minus the log-odds of treatment success under debridement.
 
-Specifically, we approximate the following integrals based on the fitted values for the patients in the late-acute silo:
+Specifically, we approximate the following (Riemann-Stieltjes) integrals based on the fitted values for the patients in the late-acute silo:
 
 $$
 \begin{aligned}
@@ -525,41 +557,126 @@ $$
 \end{aligned}
 $$
 
-where $\hat{\eta}$ denotes the linear predictor function, $d_k$ denotes the interventions in the surgical ($k=1$), duration ($k=2$) and extended prophylaxis domains ($k=3$), $r$ denotes the preference when revision is assigned and $l$ denotes the remaining covariate set including preference where it is not explicitly conditioned on and **other domain level interventions** not fixed for the purposes of the comparison, site, time effects etc.
-We then compute the effect of revision relative to debridement as:
+where $\hat{\eta}$ denotes the linear predictor function, $d_k$ denotes the interventions in the surgical ($k=1$), duration ($k=2$) and extended prophylaxis domains ($k=3$) with the surgical domain ($d_1$) indexes corresponding to debridement, one-stage and two-stage respectively. 
+Preference for surgical type under revision is denoted by $r$ and, finally, $l$ denotes the remaining covariate set including preference where it is not explicitly conditioned on and **other domain level interventions** not fixed for the purposes of the comparison, site, time effects etc.
+We compute the effect of revision relative to debridement as:
 
 $$
 \begin{aligned}
-\Delta_{d_1} &= \mathbb{E}[\hat{\eta}(d_1 = 2, d_2 = 1, d_3 = 1, r = 1, l)]\mathbb{E}[r = 1] + \\ 
+\Delta_{d_1[1]} &= \mathbb{E}[\hat{\eta}(d_1 = 2, d_2 = 1, d_3 = 1, r = 1, l)]\mathbb{E}[r = 1] + \\ 
   & \quad \mathbb{E}[\hat{\eta}(d_1 = 3, d_2 = 1, d_3 = 1, r = 2, l)]\mathbb{E}[r = 2]  - \\ 
   & \quad \mathbb{E}[\hat{\eta}(d_1 = 1, d_2 = 1, d_3 = 1, l)]
 \end{aligned}
 $$
 
-where $\mathbb{E}[r = 1]$ and $\mathbb{E}[r = 2]$ are the relevant weights based on the observed distribution of preference for revision type in the sample.
+where $\Delta_{d_1[1]}$ denotes the log-odds-ratio comparison of interest^[There is currently only one comparison of interest for each domain but the index gives us the ability to refer to others should the need arise.], $\mathbb{E}[r = 1]$ and $\mathbb{E}[r = 2]$ are the relevant weights based on the observed distribution of preference for revision type in the sample.
 
 ::: {.callout-note}
 Question - Would it be more sensible to compute $\mathbb{E}[Y|\dots]$ from the inverse linke transformed linear predictor and then compute the log-odds ratios from there or is the above acceptable???
 :::
 
-#### Antibiotic duration domain 
+### Antibiotic duration domain 
 
-The antibiotic duration domain is simpler in that we calculate the effect of 6 weeks of backbone antibiotic relative to 12 weeks.
-We use analogous methods to those detailed above restricting to the subset revealed to randomised antibiotic duration, all of which would have received a one-stage revision and who would therefore have not entered into the extended prophylaxis domain.
+The antibiotic duration domain treatment effects are simpler to estimate than those in the surgical domain in that we can calculate the effect of 6 weeks of backbone antibiotic relative to 12 weeks directly.
+To do so, we use methods analogous to those detailed above restricting to the subset revealed to randomised antibiotic duration, all of which would have received a one-stage revision and who would therefore have not entered into the extended prophylaxis domain.
 
-#### Extended prophylaxis domain 
+### Extended prophylaxis domain 
 
-For the extended prophylaxis domain we calculate the effect of 12 weeks of extended prophylaxis relative to none again using analogous methods to those detailed above.
-The estimate is restricted to the subset revealed to randomised extended prophylaxis, all of which would have received a two-stage revision and who would therefore have not entered into the antibiotic duration domain.
+For the extended prophylaxis domain we calculate the effect of 12 weeks of extended prophylaxis relative to none again using methods analogous to those detailed above.
+The estimation procedure is restricted to the subset revealed to randomised extended prophylaxis, all of which would have received a two-stage revision and who would therefore have not entered into the antibiotic duration domain.
 
-#### Antibiotic choice domain
+### Antibiotic choice domain
 
-For the extended prophylaxis domain we calculate the effect of the addition of rifampacin relative to none again using analogous methods to those detailed above.
-The estimate is restricted to the subset revealed to randomised antibiotic choice, with no restrictions on the entry into the other domains.
+For the antibiotic choice domain we calculate the effect of the addition of rifampacin relative to none again using methods analogous to those detailed above.
+The estimation process is restricted to the subset revealed to randomised antibiotic choice, with no restrictions on the entry into the other domains.
+
+
+# Decision procedures
+
+Trial decisions are made based on probability assessments with respect to comparisons of interest that are characterised by model parameters as discussed earlier.
+In its current format, the trial considers:
+
++ superiority - indicating that an intervention is beneficial relative to a comparator
++ non-inferiority - indicating that an intervention is no worse than some clinically relevant threshold to a comparator 
++ futility - indicating a low probability with respect to a superiority or non-inferiority assessment, as applicable
+
+The mathematical definitions of these quantities are provided below and a table of the thresholds currently in use is defined in @tbl-dec-thres.
+
+```{r}
+#| echo: FALSE
+#| label: tbl-dec-thres
+#| tbl-pos: H
+#| tbl-cap: "Decision thresholds"
+
+d_tbl <- tribble(
+  ~ Domain, ~ Quantity, ~ Threshold, ~ Probability,
+  "Surgical", "Superiority \n revision vs debridement", "$>0$", "$\\ge 0.99$",
+  "Surgical", "Futility \n revision vs debridement", "$>\\log(1.2)$", "$\\le 0.05$",
+  "Antibiotic duration", "Non-inferiority \n 6 weeks vs 12 weeks", "$> \\log(1/1.2)$", "$\\ge 0.99$",
+  "Antibiotic duration", "Futility \n 6 weeks vs 12 weeks", "$<\\log(1/1.2)$", "$\\le 0.2$",
+  "Extended prophylaxis", "Superiority \n 12 weeks vs none", "$>0$", "$\\ge 0.99$",
+  "Extended prophylaxis", "Futility \n 12 weeks vs none", "$>\\log(1.2)$", "$\\le 0.05$",
+  "Antibiotic choice", "Superiority \n rifampacin vs none", "$>0$", "$\\ge 0.99$",
+  "Antibiotic choice", "Futility \n rifampacin vs none", "$>\\log(1.2)$", "$\\le 0.05$"
+  )
+
+kableExtra::kbl(
+  d_tbl, format = "latex", align = c("l", "l", "l", "l"), escape = FALSE,
+  col.names = c("Domain", "Quantity", "Comparison", "Probability threshold")) |>
+  kable_paper("hover", full_width = F) |>
+  kable_styling(latex_options = "scale_down") 
+#  see above comment - do not use hold_position, use tbl-pos instead
+#   kable_styling(latex_options = "hold_position")
+```
+
+The actions that occur when decision threshold are met have been detailed in the core protocol and will not be duplicated here.
+
+## Superiority
+
+Superiority implies that an intervention has high probability of being beneficial relative to a comparator intervention.
+Generally, superiority is a probability assessment against zero.
+For any of the treatment effect parameters obtained from the primary analysis results we define:
+
+$$
+\begin{aligned}
+\mathbb{I}_{d_k[c]}^\text{sup} = \text{Pr}(\Delta_{d_k[c]} > s_{d_k[c]}) \ge \gamma_{d_k[c]}^\text{sup}
+\end{aligned}
+$$
+
+as treatment superiority where $\mathbb{I}_{d_k[c]}^\text{sup}$ is a boolean indicator of superiority, for the comparison indexed by $c$ within the $d_k$ domain relative to a reference level $s_{d_k[c]}$ (generally zero) at a probability greater than or equal to $\gamma_{d_k[c]}^\text{sup}$.
+
+## Non-inferiority
+
+Non-inferiority implies that an intervention has a high probability of being no worse than some pre-specified clinical threshold relative to the comparator intervention.
+Generally, non-inferiority is a probability assessment against $\log(1/1.2)$.
+For any of the treatment effect parameters obtained from the primary analysis results we define:
+
+$$
+\begin{aligned}
+\mathbb{I}_{d_k[c]}^\text{ni} = \text{Pr}(\Delta_{d_k[c]} > n_{d_k[c]}) \ge \gamma_{d_k[c]}^\text{ni}
+\end{aligned}
+$$
+
+as treatment non-inferiority where $\mathbb{I}_{d_k[c]}^\text{ni}$ is a boolean indicator of non-inferiority, for the comparison indexed by $c$ within the $d_k$ domain relative to a reference level $n_{d_k[c]}$ at a probability greater than or equal to $\gamma_{d_k[c]}^\text{ni}$.
+
+## Futility
+
+Futility with respect to a superiority or non-inferiority assessment implies that an intervention has low probability relative to the comparator intervention with respect to that assessment.
+Generally, non-inferiority is a probability assessment against $\log(1.2)$.
+For any of the treatment effect parameters obtained from the primary analysis results we define:
+
+$$
+\begin{aligned}
+\mathbb{I}_{d_k[c]}^\text{fut} = \text{Pr}(\Delta_{d_k[c]} > f_{d_k[c]}) \le \gamma_{d_k[c]}^\text{fut}
+\end{aligned}
+$$
+
+as treatment futility where $\mathbb{I}_{d_k[c]}^\text{fut}$ is a boolean indicator of futility with respect to the superiority assessement, for the comparison indexed by $c$ within the $d_k$ domain relative to a reference level $f_{d_k[c]}$ (generally $\log(1.2)$) at a probability greater than or equal to $\gamma_{d_k[c]}^\text{fut}$.
 
 
 
-# Decision processes
+
+
 
 
 # Adaptation
