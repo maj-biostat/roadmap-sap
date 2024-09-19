@@ -107,6 +107,16 @@ ROADMAP is motivated by several high-level questions related to the management o
 2. What is the most effective duration of backbone antibiotics after *one-stage revision* surgery?
 3. Is it better to include rifampicin in the backbone antibiotic treatment regimen?
 
+Each of these will be evaluated with reference to the primary outcome at 12 months from platform entry with the composite outcome defined as the co-occurrence of
+
+1. Alive
+2. Clinical cure (no microbiological evidence of infection)
+3. No ongoing use of antibiotics for the index joint 
+4. The destination prosthesis is in place after the initial management strategy is complete
+
+The absence of any of the above elements implies treatment failure.
+More detail on the primary outcome definition is given in the protocol.
+
 ## Objectives, endpoints and estimands
 
 The main objective of the ROADMAP trial is to examine the effect of a range of interventions in patients with PJI (defined by the eligibility criteria) on treatment success where 
@@ -341,7 +351,7 @@ Check on how this functionality is being decomposed.
 What are the redcap parts and what belongs to spiral?
 :::
 
-# Statistical principles
+# Statistical methods
 
 ## Analysis sets
 
@@ -354,64 +364,78 @@ Per the treatment policy strategy, all randomised patients will be included and 
 Participants that have reached follow up, but for whom information has not yet been gathered will be treated as missing until the data has been entered.
 Participants who have been randomised, but have not yet reached the primary endpoint, will be excluded.
 
-## Subgroups
+## Subgroups {#sec-subgroups}
 
-Subgroup populations (and analyses) enable effect heterogeneity to be explored.
-Only additive effects are included in the primary analysis linear predictor.
-Subgroup populations will explore heterogeneity by:
+Stratification of effects to subgroup populations enable effect heterogeneity to be explored, but come at the increased risk of instability, bias and false positives.
+Subgroup populations have been identified in the various appendices but are duplicated here in summary form for convenience, @tbl-subgrp-1.
 
-+ site of infection (joint - knee/hip)
+```{r}
+#| echo: FALSE
+#| label: tbl-subgrp-1
+#| tbl-pos: H
+#| tbl-cap: "Subgroup populations"
 
+d_tbl <- tribble(
+  ~ Domain, ~ Subgroup, 
+  "Surgical", "Site of infection by joint (hip/knee)",
+  "", "Duration of symptoms at domain entry in days", 
+  "", "At least one causative organism is S. aureus versus not", 
+  "", "Serum C-reactive protein (CRP) at platform entry >100 versus <=100", 
+  "", "Time from implantation of the index prosthesis to domain entry in days", 
+  "", "In those who are allocated to revision surgery: one stage versus two stage revision", 
+  "Antibiotic duration", "Silo is early, late acute or chronic",
+  "", "At least one causative organism is known at the time of domain eligibility assessment to be Staphylococcus aureus versus not",
+  "", "revision procedure comprised all elements of an ‘ideal’ procedure vs.  not",
+  "Extended prophylaxis", "Silo membership", 
+  "", "At least one causative organism is known at the time of domain eligibility assessment to be Staphylococcus aureus versus none", 
+  "", "Duration between first-stage and reimplantation procedure", 
+  "", "Duration of antibiotic treatment between first-stage and reimplantation procedure", 
+  
+  "Antibiotic choice", "Type of surgery (DAIR, one-stage, two-stage)", 
+  "", "At least one causative organism is a Staphylococcus (any species) versus none"
+  )
 
-1.	Duration of symptoms at domain entry in days
-2.	At least one causative organism is S. aureus versus not
-3.	Serum C-reactive protein (CRP) at platform entry >100 versus <=100
-4.	Time from implantation of the index prosthesis to domain entry in days 
-5.	In those who are allocated to revision surgery: one stage versus two stage revision
-
-
-druation a
-
-1.	Silo is early, late acute or chronic
-2.	At least one causative organism is known at the time of domain eligibility assessment to be Staphylococcus aureus versus not
-3.	The revision procedure comprised all elements of an ‘ideal’ procedure vs.  not (section 7.2.1)
-
-
-druation b
-
-1.	Silo is early, late acute or chronic
-2.	At least one causative organism is known at the time of domain eligibility assessment to be Staphylococcus aureus versus none 
-3.	Duration between first-stage and reimplantation procedure 
-4.	Duration of antibiotic treatment between first-stage and reimplantation procedure 
-
-
-choice
-
-1.	Main surgical strategy was debridement, antibiotics and implant retention (DAIR), one-stage revision or two-stage revision.
-2.	At least one causative organism is a Staphylococcus (any species) versus none are. 
-
+kableExtra::kbl(
+  d_tbl, format = "latex", align = c("l", "l", "l", "l"), escape = FALSE,
+  col.names = c("Domain", "Subgroup population")) |>
+  kable_paper("hover", full_width = F) |>
+  column_spec(2, width = "13cm") |>
+  kable_styling(latex_options = "scale_down") 
+#  see above comment - do not use hold_position, use tbl-pos instead
+#   kable_styling(latex_options = "hold_position")
+```
 
 
 
 ## Description
 
-A CONSORT diagram will 
-When reporting on scheduled analyses (and other reporting when deemed necessary), a CONSORT-style flow diagram will illustrate patient progression through the platform and domains. Number (percentage) of participants randomised to each domain and intervention will be given for all randomised participants. Reasons for ineligibility will be presented by platform, domain, and intervention. Reasons for study withdrawal will be presented by intervention group.
-Cumulative randomisation charts will be presented overall and by study site.
 
+A CONSORT diagram will will be provided to detail patient progression showing:
 
-screening
++ participants screened
++ participants eligible (giving reasons for ineligibility)
++ participants consented
++ participants entering into randomised treatment (revealed) by domain and intervention
++ participants withdrawing from study
++ participants reaching 12-month endpoint
 
-eligibility
+Recruitment numbers will be reported by region and site and intervention availability by domain will be presented, again by site.
 
-recruitment
-
-withdrawal (level of withdrawal)
-
-baseline characteristics
+Protocol deviations and the occurrence of intercurrent events will be summarised by domain and intervention.
+Baseline demographics will be provided by domain and intervention.
 
 ## Sequential analyses
 
+Interim analyses will be run over the life of the trial to evaluate pre-specified decision criteria.
+Analyses will start once 500 participants have reached the primary endpoint and every 4 months thereafter.
+
+::: {.callout-note}
+Need to revisit this timing.
+I think it is probably more operationally practical to run interims on a regular timing rather than for fixed sample size.
+:::
+
+The analysis will focus solely on the primary outcome (with subgroup analyses run conditional on futility rules being triggered, see later) and will follow the approach detailed in @sec-primary-analysis.
+Only the analytical group responsible for providing the interim analysis results to the DSMC will be unblinded to the individual treatment group assignments. 
 
 ## Analysis approach
 
@@ -421,7 +445,7 @@ Posterior summaries will be reported as posterior means and medians with 95% cre
 Convergence will be assessed visually and with reference to appropriate statistics. 
 Model fit will be considered with reference to posterior predictive checks. 
 
-## Primary analysis
+## Primary analysis {#sec-primary-analysis}
 
 The primary analysis model for ROADMAP will adjust for silo, joint, preference for revision type, region, site, time period of recruitment and baseline characteristics, adopting the following form:
 
@@ -431,7 +455,7 @@ The primary analysis model for ROADMAP will adjust for silo, joint, preference f
 $$
 \begin{aligned}
 Y &\sim \text{Bernoulli}(p) \\
-\text{logit}(p) &= \mu + \lambda_s + \rho_j + \phi_q + \sum_{d \in \mathcal{D}} \va{x}_{d}^\prime \va*{\beta}_{d} + \psi_r + \zeta_{z(r)} + \tau_t + \va{w}^\prime \va*{\gamma}
+\text{logit}(p) &= \mu + \lambda_s + \rho_j + \phi_q + \sum_{d \in \mathcal{D}} \va{x}_{d}^\prime \va*{\beta}_{d} + \tau_t + \psi_r + \zeta_{z(r)} + \va{w}^\prime \va*{\gamma}
 \end{aligned}
 $$
 
@@ -443,7 +467,7 @@ where $Y$ is a binary variable representing unit level treatment success with pr
 + $\lambda_s$ shift attributable to membership in silo $s$
 +	$\rho_j$ shift attributable site of infection $j$
 +	$\phi_q$ shift attributable to preference for type of revision surgery $q$
-+	$\va*{\beta}_{d}$ shift attributable to each vector of treatment effects (including non-participation effects) as indicated by the row vector $\va{x}$ for domain $d$ in the set of available domains $\mathcal{D}$ 
++	$\va*{\beta}_{d}$ shift attributable to each vector of treatment effects (including non-participation effects) as indicated by the row vector $\va{x}^\prime$ for domain $d$ in the set of available domains $\mathcal{D}$ 
 +	$\psi_r$ shift attributable to region $r$ 
 +	$\zeta_{z(r)}$ shift attributable to site $z$ nested within region $r$
 +	$\tau_t$ shift attributable to randomisation period $t$
@@ -468,10 +492,16 @@ which is centred on zero with 90% of its mass between $\pm 3$ on the log-odds sc
 The priors for all main effects will be set to 
 
 $$
-(\lambda_s, \rho_j, \phi_q, \va*{\beta}_d, \va*{\gamma}) \sim \text{Normal}(0, 2)
+(\lambda_s, \rho_j, \phi_q, \va*{\beta}_d, \va*{\gamma}) \sim \text{Normal}(0, 2.5)
 $$
 
 which are centred on zero with 90% of its mass between $\pm 3.3$ on the log-odds scale.
+
+The baseline covariates in the model include
+
++ age
++ sex
++ ...
 
 Noting that some domains may vary their active set of interventions over time, a first-order random walk will be used to model temporal variation in the background response which has the following structure
 
@@ -489,42 +519,131 @@ with indexes aligned with analyses the $\tau_1$ term representing the most recen
 Question - Would it be preferable/more sensible to model on a finer granularity, i.e. monthly, quarterly etc?
 :::
 
+The prior for region will be set as per the main effects detailed above with the first region fixed to zero. 
+Site priors will be nested within region and set as 
+
+$$
+\begin{aligned}
+\zeta_{z(r)} &\sim \text{Normal}(0, \sigma_\zeta) \\
+\sigma_\zeta &\sim \text{Exponential}(1)
+\end{aligned}
+$$
 
 
-
-
-adjustment for cov
-
-missing data
-
-assumption checks
-
-variations
-
-
+The primary analysis model will be assessed for adequacy. 
+Additional models (either simpler or more complex) may be investigated as part of checks of sensitivity, stability, and model fit. If any issues or concerns arise (for example, strong evidence of interactions across treatment domains), all changes or updates to the specified primary model will be documented and reported.
 
 ### Sensitivity analysis
 
-### Subgroup analysis
 
+
+## Subgroup analyses {#sec-subgroup-analyses}
+
+Pre-specified subgroup analyses will be restricted to the primary analysis with exploratory subgroup analyses being discretionary.
+The general approach will be to use the complete data, effectively incorporating first-order interactions within the relevant models via hierarchical models for each subgroup considered.
+Analyses will be run for final reporting on each domain but also at interim analyses for the relevant domain-level subgroups if a futility decision is triggered with the latter analysis motivated by a prior belief in the possibility of material treatment effect heterogeneity.
+Additionally, the researchers had a desire to mitigate the possibility of terminating entry into a domain for subgroups when the possibility of a positive outcome remained.
+
+To address subgroups, the primary analysis model is revised such that the parameters in the linear predictor are split for all relevant groups.
+For example, for evaluation of silo-specific effects, the revised linear predictor would take the following form:
+
+$$
+\begin{aligned}
+\mu_s + \rho_{j,s} + \phi_{q,s} + \sum_{d \in \mathcal{D}} \va{x}_{d}^\prime \va*{\beta}_{d} + \tau_t + \psi_r + \zeta_{z(r)} + \va{w}_s^\prime \va*{\gamma_{s}}
+\end{aligned}
+$$
+
+leaving time and site effects unstratified (along with terms where identification is infeasible).
+For each of the main effects priors are converted to a hierarchical structure, for example for the surgical domain treatment effects:
+
+$$
+\begin{aligned}
+(\va*{\beta}_{1,s}) &\sim \text{Normal}(\nu, \sigma_\nu) \\
+\nu &\sim \text{Normal}(0, 2.5) \\
+\sigma_\nu &\sim \text{Half-Normal}(0, 1)
+\end{aligned}
+$$
+
+and with other main effects dealt with analogously.
+
+<!-- minutes from 2024-09-09 -->
+
+<!-- a.	Subgroups on joint: MJ: decision was to not look at heterogeneity in joint and make all decisions like assuming constant effects across joint in the interim analyses. At the interim analyses, do the subgroup analysis to look at heterogeneity by joint, and then have some sort of policy to put forward a case to the DSMC if needed as a way to see the differences in effects for various groups. LM: piano data doesn’t suggest there is a major difference in surgical outcomes between the two groups. Updated core protocol provides us the opportunity to leave one group open is there is inconsistency across the subgroups. MJ: operational perspective: make futility decision on surgery, look at sub-group specific effects of surgery and if one isn’t futile, there is the opportunity to continue randomising for those sub-groups. For any sub-groups in any of the domains (to avoid doing additional ethics amendment). Subgroups analysis only if the trigger is met.  MJ to consider -->
 
 
 ## Secondary analyses
 
-## Estimation
 
-Bayesian 
+### Desirability of outcome ranking
+Ordinal regression, specifically cumulative logistic regression
+
+### Patient-reported joint function (Oxford hip or knee score) at 12 months
+Ordinal regression, specifically cumulative logistic regression
+
+### Patient-reported quality of life (EQ5D5L) at 12 months
+Linear regression
+
+### Cost effectiveness
+Bayesian simulation
+
+### All-cause mortality at 12 months after platform entry
+Hazard Model
+
+### Clinical cure at 12 months after platform entry (as defined in the primary outcome)
+Cause specific hazard model 
+
+### Proportion no longer taking any antibiotics for the index joint at 12 months (as defined in the primary outcome)
+Logistic regression
+
+### Proportion in whom the destination prosthesis is still in place at 12 months (as defined in the primary outcome)
+Logistic regression
+
+
+### Microbiological relapse (Positive joint fluid or tissue culture for one or more of the index isolates between 100 days and 12 months after platform entry)
+Cause specific hazard model
+
+### Microbiological reinfection (Positive joint fluid or tissue culture with a different organism to the index isolates between 100 days and 12 months after platform entry)
+Cause specific hazard model
+
+
+### Time to joint registry captured revision procedure (within 24 months) from platform entry
+Cause specific hazard model
 
 ## Missing data
 
+### Primary outcome variable
+
+Given the use of a composite outcome variable for the primary analysis, missingness in the composite elements can have differing implications to the interpretation of the outcome.
+The composite is ascertained through the use of hospital databases, followup with healthcare provider and/or patient and/or data linkage with death registries.
+
+Treatment failure is indicated if any of the four composite elements are observed to fail. That is, if we see any of death, absence of clinical cure, ongoing antibiotic use or destination prosthesis absent, then the unit is a failure, irrespective of whether the other elements of the composite are observed or missing.
+
+Being alive, if direct evidence is missing, can be implied by the existence of any of observation of the other elements in the composite.
+If all other elements are missing and death cannot be confirmed by other sources then the unit could either be alive or dead (e.g. they might have died out of country although this seems highly improbable).
+More likely is that if a patient cannot be found in a death registry, then they are alive.
+
+Clinical cure suggests that antibiotics would no longer be required and therefore could possibly be a proxy for antibiotic status if it were missing, although this would not be definitive.
+Conversely, if the status of clinical cure were missing and antibiotic status were known, then we could possibly take the fact that antibiotics were not being received to imply clinical cure.
+
+Destination prosthesis status could be not be implied by other elements of the composite and therefore the outcome status cannot be confirmed if it is missing.
+
+### Covariates
+
+When missing, some covariates can be completed by implication.
+For example, if region is missing, but site is available, region is implied.
+
+### Handling missingness
+
+When missingness is completely at random or dependent on covariates, but not jointly dependent on the exposure and the outcome then, within logistic regression, the parameter estimate for the exposure is unbiased under complete case analysis [@hughes2019].
+Therefore, a complete case approach will be used at the interims and final analysis.
+A sensitivity analysis will be run for the final analysis using multiple imputation to imputate both the missing components of the composite primary outcome variable and missing covariate values.
+Missing values will be imputed using a fully conditional specification via multivariate imputation by chained equations [@vanbuuren2011].
 
 ## Software
 
 Analyses will be implemented in R and Bayesian models will be implemented in Stan with posterior distributions approximated using Markov chain Monte Carlo.
 
-
-
-# Statistical quantities {#sec-statistical-quantities}
+# Quantities of interest {#sec-statistical-quantities}
 
 ## Treatment effects
 
@@ -593,7 +712,7 @@ The estimation process is restricted to the subset revealed to randomised antibi
 
 # Decision procedures
 
-Trial decisions are made based on probability assessments with respect to comparisons of interest that are characterised by model parameters as discussed earlier.
+Trial decisions are made based on probabilities associated with the comparisons of interest as characterised by the model parameters discussed earlier.
 In its current format, the trial considers:
 
 + superiority - indicating that an intervention is beneficial relative to a comparator
@@ -630,6 +749,8 @@ kableExtra::kbl(
 ```
 
 The actions that occur when decision threshold are met have been detailed in the core protocol and will not be duplicated here.
+However, any occurrence of a futility decision requires that a subgroup analysis as per the populations listed in @sec-subgroups using the methods detailed in @sec-subgroup-analyses for the relevant domain(s).
+For a futility decision to hold, it is expected that all relevant subgroups would show futility.
 
 ## Superiority
 
@@ -674,17 +795,14 @@ $$
 as treatment futility where $\mathbb{I}_{d_k[c]}^\text{fut}$ is a boolean indicator of futility with respect to the superiority assessement, for the comparison indexed by $c$ within the $d_k$ domain relative to a reference level $f_{d_k[c]}$ (generally $\log(1.2)$) at a probability greater than or equal to $\gamma_{d_k[c]}^\text{fut}$.
 
 
-
-
-
-
-
 # Adaptation
+
+Three possible adaptations are currently identified, namely early stopping (due to superiority, non-inferiority or futility), the addition of interventions within existing domains and the addition of entirely new domains.
 
 
 # Simulation results
 
-## Enrolment progression at sequential analyses
+## Enrolment progression at sequential analyses (todo)
 
 
 # References
