@@ -10,7 +10,7 @@ project:
     - "!refs/"
 
 toc: true
-toc-depth: 3
+toc-depth: 4
 toc-title: "Table of contents"
 number-sections: true
 highlight-style: github

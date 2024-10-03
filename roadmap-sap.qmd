@@ -119,9 +119,9 @@ Each of these will be evaluated with reference to the primary outcome at 12-mont
 The absence of any of the above elements implies treatment failure.
 More detail on the primary outcome definition is given in the protocol.
 
-## Objectives, endpoints and estimands
+## Objectives and endpoints
 
-The main objective of the ROADMAP trial is to examine the effects associated with a range of interventions in patients with PJI (defined by the eligibility criteria) on treatment success where this is defined as the patient being alive with clinical cure, not taking antibiotics for PJI and with the destination prothesis in place and is assessed at 12 months.
+The overarching objective for ROADMAP trial is to examine the effect of a range of interventions in patients with PJI (defined by the eligibility criteria) on treatment success where that is defined as the patient being alive with clinical cure, not taking antibiotics for PJI and with the destination prothesis in place and is assessed at 12 months.
 @tbl-obj provides a high-level summary of the domain objectives.
 Further detail can be found in the protocol.
 
@@ -160,9 +160,16 @@ gt_tbl
 ```
 
 
-The estimands are detailed in the protocol (references below correspond to those in the protocol).
+The estimands are detailed in the core protocol (references below correspond to those in the protocol) and also in the domain specific appendicies.
+
+::: {.callout-note}
+The estimands are introduced in generality in the core protocol and then made specific in the DSA but not much more detail was added.
+We might be better served by removing estimands from the core protocol and having them solely in the DSAs, but with more detail than they presently have, and then fleshed out here as required.
+@Mallinckrodt2020 gives guidanace on how to improve the current specification because the way the estimands are presently stated is basically tokenistic rather than providing any real value to anyone.
+:::
+
 Estimands emphasise what is being estimated rather than how the estimation is undertaken.
-Below we add detail to the specification provided in the protocol with a focus on the interventions, population summaries and intercurrent events in an attempt to further clarify what is being estimated.
+Below we add detail to the specification provided in the protocol and DSAs with a focus on the treatment regimen, population summaries and intercurrent events.
 
 ::: {.callout-note}
 In particular, notice that each of the treatment-specific ICEs included in the discussion that follows may occur for a given unit in isolation or in conjunction with ICEs associated with treatment arms in other domains, e.g. a patient switches from DAIR to revision due to having a loose joint and then also discontinues extended prophylaxis due to adverse reaction.
@@ -171,55 +178,61 @@ For the above example, this implies that for the surgical domain comparison we w
 Similarly, when considering the extended prophylaxis comparison, we would likely only refer to the ICE associated with discontinuation and not the ICE relating to the loose joint.
 :::
 
+## Estimands
+
 ### Primary estimand {#sec-html-tables}
 
-See estimand A.1 in the master protocol, which has been extended here in order to provide additional details on all the comparisons that are involved.
+For each domain there is a primary estimand for which a generic overview is given in the core protocol and then a specific version provided in the DSAs.
 
-A.1 approximates a *"pure-ITT"* approach in that all ICEs are intended to be handled under a treatment policy strategy whereby the ICEs are effectively considered to be part of the treatment regimen of interest and can therefore be ignored @Mallinckrodt2020.
-We do, however, note that the definition of the primary outcome implies a composite strategy for both the ICEs relating to death and the replacement of desination prothesis.
+The primary estimand for all the domains targets an intention to treat (ITT) perspective in that all ICEs are to be handled under a treatment policy strategy.
+This means that all ICEs are effectively considered to be part of the treatment regimen of interest and are therefore be ignored, @Mallinckrodt2020.
+However, the definition of the primary outcome does, in fact, imply a composite strategy for (what would be) ICEs relating to both death and the replacement of desination prothesis.
 
-The additional detail provided here is intended to aid thinking and interpretation as the use of a treatment policy strategy has particular implications, especially when non-inferiority is a quantity of interest.
+The detail provided here is intended to clarify intent and aid thinking and interpretation as the use of a ICE strategies have specific implications that would otherwise remain unstated.
+All the identifiers relate to those used in the DSAs.
 
 ::: {.callout-note}
-While death (occurring prior, during or after the occurrence of the intervention) would ordinarily be considered an intercurrent event in this setting, it has been accounted for by its inclusion in the primary outcome definition, i.e. we implicitly adopt a composite strategy for death.
+While death (occurring prior, during or after the occurrence of the intervention) may ordinarily be considered an intercurrent event in this clinical setting, it has been accounted for by its inclusion in the primary outcome definition, i.e. we implicitly adopt a composite strategy for death.
 Similarly, secondary or rescue surgery leading to the removal of a prosthetic is accounted for by its inclusion in the primary outcome definition and again implies the composite strategy.  
 :::
 
-#### Estimand A.1.1 (surgical intervention)
+#### Estimand B.1 (surgical intervention)
 
 <!-- In all cases, interest is in the main effects. -->
 
-**High-level overview:**
+**High-level lay overview:**
 
-The estimand considers the effect of removing the infected joint relative to cleaning and leaving in place on treatment success at 12 months.
+The estimand considers the effect of removing the infected joint versus cleaning and leaving the joint in place on treatment success at 12 months.
 
-**Treatment condition:**
+**Treatment regimen/ICEs:**
 
-The protocol definitions of the interventions are provided in the DSA for the Surgical strategy domain (late acute silo).
-These definitions give the full detail on the setting and what needs to occur for each interventions in order for it to be considered to be per-protocol.
-For example, at a minimum, debridement and implant retention (DAIR) must include an open approach, exchange of modular components.
+The protocol definitions for the surgical interventions are given in the DSA for the Surgical strategy domain (late acute silo).
+These definitions provide detail for all the interventions under consideration.
+For example, at a minimum, debridement and implant retention (DAIR) must include an open approach, exchange of modular components, removal of the synovial lining of the joint and irrigation etc.
 
 The randomised treatment arms comprise DAIR and revision with the clinician permitted to self-select the type of revision (one or two-stage) to be used when a patient is assigned to the revision group.
-Likely intercurrent events and the approaches used to handle them are summarised in @tbl-ice1 where the treatment policy ICE strategy aims to establish the effect of initially randomised treatment.
+The treatment regimen being evaluated is expanded upon below.
+
+Likely intercurrent events for the surgical domain and the approaches used to handle them are summarised in @tbl-ice-b1.
 
 ::: {.callout-note}
-Other ICEs are probably relevant here.
+Other ICEs are possibly relevant but not yet considered.
 For example, withdrawal due to the clinical opinion on what is in the patient's best interest with regards to their involvement in roadmap. However, even if a patient is withdrawn by request of the clinician, it may be acceptable to continue to collect data on such a patient, in which case the treatment policy would still be relevant.
 
-Deviations from assigned treatment in terms of variations in procedures per the protocol definitions but not leading to switching would also constitute an ICE that impact the interpretation of the treatment effects. An example of this may be secondary surgery that does not lead to replacement of prosthetic, i.e. not handled via the composite strategy. Another example may be deviation from any protocol timings such as a requirement to have a surgical procedure within a given time window from randomisation. These would also be currently handled via treatment policy but have not yet been made explicit.
+Deviations from assigned treatment in terms of variations in procedures per the protocol definitions but not leading to switching would also constitute an ICE that impact the interpretation of the treatment effects. An example of this may be secondary surgery that does not lead to replacement of prosthetic, i.e. not handled via the composite strategy. Another example may be deviation from any protocol timings such as a requirement to have a surgical procedure within a given time window from randomisation. Within this estimand, these would also be currently handled via the treatment policy strategy.
 :::
 
 ```{r}
 #| echo: FALSE
-#| label: tbl-ice1
+#| label: tbl-ice-b1
 #| tbl-pos: H
 #| tbl-cap: "Surgery domain intercurrent events"
 
 d_tbl <- tribble(
   ~ id, ~ arm, ~ ice, ~ class , ~ strategy, 
-  "A.1.1(i1)" , "DAIR"  , "If prosthesis is found to be loose when the joint is opened, the surgeon would routinely override allocation and do a revision." , "Switchover" , "Treatment policy" ,
-"A.1.1(i2)" , "Revision"  , "If the patient becomes clinically unstable prior to or during the operation, the surgeon may abandon the attempt at revision and revert to a DAIR." , "Switchover" , "Treatment policy" ,
-"A.1.1(i3)" , "Revision"  , "If one or more components of the prosthesis are too difficult to remove, the surgeon may abandon the attempt at revision and revert to a DAIR. This is more likely with a non-cemented hip than with a cemented hip or a knee." , "Switchover" , "Treatment policy"  
+  "B.1(i1)" , "DAIR"  , "If prosthesis is found to be loose when the joint is opened, the surgeon would routinely override allocation and do a revision." , "Switchover" , "Treatment policy" ,
+"B.1(i2)" , "Revision"  , "If the patient becomes clinically unstable prior to or during the operation, the surgeon may abandon the attempt at revision and revert to a DAIR." , "Switchover" , "Treatment policy" ,
+"B.1(i3)" , "Revision"  , "If one or more components of the prosthesis are too difficult to remove, the surgeon may abandon the attempt at revision and revert to a DAIR. This is more likely with a non-cemented hip than with a cemented hip or a knee." , "Switchover" , "Treatment policy"  
   )
 
 gt_tbl <- gt(d_tbl) |>
@@ -241,31 +254,40 @@ gt_tbl <- gt(d_tbl) |>
     class = "Class",
     strategy = "Strategy"
   ) |>
-  tab_options(table.font.size = "70%")
+  tab_options(table.font.size = "70%") |> 
+  tab_footnote(
+    footnote = md("Switchover will not generally result in the outcome variable being missing (assuming the patient followup continues to completion) but does affect the interpretation of the result due to dilution of the treatment effect. For example, in a two-arm trial, if the majority of units assigned to the first treatment switched over to the second treatment and none of the units assigned to the second treatment switched then an ITT/treatment policy approach would be comparing groups of units that effectively received the same treatment."),
+    locations = cells_body(
+      columns = class,
+      rows = 1
+    )
+  )
 
 gt_tbl
 ```
 
-Under a treatment policy strategy, the treatment regimen under consideration is, in fact, the initial randomized treatment with discontinuation or switch of treatment and/or alterations in background therapy, changes in medication and rescue therapy at any point in time.
 
-As such, this ICE strategy is not associated with a specific single treatment regimen, but rather yields a view of the average effects of a mix of regimens aligned to those that commonly occur in practice when undertaking DAIR or revision.
+The treatment regimen under evaluation is the randomised and revealed surgical treatment in conjunction with any occurrence of specified or unspecified ICE(s) in combination with randomised and non-randomised treatments associated with other domains.
+That is, interest is in the comparison of groups without allowances for lack of adherence, adding or switching, changes in background medication, and so on.
+As such, the estimand is not associated with a specific single treatment protocol, but rather the average of a total effect of a mix of regimens aligned to those that commonly occur in practice when undertaking DAIR or revision.
 
-Switchover will not generally result in the outcome variable being missing (assuming the patient followup continues to completion) but does affect the interpretation of the result due to dilution of the treatment effect.
-For example, in a two-arm trial, if the majority of units assigned to the first treatment switched over to the second treatment and none of the units assigned to the second treatment switched then an ITT/treatment policy approach would be comparing groups of units that effectively received the same treatment.
+::: {.callout-note}
+In the above, perhaps it would be more accurate to say that the regimen is the "randomised and revealed surgical treatment ... in additon to a specific combination of randomised and non-randomised treatments associated with other domains."
+:::
 
 **Population summary:**
 
-The population-level summary measure is the conditional odds ratio for revision relative to DAIR.
+The population-level summary measure is the conditional odds ratio for revision comprising both one-stage and two-stage procedures relative to DAIR.
 
 **Data useful for estimand:**
 
-It is important that units continue to be followed up after the occurrence of an ICE.
+It is important that units continue to be followed up after the occurrence of an ICE to obtain detail on the final status of the primary outcome.
 
 **Main estimator:**
 
 A single Bayesian multivariable logistic regression model is used to characterise unit responses for the primary outcome across all domains with further detail provided in later sections.
 
-Given the structure of the study, specifically, the desire to permit clinicians free choice of revision type and the dependency between specific revision types and entry into the antibiotic duration and extended prophylaxis domain, the population-level summary is constructed as a weighted conditional log odds ratio where the weights adopted would be those observed in the study sample.
+Given the structure of the study, specifically, the desire to permit clinicians free choice of revision type and the dependency between specific revision types and entry into the antibiotic duration and extended prophylaxis domain, the population-level summary is constructed as a weighted conditional log odds ratio where the weights adopted are to be informed by the sample distribution for the surgical revision type under assignment to revision.
 
 **Missing data:**
 
@@ -273,36 +295,36 @@ Missing data is inevitable due to, for example, limitations in identifying clini
 Additionally, components of the composite outcome may not be available in the clinical records (e.g. ongoing use of antibiotics for the specific reason of managing prosthetic infection might not be adequately recorded).
 However, missingness is assumed to be low and also at random across all variables and variable components such that imputation could, in principle, be undertaking by conditioning on observed variates.
 
-Under the above assumptions, that is the missingness is not simultaneously dependent on the outcome and exposure, imputation is not technically required and a complete-case analysis will yield unbiased estimates of the treatment effects.
-Therefore, imputation will not be adopted for the primary outcome variable.
+Under the above assumptions, that is the missingness is not simultaneously dependent on the outcome and exposure, multiple imputation is not technically required and a complete-case likelihood-based analysis will yield unbiased estimates of the treatment effects.
+Therefore, multiple imputation will not be adopted for the primary outcome variable.
 Where it occurs, missingness in covariates will be addressed by deduction (where possible) or fixed imputation scheme (if reasonable) and will be disclosed in the reporting.
 
 **Sensitivity:**
 
-Tipping point sensitivity analysis and multiple imputation may be considered and implemented at the discretion of the analyst.
+Tipping point sensitivity analysis and multiple imputation schemes may be considered and implemented at the discretion of the analyst and will be disclosed in the reporting.
 
-#### Estimand A.1.2 (antibiotic duration intervention)
+#### Estimand D.1 (antibiotic duration intervention)
 
-**High-level overview:**
+**High-level lay overview:**
 
 The estimand considers the effect of the duration of backbone antibiotics on treatment success at 12 months, specifically whether 6 weeks of backbone antibiotic is non-inferior to 12 weeks in patients receiving one-stage revision.
 
-**Treatment condition:**
+**Treatment regimen/ICEs:**
 
-The protocol definitions of the interventions are provided in the DSA for the Antibiotic duration domain following single stage revision.
-Potential intercurrent events and the approaches used to handle them are summarised in @tbl-ice2 where the treatment policy ICE strategy aims to establish the effect of initially randomised treatment.
+The protocol definitions of the interventions are provided in the DSA for the antibiotic duration domain following single stage revision.
 
+Potential intercurrent events and the approaches used to handle them are summarised in @tbl-ice-d1 where the treatment policy ICE strategy aims to establish the effect of initially randomised treatment.
 
 ```{r}
 #| echo: FALSE
-#| label: tbl-ice2
+#| label: tbl-ice-d1
 #| tbl-pos: H
 #| tbl-cap: "Antibiotic duration domain intercurrent events"
 
 d_tbl <- tribble(
   ~ id, ~ arm, ~ ice, ~ class , ~ strategy, 
-  "A.1.2(i1)" , "6 wk"  , "If patient has slow improvement, recrudescence of infection or need to return to theatre then clinicians may choose to prolong antibiotic therapy." , "Extended therapy" , "Treatment policy" ,
-"A.1.2(i2)" , "12 wk"  , "Adverse effects of antibiotics or patient discharge/relocation may lead to early termination of therapy." , "Discontinuation" , "Treatment policy" 
+  "D.1(i1)" , "6 wk"  , "If patient has slow improvement, recrudescence of infection or need to return to theatre then clinicians may choose to prolong antibiotic therapy." , "Extended therapy" , "Treatment policy" ,
+"D.1(i2)" , "12 wk"  , "Adverse effects of antibiotics or patient discharge/relocation may lead to early termination of therapy." , "Discontinuation" , "Treatment policy" 
   )
 
 gt_tbl <- gt(d_tbl) |>
@@ -324,15 +346,29 @@ gt_tbl <- gt(d_tbl) |>
     class = "Class",
     strategy = "Strategy"
   ) |>
-  tab_options(table.font.size = "70%")
+  tab_options(table.font.size = "70%")  |> 
+  tab_footnote(
+    footnote = md("Extended therapy in the 6 week group would make the responses more similar to the 12 week group leading to increase likelihood of non-inferiority decision, i.e. conclusions may anti-conservative."),
+    locations = cells_body(
+      columns = class,
+      rows = 1
+    )
+  )  |> 
+  tab_footnote(
+    footnote = md("Discontinuation in the 12 week group would make the responses more similar to the 6 week group."),
+    locations = cells_body(
+      columns = class,
+      rows = 2
+    )
+  )
 
 gt_tbl
 ```
 
 
+The treatment regimen under evaluation is the randomised and revealed antibiotic duration treatment in conjunction with any occurrence of specified or unspecified ICE(s) in combination with randomised and non-randomised treatments associated with other domains.
+That is, interest is in the comparison of groups without allowances for lack of adherence, adding or switching, changes in background medication, and so on.
 
-Extended therapy in the 6 week group (A.1.2(i1)) would make the responses more similar to the 12 week group leading to increase likelihood of non-inferiority decision, i.e. conclusions may anti-conservative. 
-Similarly, early termination in the 12 week group (A.1.2(i2)) would make the responses more similar to the 6 week group.
 
 **Population summary:**
 
@@ -342,28 +378,29 @@ Other sections are as above.
 
 
 
-#### Estimand A.1.3 (extended prophylaxis intervention)
+#### Estimand E.1 (extended prophylaxis intervention)
 
-**High-level overview:**
+**High-level lay overview:**
 
 The estimand considers the effect of the extended prophylaxis on treatment success at 12 months, specifically whether 12 weeks of extended prophylaxis is more effective than none following the second stage of the revision procedure in patients receiving two-stage revision.
 
-**Treatment condition:**
+**Treatment regimen/ICEs:**
 
 The protocol definitions of the interventions are provided in the DSA for the Antibiotic duration domain (extended prophylaxis) following a two-stage revision.
-Potential intercurrent events and the approaches used to handle them are summarised in @tbl-ice3 where the treatment policy ICE strategy aims to establish the effect of initially randomised treatment.
+
+Potential intercurrent events and the approaches used to handle them are summarised in @tbl-ice-e1 where the treatment policy ICE strategy aims to establish the effect of initially randomised treatment.
 
 ```{r}
 #| echo: FALSE
-#| label: tbl-ice3
+#| label: tbl-ice-e1
 #| tbl-pos: H
 #| tbl-cap: "Extended prophylaxis domain intercurrent events"
 
 d_tbl <- tribble(
   ~ id, ~ arm, ~ ice, ~ class , ~ strategy, 
-  "A.1.3(i1)" , "None"  , "If the patient has slow improvement, recrudescence of infection or need to return to theatre then clinicians may choose to prolong extended prophylaxis therapy." , "Extended therapy" , "Treatment policy" ,
-"A.1.3(i2)" , "None"  , "If the patient shows late positive culture, they may become ineligible after revealed to their and would also receive an additional 6-12 weeks of backbone antibiotic." , "Extended therapy" , "Treatment policy" ,
-"A.1.3(i3)" , "12 wk"  , "Adverse effects of antibiotics or patient discharge/relocation may lead to early termination of therapy." , "Discontinuation" , "Treatment policy" 
+  "E.1(i1)" , "None"  , "If the patient has slow improvement, recrudescence of infection or need to return to theatre then clinicians may choose to prolong extended prophylaxis therapy." , "Extended therapy" , "Treatment policy" ,
+"E.1(i2)" , "None"  , "If the patient shows late positive culture, they may become ineligible after revealed to their and would also receive an additional 6-12 weeks of backbone antibiotic." , "Extended therapy" , "Treatment policy" ,
+"E.1(i3)" , "12 wk"  , "Adverse effects of antibiotics or patient discharge/relocation may lead to early termination of therapy." , "Discontinuation" , "Treatment policy" 
   )
 
 gt_tbl <- gt(d_tbl) |>
@@ -385,7 +422,21 @@ gt_tbl <- gt(d_tbl) |>
     class = "Class",
     strategy = "Strategy"
   ) |>
-  tab_options(table.font.size = "70%")
+  tab_options(table.font.size = "70%")  |> 
+  tab_footnote(
+    footnote = md("Extended therapy in the no extended prophylaxis group would make the group more similar to the 12 week group leading to increase likelihood of non-inferiority decision, i.e. conclusions may anti-conservative."),
+    locations = cells_body(
+      columns = class,
+      rows = 1
+    )
+  )  |> 
+  tab_footnote(
+    footnote = md("Discontinuation in the 12 week group would make the responses more similar to the no extended prophylaxis group."),
+    locations = cells_body(
+      columns = class,
+      rows = 3
+    )
+  )
 
 gt_tbl
 ```
@@ -395,8 +446,10 @@ gt_tbl
 TODO - Get more detail on A.1.3(i2) and check my interpretation is correct.
 :::
 
-Extended therapy in the no extended prophylaxis group would make the group more similar to the 12 week group leading to increase likelihood of non-inferiority decision, i.e. conclusions may anti-conservative. 
-Equally, early termination in the 12 week group would make the responses more similar to the no extended prophylaxis group.
+
+The treatment regimen under evaluation is the randomised and revealed extended prophylaxis treatment in conjunction with any occurrence of specified or unspecified ICE(s) in combination with randomised and non-randomised treatments associated with other domains.
+That is, interest is in the comparison of groups without allowances for lack of adherence, adding or switching, changes in background medication, and so on.
+
 
 **Population summary:**
 
@@ -405,28 +458,29 @@ The population-level summary measure is the conditional odds ratio for 12 weeks 
 Other sections are as above.
 
 
-#### Estimand A.1.4 (choice intervention)
+#### Estimand C.1 (antibiotic choice intervention)
 
-**High-level overview:**
+**High-level lay overview:**
 
 The estimand considers the effect of the antibiotic choice on treatment success at 12 months, specifically whether the use of rifampicin is more effective than none for domain eligible units.
 
-**Treatment condition:**
+**Treatment regimen/ICEs:**
 
 The protocol definitions of the interventions are provided in the DSA for the Antibiotic choice domain.
-Potential intercurrent events and the approaches used to handle them are summarised in @tbl-ice4 where the treatment policy ICE strategy aims to establish the effect of initially randomised treatment.
+
+Potential intercurrent events and the approaches used to handle them are summarised in @tbl-ice-c1 where the treatment policy ICE strategy aims to establish the effect of initially randomised treatment.
 
 ```{r}
 #| echo: FALSE
-#| label: tbl-ice4
+#| label: tbl-ice-c1
 #| tbl-pos: H
 #| tbl-cap: "Choice domain intercurrent events"
 
 d_tbl <- tribble(
   ~ id, ~ arm, ~ ice, ~ class , ~ strategy, 
-  "A.1.4(i1)" , "None"  , "If the patient has slow improvement (e.g. 1-4 weeks post operatively), clinicians may add rifampicin despite assignment." , "Switchover" , "Treatment policy" ,
-"A.1.4(i2)" , "Rifampicin"  , "If the site pharmacy runs out of or does not have any rifampicin in stock may lead to early termination or non-receipt of therapy." , "Discontinuation or non-receipt" , "Treatment policy" ,
-"A.1.4(i3)" , "Rifampicin"  , "Adverse effects of rifampicin (intractable nausea, severe hepatitis) may lead to early termination of therapy." , "Discontinuation" , "Treatment policy"  
+  "C.1(i1)" , "None"  , "If the patient has slow improvement (e.g. 1-4 weeks post operatively), clinicians may add rifampicin despite assignment." , "Switchover" , "Treatment policy" ,
+"C.1(i2)" , "Rifampicin"  , "If the site pharmacy runs out of or does not have any rifampicin in stock may lead to early termination or non-receipt of therapy." , "Discontinuation or non-receipt" , "Treatment policy" ,
+"C.1(i3)" , "Rifampicin"  , "Adverse effects of rifampicin (intractable nausea, severe hepatitis) may lead to early termination of therapy." , "Discontinuation" , "Treatment policy"  
   )
 
 gt_tbl <- gt(d_tbl) |>
@@ -448,7 +502,14 @@ gt_tbl <- gt(d_tbl) |>
     class = "Class",
     strategy = "Strategy"
   ) |>
-  tab_options(table.font.size = "70%")
+  tab_options(table.font.size = "70%") |> 
+  tab_footnote(
+    footnote = md("Both discontinuation/non-receipt of rifampicin or addition of rifampicin to the the control group make groups more similar than they otherwise would be."),
+    locations = cells_body(
+      columns = class,
+      rows = c(2,3)
+    )
+  )
 
 gt_tbl
 ```
@@ -459,7 +520,8 @@ Clarify A.1.4(i1), would this still constitute switchover after the delayed star
 As with other domains, patient discharge/relocation is probably relevant.
 :::
 
-Both discontinuation/non-receipt of rifampicin or addition of rifampicin to the the control group make groups more similar than they otherwise would be. 
+The treatment regimen under evaluation is the randomised and revealed antibiotic choice treatment in conjunction with any occurrence of specified or unspecified ICE(s) in combination with randomised and non-randomised treatments associated with other domains.
+That is, interest is in the comparison of groups without allowances for lack of adherence, adding or switching, changes in background medication, and so on.
 
 **Population summary:**
 
@@ -468,12 +530,71 @@ The population-level summary measure is the conditional odds ratio for rifampici
 Other sections are as above.
 
 
-### Secondary estimands
+### Supportive estimands
+
+Supportive estimands are provided to address the needs of other stakeholders giving alternative perspectives and interpretations of intervention effects.
+
+Given the number of estimands defined in the DSAs, only those where ICEs are not handled under the treatment policy strategy are discussed.
+
+By and large, all of the supportive estimands should be treated as exploratory.
+
+#### Estimand B.2 (surgical intervention)
+
+**High-level lay overview:**
+
+Per the primary estimand for the surgical domain, this secondary/supportive estimand considers the effect of removing the infected joint versus cleaning and leaving the joint in place on treatment success at 12 months.
+However, the treatment regimen under consideration is tightened to a sub-population that adhered to the assigned treatment.
 
 ::: {.callout-note}
-The DSA considers some secondary estimands, e.g. the surgical domain (late-actue) outlines an interest per protocol estimand.
-TODO - revisit and introduce necessary analysis specifications.
+The manner in which the estimand is currently written, aligns with a per-protocol analysis whereby only those patients that were adherent to their assigned (observed) treatment are retained in the analysis.
+This doesn't consider whether those patients would also be adherent in their counterfactual treatment.
+The problem with this is that it violates the randomisation - the groups might be unbalanced on either known or unknown (or both) confounders.
+The traditional per-protocol effect is well known to produce biased estimates for treatment effects.
+What I believe is of interest is the effect of the surgical intervention in those that would have adhered to all arms.
+Given that the ICEs for the surgical domain negate the possibility of forcing the assignment on the patient, principal strata seems like the only approach that can be used.
 :::
+
+**Treatment regimen/ICEs:**
+
+The only ICEs are per the primary estimand for the surgical domain.
+
+::: {.callout-note}
+The DSA currently states that principle stratum strategy is to be used as the single mechanism for handling ICEs.
+Obviously, this is a placeholder as it was a fairly arbitrary inclusion.
+For the surgical domain currently specified ICEs are switchover to revision for DAIR where the joint is loose and similarly for revision under opposite conditions.
+Additionally, revision might be abandoned if the patient becomes unstable during the operation.
+To handle these via desired strategy we first conceptualise strata.
+Assuming just two treatment arms, the strata are $S = \{(0, 0), (0, 1), (1, 0), (1, 1)$ mapping to patients non-compliant with either of the treatments, non-compliant for dair, non-compliant for revision, compliant for both.
+The subset associated with the final strata would be the one for which we would estimate the effect of DAIR vs revision.
+:::
+
+<!-- Note to self - see earlier correspondence b/w TS and MJ in the comments at the end of this file. -->
+
+**Population summary:**
+
+TODO
+
+**Data useful for estimand:**
+
+It is important that units continue to be followed up after the occurrence of an ICE to obtain detail on the final status of the primary outcome.
+
+Record which of the patients, assigned to revision, had loose joints such that had they been assigned to DAIR, then switchover would likely have occurred.
+
+Record which of the patients, assigned to DAIR, had indications of prosthesis that would likely be difficult to remove, such that had they been assigned to revision, then switchover would likely have occurred.
+
+Record if the patient became unstable or neared instability at any point during the procedure for both DAIR and revision.
+
+#### Estimand D.2 (antibiotic duration)
+
+todo
+
+#### Estimand E.2 (extended prohylaxis)
+
+todo
+
+#### Estimand C.2 (antibiotic choice)
+
+todo
 
 ## Study design
 
@@ -529,10 +650,15 @@ Per the treatment policy strategy, all randomised patients will be included and 
 Participants that have reached follow up, but for whom information has not yet been gathered will be treated as missing until the data has been entered.
 Participants who have been randomised, but have not yet reached the primary endpoint, will be excluded.
 
-
 ### Per-protocol
 
-The minimal requirements for retaining patients within the per-protocol population set are provided in @tbl-pp1.
+The minimal requirements for determining that patients are aligned with the protocol criteria with regards to the manner in which the interventions were delivered are provided in @tbl-pp1.
+
+::: {.callout-note}
+Per-protocol analyses typically exclude those patients that deviate from the protocol.
+However, the results from such analyses will only be valid where deviations from the protocol are non-informative.
+Consider (1) exclusions can imbalance treatment groups on known or unknown confounders and prognostic factors (2) noncompliance may relate to a specific intervention or disease severity.
+:::
 
 ```{r}
 #| echo: FALSE
@@ -581,8 +707,6 @@ gt_tbl <- gt(d_tbl) |>
 
 gt_tbl
 ```
-
-
 
 ## Subgroups {#sec-subgroups}
 
@@ -810,14 +934,14 @@ and with other main effects dealt with analogously.
 
 <!-- a.	Subgroups on joint: MJ: decision was to not look at heterogeneity in joint and make all decisions like assuming constant effects across joint in the interim analyses. At the interim analyses, do the subgroup analysis to look at heterogeneity by joint, and then have some sort of policy to put forward a case to the DSMC if needed as a way to see the differences in effects for various groups. LM: piano data doesn’t suggest there is a major difference in surgical outcomes between the two groups. Updated core protocol provides us the opportunity to leave one group open is there is inconsistency across the subgroups. MJ: operational perspective: make futility decision on surgery, look at sub-group specific effects of surgery and if one isn’t futile, there is the opportunity to continue randomising for those sub-groups. For any sub-groups in any of the domains (to avoid doing additional ethics amendment). Subgroups analysis only if the trigger is met.  MJ to consider -->
 
-## Secondary analyses
+## Supportive (domain agnostic) analyses
 
+The following sections detail analyses applying to all domains, i.e. where interest is in treatment effects associated with all domains.
 
 ### Desirability of outcome ranking
 
-The DOOR method involves comparing trial participant outcomes in different treatment arms by the desirability of the overall patient outcome.
-The desirability of outcome ranking (DOOR) criteria for ordering outcomes are provided in @tbl-sec-door.
-From this, each patient is assigned a ranking, which is simply an ordinal random variable, to characterise their state.
+A desirability of outcome ranking (DOOR) analysis involves unit level comparisons between all trial participants across the treatment arms.
+Each patient receives a single rank to characterise their overall state at 12-months after platform entry with the current DOOR criteria provided in @tbl-sec-door.
 
 ```{r}
 #| echo: FALSE
@@ -855,14 +979,14 @@ gt_tbl <- gt(d_tbl) |>
     Qol = "Qol"
   ) |> 
    tab_footnote(
-    footnote = md("*Good* joint function is based on thresholds related to patient reported success. A successful outcome at 12-months will be defined for knee PJI with an Oxford Knee Score (OKS) at 12 months of >36 or an improvement (delta) from baseline of >9 and for hip PJI as a Oxford Hip Score (OHS) of >38 or an improvement of >12 (35)."),
+    footnote = md("*'Good'* joint function is based on thresholds related to patient reported success. A successful outcome at 12-months will be defined for knee PJI with an Oxford Knee Score (OKS) at 12 months of >36 or an improvement (delta) from baseline of >9 and for hip PJI as a Oxford Hip Score (OHS) of >38 or an improvement of >12 (35)."),
     locations = cells_body(
       columns = JointFunc,
       rows = 1
     ) 
     ) |> 
    tab_footnote(
-    footnote = md("Treatment Success relates to primary outcome"),
+    footnote = md("Treatment Success relates to primary outcome definition."),
     locations = cells_column_labels(columns = TrtSuccss) 
   ) |>
   tab_options(table.font.size = "80%")
@@ -871,11 +995,8 @@ gt_tbl
   
 ```
 
-
-
-
-The analysis approach targets a what has been called a DOOR probability, but is more broadly referred to as a Probabilistic Index (PI) @DeSchryver2018.
-Pairwise comparisons between all patients are used to compute the PI as
+The DOOR analysis approach targets what has been called a *DOOR probability* but is more broadly referred to as a Probabilistic Index (PI), see @DeSchryver2018 and is equivalent to the Mann-Whitney-U statistic.
+To calculate the PI we will enumerate all pairwise comparisons between all patients (win, loss, tie) and then the PI is given by
 
 $$
 \begin{aligned}
@@ -883,10 +1004,10 @@ PI &= \frac{ (n_{win} + 0.5 n_{tie}) } { n_e n_c }
 \end{aligned}
 $$
 
-where $n_{win}$ and $n_{tie}$ are the number of instances where the experimental units do *better* than the control patients or have equivalent ranking respective for all pairs and $n_e$ and $n_c$ are the number of patients in each of the two arms being compared.
-Confidence intervals are then computed via a bootstrap procedure or other methods.
+where $n_{win}$ and $n_{tie}$ are the number of instances where the experimental units do *better* than the control patients or have equivalent ranking respectively for all pairs and $n_e$ and $n_c$ are the number of patients in each of the two arms being compared.
+We will produce confidence intervals via a bootstrap procedure or other methods.
 
-The PI refers to the probability that the outcome of a randomly selected subject in one group exceeds the outcome of another randomly selected subject in another group (plus half of the probability of a tied DOOR) @Evans2015.
+We note that the PI refers to the probability that the outcome of a randomly selected subject in one group exceeds the outcome of another randomly selected subject in another group (plus half of the probability of a tied DOOR) @Evans2015.
 In principle, it targets:
 
 $$
@@ -900,10 +1021,10 @@ where $Y_e$ is a random variable describing the outcome under an experimental tr
 ::: {.callout-note}
 Care has to be taken when interpreting a PI.
 First, the measure is NOT the probability that a patient will benefit from having the experimental treatment rather than control.
-For further cautions, see Senn @Senn2011.
+For further cautions, see @Senn2011.
 :::
 
-Separate DOOR analyses will be run on relevant strata based on the assessment and ranking of the relevant outcomes at 12-months:
+Separate DOOR analyses will be run on strata based on the assessment and ranking of the relevant outcomes at 12-months:
 
 + For the surgical domain, the PI will be computed for only the units within the late-acute silo revealed to randomised treatment for this domain
 + For the antibiotic duration domain, the PI will be computed for only the units that received one-stage revision and revealed to randomised treatment for this domain
@@ -912,13 +1033,13 @@ Separate DOOR analyses will be run on relevant strata based on the assessment an
 
 
 
-### Patient-reported joint function (Oxford hip or knee score) at 12 months
+### Patient-reported joint function
 
 The Oxford Hip Score (OHS) is a joint-specific, patient-reported outcome measure that has been designed to assess disability in patients undergoing joint replacement. 
 The score is computed based on the responses to a 12-item survey.
-As of 2007, responses range from 0 to 4 and the total score has a maximum (best) value of 48 with 40-48 indicating satisfactory joint function and 3-5 being a suggested clinically important difference.
+As of 2007, responses range from 0 to 4 for each question and the total score has a maximum (best) value of 48 with 40-48 indicating satisfactory joint function and 3-5 being a suggested clinically important difference.
 
-The OHS will be analysed using cumulative logistic regression.
+The OHS will be analysed using cumulative logistic regression based on the data obtained at 12-months after platform entry.
 Letting $Y \in \{ 1, 2, \dots K \}$ denote the outcome (with $K = 48$ here) for unit $i$, the proportional odds model can be considered with reference to categorising some latent continuous variable $Y^*$.
 Ordered cut-points, $c \in \mathbb{R}^{K-1}$ are defined such that $c_k < c_{k+1}$ with
 
@@ -938,26 +1059,24 @@ $$
 <!-- \end{aligned} -->
 <!-- $$ -->
 
-and where the (generically stated) linear predictor would have terms and priors analogous to those used in the primary analysis.
+and where the linear predictor (generically stated in the above) would have terms and priors analogous to those used in the primary analysis.
+The priors for the intercept terms would be based on a weakly informative dirichlet prior.
 
-### Patient-reported quality of life (EQ5D5L) at 12 months
+### Patient-reported quality of life (EQ5D5L)
 
 The the EuroQOL 5 dimension 5 levels (EQ-5D-5L) instrument is a preference-based QoL instrument comprised of five dimensions: mobility, self-care, usual activities, pain/discomfort, and anxiety/depression.
 Respondents are asked to choose the most appropriate option from five alternatives (no, slight, moderate, severe, or extreme problems). 
 In addition, respondents are asked to indicate their present health state on a visual analogue scale (EQ VAS) ranging from the worst imaginable health state (“0”) to the best imaginable health state (“100”).
 
-::: {.callout-note}
-TODO - generally, the QoL analyses rely on utility values to produce QALYs for a cost-utility assessment. 
-These are ordinarily underkane by an econometrician.
-:::
+At this time, we assume that the QoL at 12-months after platform entry will be analysed by the health economics team and is therefore not specified here.
 
 ### Cost effectiveness
 
-While a cost-effectiveness analysis will likely use Bayesian simulation, this work will be undertaken by the econometrician and is beyond the scope of the specification here.
+Similar to QoL at 12-months after platform entry we assume that this outcome will be analysed by the health economics team and is therefore not specified here.
 
-### All-cause mortality at 12 months after platform entry {#sec-all-cause-mortality}
+### All-cause mortality to 12 months {#sec-all-cause-mortality}
 
-We will use a proportional-hazards model to analyse all-cause mortality at 12-months.
+We will use a proportional-hazards model to analyse all-cause mortality to 12-months after platform entry.
 Specifically, assuming no time-varying covariates or coefficients:
 
 $$
@@ -982,21 +1101,15 @@ The M-spline should include an intercept so that $h(t)$ is not constrained to ze
 TODO - have a look at M-spline vs B-spline.
 :::
 
-### Clinical cure at 12 months after platform entry (as defined in the primary outcome)
+### Clinical cure to 12 months
 
-We will use a proportional-hazards model (per @sec-all-cause-mortality) to analyse clinical cure at 12-months.
+We will use a proportional-hazards model (as per @sec-all-cause-mortality) to analyse clinical cure (as defined within the context of the primary outcome) to 12 months after platform entry.
 
-### Proportion no longer taking any antibiotics for the index joint at 12 months (as defined in the primary outcome) {#sec-prop-ab-free}
+Given the possibility of death, this is actually a comparison of clinical cure versus *either* no clinical cure or death.
 
-Recalling the primary outcome:
+### No longer taking any antibiotics for the index joint {#sec-prop-ab-free}
 
-1. Alive
-2. Clinical cure (no microbiological evidence of infection)
-3. No ongoing use of antibiotics for the index joint 
-4. The destination prosthesis is in place after the initial management strategy is complete
-
-this secondary analysis aims to characterise the proportion of patients no longer taking antibiotics for the index joint at 12-months.
-Therefore, this is actually a comparison of no-longer taking antibiotics versus taking antibiotics or death.
+Given the possibility of death, this is actually a comparison of no longer taking antibiotics (as defined within the context of the primary outcome) versus *either* taking antibiotics or death.
 
 We will use a logistic regression model to analyse the proportion no longer taking antibiotics at 12-months.
 Specifically, if $Y$ is a binary indicatoring with $Y = 1$ indicating use of antibiotics at 12-months, we model:
@@ -1004,21 +1117,22 @@ Specifically, if $Y$ is a binary indicatoring with $Y = 1$ indicating use of ant
 $$
 \begin{aligned}
 Y &\sim \text{Bernoulli}(p) \\
-\text{logit}(p) = \eta = x^\top \beta
+\text{logit}(p) &= \eta = x^\top \beta
 \end{aligned}
 $$
 
 where $\eta$ takes the same form as the primary analysis, see @sec-primary-analysis.
 
-### Proportion in whom the destination prosthesis is still in place at 12 months (as defined in the primary outcome) {#sec-joint-in-place}
+### Destination prosthesis still in place {#sec-joint-in-place}
 
-As detailed in @sec-prop-ab-free, this is actually a comparison of having the destination prosthesis in place versus not having the destination prosthesis in place or death.
+Similar to the analysis defined in @sec-prop-ab-free, this is actually a comparison of having the destination prosthesis in place (as defined in the primary outcome) versus *either* not having the destination prosthesis in place or death.
 
-The same approach as detailed in @sec-prop-ab-free will be used.
+We will use a logistic regression model to analyse the proportion with the destination prosthesis still in place at 12-months after platform entry.
 
-### Microbiological relapse (Positive joint fluid or tissue culture for one or more of the index isolates between 100 days and 12 months after platform entry) {#sec-microbiological-relapse}
+### Microbiological relapse b/w 100 days and 12 months {#sec-microbiological-relapse}
 
-The occurrence of microbiological relapse is subject to the competing risk of death.
+Similar to the above outcomes, the occurrence of microbiological relapse, indicated by positive joint fluid or tissue culture for one or more of the index isolates, is subject to the competing risk of death.
+
 We will therefore use a cause-specific proportional-hazards model to analyse this outcome.
 Specifically, assuming no time-varying covariates or coefficients:
 
@@ -1029,17 +1143,201 @@ h_{r(t)} = h_{0,r}(t) \exp(x^\top \beta_r)
 $$
 
 This method evaluates the intensity associated with a given event type, treating all competing events as censored, in addition to those who are censored for loss to follow-up or withdrawal.
+
 The approach assumes independent censoring for patients who are not truly censored but that fail fail from the competing event, here death.
 This means that any censored patient at time $t$ would have the same rate of microbiological relapse, regardless of whether the censoring was due to administrative censoring or any of the other event types.
-There is no way to explicitly test this assumption.
+However, there is no way to explicitly test this assumption.
 
-### Microbiological reinfection (Positive joint fluid or tissue culture with a different organism to the index isolates between 100 days and 12 months after platform entry)
+### Microbiological reinfection b/w 100 days and 12 months
+
+The occurrence of microbiological reinfection, indicated by positive joint fluid or tissue culture with a different organism to the index isolates, between 100 days and 12 months after platform entry will be analysed using an analogous approach as that detailed in @sec-microbiological-relapse.
+
+### Time to joint registry captured revision procedure to 24 months
 
 For the analysis of microbiological reinfection an analogous approach as that detailed in @sec-microbiological-relapse will be used.
 
-### Time to joint registry captured revision procedure (within 24 months) from platform entry
+(within 24 months) from platform entry
+ 
+::: {.callout-note}
+todo - Clarify what the intent for this is.
+:::
 
-For the analysis of microbiological reinfection an analogous approach as that detailed in @sec-microbiological-relapse will be used.
+## Supportive (domain-specific) analyses
+
+The following sections detail analyses are domain-specific, i.e. where the interest is in treatment effects specific to a given domain. 
+These map to estimands defined in the relevant DSAs.
+
+::: {.callout-note}
+todo - Get the DSA estimand specification update to indicate that these are all up to 12 months.
+:::
+
+### Surgical domain
+
+For the following, irrespective of the modelling approach, the effects of interest are only those relating to the surgical domain.
+
+#### Treatment success at 12 months
+
+todo
+
+#### Unplanned re-operation
+
+We will use logistic regression to analyse the occurrence of unplanned re-operation on the index joint more than 14 days after the initial definitive procedure.
+The analyses will be based on all patients irrespective of any occurrence of specified or unspecifed ICEs.
+
+#### Dislocation of index joint
+
+We will use logistic regression to analyse the occurrence of dislocation of the index joint on all patients irrespective of any occurrence of specified or unspecifed ICEs.
+The analyses will be based on all patients irrespective of any occurrence of specified or unspecifed ICEs.
+
+#### Unplanned or unexpected periprosthetic fracture
+
+We will use logistic regression to analyse the occurrence of unplanned or unexpected periprosthetic fracture (either intraoperative or later on, requiring attendance at a hospital). 
+The analyses will be based on all patients irrespective of any occurrence of specified or unspecifed ICEs.
+
+
+
+
+### Antibiotic duration domain
+
+For the following, irrespective of the modelling approach, the effects of interest are only those relating to the antibiotic duration domain.
+
+#### Treatment success at 12 months
+
+todo
+
+
+#### Acute liver injury following platform entry (to 90 days)
+
+We will use logistic regression to analyse the occurrence of acute liver injury to 90 days post platform entry. 
+
+::: {.callout-note}
+todo - Check whether this was meant to be 90 days post commencement of antibiotics.
+:::
+
+The analyses will be based on all patients irrespective of any occurrence of specified or unspecifed ICEs.
+
+
+#### Laboratory-proven *Clostridium difficile* diarrhoea (to x days)
+
+We will use logistic regression to analyse the occurrence of laboratory-proven *Clostridium difficile* diarrhoea.
+
+::: {.callout-note}
+todo - Check whether this should have a time limit on it. Presumably also 90 days...
+:::
+
+The analyses will be based on all patients irrespective of any occurrence of specified or unspecifed ICEs.
+
+#### Antibiotics ceased due to suspected adverse reaction (to 90 days)
+
+
+We will use logistic regression to analyse the occurrence of ceasing antibiotics due to other suspected adverse reaction between the time of domain entry to day 90.
+
+::: {.callout-note}
+todo - What is meant by other?  Check whether this was meant to be 90 days post commencement of antibiotics.
+:::
+
+The analyses will be based on all patients irrespective of any occurrence of specified or unspecifed ICEs.
+
+
+
+### Extended prophylaxis domain
+
+#### Treatment success at 12 months
+
+todo
+
+
+#### Time alive and free from any revision procedure (to 12-months)
+
+Time alive and free from any revision procedure on the index joint captured by a national joint replacement registry within 12 months of domain entry.
+
+Time to event.
+
+
+::: {.callout-note}
+todo - This seems like it would be domain agnostic. Not sure what it is doing in the DSA for AB duration.
+:::
+
+
+time alive and free from any revision procedure on the index joint captured by a national joint replacement registry within 24 months of domain entry.
+
+#### Time alive and free from any revision procedure (to 24-months)
+
+As above.
+
+::: {.callout-note}
+todo - This seems like it would be domain agnostic. Not sure what it is doing in the DSA for AB duration.
+:::
+
+
+#### Laboratory-proven *Clostridium difficile* diarrhoea (to x days)
+
+We will use logistic regression to analyse the occurrence of laboratory-proven *Clostridium difficile* diarrhoea.
+
+::: {.callout-note}
+todo - Check whether this should have a time limit on it. Presumably 90 days as per ab duration domain
+:::
+
+The analyses will be based on all patients irrespective of any occurrence of specified or unspecifed ICEs.
+
+#### Antibiotics ceased due to suspected adverse reaction (to 90 days)
+
+We will use logistic regression to analyse ceasing antibiotics due to other suspected adverse reaction between the time of domain entry to day 90 post platform entry.
+
+::: {.callout-note}
+todo - What is meant by other?  Check whether this was meant to be 90 days post commencement of extended prophylaxis.
+:::
+
+The analyses will be based on all patients irrespective of any occurrence of specified or unspecifed ICEs.
+
+
+
+
+### Antibiotic choice domain
+
+#### Treatment success at 12 months
+
+todo
+
+
+#### Acute liver injury (to day 100)
+
+We will use logistic regression to analyse the occurrence acute liver injury to day 100 post platform entry.
+
+::: {.callout-note}
+todo - Check whether this should be post commencement of rif. 
+:::
+
+The analyses will be based on all patients irrespective of any occurrence of specified or unspecifed ICEs.
+
+
+#### Acute liver injurty (to day 100)
+
+
+::: {.callout-note}
+todo - Check if c.4 is a duplicate??
+:::
+
+#### Laboratory-proven *Clostridium difficile* diarrhoea (to x days)
+
+We will use logistic regression to analyse the occurrence of laboratory-proven *Clostridium difficile* diarrhoea.
+
+::: {.callout-note}
+todo - Check whether this should have a time limit on it. Presumably 90 days as per ab duration domain
+:::
+
+The analyses will be based on all patients irrespective of any occurrence of specified or unspecifed ICEs.
+
+#### Antibiotics ceased due to suspected adverse reaction (to 100 days)
+
+We will use logistic regression to analyse ceasing antibiotics due to other suspected adverse reaction between the time of domain entry to day 100 post platform entry.
+
+::: {.callout-note}
+todo - Check why this is 100 days and others are 90.
+:::
+
+The analyses will be based on all patients irrespective of any occurrence of specified or unspecifed ICEs.
+
 
 ## Missing data
 
@@ -1258,87 +1556,63 @@ Three possible adaptations are currently identified, namely early stopping (due 
 ## Enrolment progression at sequential analyses (todo)
 
 
-```{r}
-library(sandwich)
-library(data.table)
-# N unique pts on which we have multiple obs, each pt nested within one of
-# the 10 sites
-N <- 500
-N_site <- 10
-p_site <- as.numeric(extraDistr::rdirichlet(1, rep(1, 10)))
-sites <- sample(1:N_site, N, replace = T, prob = p_site)
-d_pt <- data.table(
-  id_pt = 1:N,
-  site = sort(sites)
-)
-# number obs per pt - inflated here to make a point
-n_obs <- rpois(N, 1)
-d <- d_pt[unlist(lapply(1:N, function(x){
-  rep(x, n_obs[x])
-}))]
-d[, id_obs := 1:.N, keyby = id_pt]
-# distribution of frequency of observations on a pt
-# hist(d[, .N, keyby = id_pt][, N])
-
-# about 60% resistant but with site and subject level variability beyond the
-# natural sampling variability due to varying number of subjects per site
-nu <- rnorm(N, 0, 0.5)
-# treat site as true fixed effect
-rho <- rnorm(N_site, 0, 0.7)
-d[, eta := 0.4 + rho[site] + nu[id_pt]]
-
-# hist(d[, unique(eta), keyby = id_pt][,plogis(V1)])
-
-d[, y := rbinom(.N, 1, plogis(eta))]
-d[, site := factor(site)]
-d[, id_pt := factor(id_pt)]
-
-# summary stats - we got much more data here than you do but this is just for
-# demo
-d[, .(y = sum(y), n = .N)]
-
-# standard glm, not accounting for pt
-f1 <- glm(y ~ 1, family = binomial, data = d)
-
-# get naive standard errors
-s_f1 <- summary(f1)$coef
 
 
+<!-- The treatment regimen under evaluation is the randomised and revealed surgical treatment in combination with randomised and non-randomised treatments associated with other domains in the subset of patients that would adhere to all surgical domain interventions but that may have had specified or unspecified ICE(s) associated with other domains. -->
 
-# sample proportion (same as model estimate)
-p_obs <- d[, sum(y)/.N]
-p_obs
 
-# wald (normal approximation)
-se_wald <- sqrt(p_obs * (1-p_obs) / nrow(d))
-p_0_lb <- p_obs - qnorm(0.975) * se_wald
-p_0_ub <- p_obs + qnorm(0.975) * se_wald
+<!-- No problems Mark, -->
+<!-- In the situation you mention, I would analyse the crossed over patient according to their original assignment because they had no choice but to cross over. So, in my mind, it is still a type of ‘hypothetical’ estimand, but one in which you only censor those who stopped or crossed over but who could have, in theory, stayed on their original assignment. The hypothetical estimand is the effect of the assignment (not the treatment) in which everyone who could have adhered, did adhere. Obviously the determination about whether they ‘needed to’ stop or cross-over may be subjective, which is a limitation. -->
+<!-- Tom -->
 
-# model uncertainty naive
-lo_1 <- qlogis(p_obs)
-# se from intercept term, i.e. we are just looking at the 'average' or
-# typical pt, over which we would expect heterogeneity
-p_1_lb <- plogis(lo_1 - qnorm(0.975) * s_f1[1, 2])
-p_1_ub <- plogis(lo_1 + qnorm(0.975) * s_f1[1, 2])
+<!-- From: Mark Jones <mark.jones1@sydney.edu.au>  -->
+<!-- Sent: Wednesday, July 3, 2024 1:07 PM -->
+<!-- To: Thomas Snelling <tom.snelling@sydney.edu.au> -->
+<!-- Cc: Daniela Vargas <daniela.vargas@sydney.edu.au> -->
+<!-- Subject: Re: roadmap - notes on itt/pp etc -->
 
-# adjusted to account for heterogeneity due to site (we did not 
-# adjust for site in the model) and repeat measure for pt
-sw_se <- sqrt(vcovCL(f1, cluster = d[, .(site, id_pt)], type = "HC1")[1,1])
-p_2_lb <- plogis(lo_1 - qnorm(0.975) * sw_se)
-p_2_ub <- plogis(lo_1 + qnorm(0.975) * sw_se)
- 
-predict(f1, type = "response")[1]
-sprintf("%.4f (%.4f, %.4f)", p_obs, p_0_lb, p_0_ub)
+<!-- Thanks for following up Tom, -->
 
-# Model based adjusting for site.
-sprintf("%.4f (%.4f, %.4f)", p_obs, p_1_lb, p_1_ub)
+<!-- I had to deal with the reviewers comments for stop yesterday and now am going through the manuscript for Michelle to try and get rid of that. Long story short is that it will probably be Friday or early next week before I have anything useful to go through. -->
 
-# Adjusted - account for heterogeneity due to site (we did not 
-# adjust for site) and repeat measure for pt
-sprintf("%.4f (%.4f, %.4f)", p_obs, p_2_lb, p_2_ub)
+<!-- I have thought about what you said for the view treatment effects (vs assignment effects) and wonder if a hypothetical estimand is the best option in that for someone with a loose joint assigned to dair since there is no option other than to cross over. Perhaps a principal stratum perspective might be more suitable in that instance. But I will have a look through the paper that you sent and have a think about it. My thought at the moment is that a mix of strategies is maybe necessary to address the different ices. There has been some work on using a mix, but I am not sure how broadly it is applied. -->
 
-```
+<!-- Regards -->
+<!-- Mark -->
 
+
+<!-- Mark Jones | Senior Biostatistician -->
+<!-- Health and Clinical Analytics Lab, Sydney School of Public Health -->
+
+<!-- THE UNIVERSITY OF SYDNEY -->
+<!-- E mark.jones1@sydney.edu.au | W http://sydney.edu.au -->
+
+<!-- Hi Mark. I have a meeting at 4-5pm today, but otherwise pretty flexible. Let me know if you’d like to schedule time to discuss this. -->
+<!-- Tom -->
+
+<!-- From: Thomas Snelling  -->
+<!-- Sent: Monday, July 1, 2024 6:12 PM -->
+<!-- To: Mark Jones <mark.jones1@sydney.edu.au> -->
+<!-- Subject: RE: roadmap - notes on itt/pp etc -->
+
+<!-- Actually, this paper might be more illustrative https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10505414/ -->
+<!-- Tom -->
+
+<!-- From: Thomas Snelling  -->
+<!-- Sent: Monday, July 1, 2024 4:28 PM -->
+<!-- To: Mark Jones <mark.jones1@sydney.edu.au> -->
+<!-- Subject: RE: roadmap - notes on itt/pp etc -->
+
+<!-- Thanks for this Mark. I’ve had a quick read through this. Useful to share this to prompt our collective thinking, but I expect we will need to be fairly directive with Josh about what we advise. -->
+<!-- I think the appropriate estimand for the PP analysis is the hypothetical difference in effect that would be observed if everyone who could adhere to treatment actually did (and those couldn’t defaulted to something else) and where everyone who could in theory be followed up (i.e. because they weren’t dead and didn’t have an amputation), actually were. -->
+<!-- In this case, we (only) censor those who stop adhering to their assigned treatment (but who could have reasonably adhered), and then effectively weight those who remain uncensored according to their inverse probability of censoring to minimise risk of confounding by factors that are both predictive of censoring and predictive of the outcome. Importantly, those who stopped or switched because they had no choice (eg loose or stuck joint), remain in their assigned strategy if though they stopped/ switched. -->
+<!-- I’ve had a quick scan of the literature and found this paper. At a glance it looks like this aligns with what they advocate? Reducing Bias in Estimates of Per Protocol Treatment Effects: A Secondary Analysis of a Randomized Clinical Trial | Research, Methods, Statistics | JAMA Network Open | JAMA Network -->
+<!-- https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2807637 -->
+
+<!-- Regards, -->
+<!-- Tom -->
+
+<!-- The hypothetical strategy for handling ICEs is not appropriate here as  -->
 
 
 
