@@ -1,0 +1,102 @@
+---
+title: Simulation Report
+subtitle: |
+    ROADMAP: RandOmised Arthroplasty infection worlDwide Multidomain Adaptive Platform trial - simulation report
+description: |
+    Investigator initiated, Randomised Embedded Multifactorial Adaptive Platform (REMAP) trial, conducted across multiple hospitals in several regions of the world.
+date: last-modified
+date-format: "D MMMM YYYY"
+author: 
+  - name: Mark Jones
+    id: mj
+    email: mark.jones1@sydney.edu.au
+  - name: James Totterdell
+    id: jt
+    email: james.totterdell@sydney.edu.au
+version: 0.1
+sponsor: University of Newcastle, NSW, Australia
+protocol-number: Version 1.1  01AUG2024
+registration: todo
+hrec: todo
+ci1: Professor Joshua Davis  
+ci2: Professor Laurens Manning
+editor: source
+bibliography: etc/refs.bib
+csl: etc/elsevier-harvard.csl
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE
+)
+```
+
+```{r, echo = F}
+#| echo: false
+
+# uml digs
+library(nomnoml)
+library(ggplot2)
+suppressPackageStartupMessages(library(data.table))
+library(tibble)
+library(gt)
+library(kableExtra)
+suppressPackageStartupMessages(library(qs))
+library(git2r)
+```
+
+{{< pagebreak >}}
+
+::: summary
+|     |        |
+|:----|:------------|
+|Study title:  |  ROADMAP: RandOmised Arthroplasty infection worlDwide Multidomain Adaptive Platform trial |
+|Intervention: |  Surgery type, backbone antibiotic duration, extended prophylaxis, antibiotic type |   
+|Study design:  |   Randomised Embedded Multifactorial Adaptive Platform trial | 
+|Sponsor:  |    University of Newcastle, NSW, Australia | 
+Protocol: |  Version 1.1  01AUG2024 |
+|Registration:  |    todo | 
+|HREC:  |   todo | 
+|Study date of first consent:  |   todo | 
+|Principal coordinating investigators:  |   Professor Joshua Davis  and Professor Laurens Manning | 
+:::
+
+<!-- 
+Note that the above relies on the pandoc extension implemented in the lua file 
+in the etc directory. It additionally relies on the presence of a custom style
+in word called study summary. It will currently only work for word (because I
+cannot be bothered to implement it in anything else at the moment).
+-->
+
+
+{{< pagebreak >}}
+
+# Version history {.unlisted .unnumbered}
+
+| Version    |   Date     | Change    |   Reason     |
+|:----|:------------|:----|:------------|
+| 0.1 | 09/2024 | First version | N/A |
+| 0.2 | 12/2024 | Review 1 | Edits based on initial comments from TS and JT |
+
+
+{{< pagebreak >}}
+
+# Repository status {.unlisted .unnumbered}
+
+\footnotesize
+```{r}
+#| echo: false
+repo <- repository(path = ".")
+summary(repo)
+```
+\normalsize
+
+{{< pagebreak >}}
+
+# Preface {.unlisted .unnumbered}
+
+This simulation report documents the current set of reference simulations for ROADMAP.
+The simulation report is an operational document that will be updated, as necessary, over the course of the study.
+
+
+
