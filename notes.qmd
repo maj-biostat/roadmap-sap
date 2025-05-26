@@ -3,6 +3,8 @@ title: "Discussion points/notes"
 format:
   html:
     number-sections: false
+date: 26/05/2025
+date-modified: last-modified
 ---
 
 # Section 1.1 - Background
