@@ -1099,6 +1099,7 @@ $$
 $$
 
 with indexes aligned with analyses and the $\tau_1$ term representing the current quarter (i.e. 3 monthly intervals).
+The time adjustment will only be included in the model if treatment is varied over time.
 
 The prior for region will be set as per the main effects detailed above with the first region fixed to zero. 
 Site priors will be nested within region and set as 
@@ -1633,21 +1634,32 @@ Also software used will be disclosed in the reports.
 
 ## Treatment effects
 
-Interest is primarily geared towards the conditional effects of treatments under the various analyses.
-In general, treatment is randomised so groups are exchangeable (i.e. the potential outcome associated with any treatment is independent of the treatment that was assigned).
+Interest is primarily geared towards estimating effects of treatments under the specified analyses.
+In general, we consider randomised treatment whereby groups are exchangeable (i.e. the potential outcome associated with any treatment is independent of the treatment that was assigned).
 For the surgical domain, the choice of revision is left to the clinician and those groups are not exchangeable.
+This is because what leads a surgeon to prefer one versus two-stage revision will likely be informative of outcome, making those that receive one-stage systematically different from those that receive two.
 
-The following descriptions relate to the calculation of treatment effects (conditional log-odds-ratios) for the primary analysis.
-All domains adopt g-computation and a Bayesian bootstrap that characterises the uncertainty in the joint covariate distribution.
+The following descriptions relate to the calculation of treatment effects for the primary analysis.
+All domains adopt g-computation and a Bayesian bootstrap that aims to account for the uncertainty in the joint covariate distribution.
 
-### Surgical domain 
+### Surgical domain {#sec-surgical-domain}
 
-For the surgical domain, we calculate the effect of revision relative to debridement as the difference between a weighted sum of the log-odds of treatment success under one-stage and two-stage revision minus the log-odds of treatment success under debridement.
+For the surgical domain, we calculate the effect of revision relative to debridement using g-computation and a Bayesian bootstrap as follows:
+
++ for each unit within the late acute silo, compute the predicted probability of the outcome assuming they are assigned to the DAIR group with each of their covariates set at their natural values, which, if necessary, are implied via reference to original allocation
++ for each unit within the late acute silo and preferenced to one-stage revision, compute the predicted probability of the outcome assuming they are assigned to the revision group (and type determined from clinical preference) with each of their covariates set at their natural values, which, if necessary, are implied via reference to original allocation
++ for each unit within the late acute silo and preferenced to two-stage revision, compute the predicted probability of the outcome assuming they are assigned to the revision group (and type determined from clinical preference) with each of their covariates set at their natural values, which, if necessary, are implied via reference to original allocation
++ for each set of predicted probabilities, form the scalar product with draws from a Dirichlet distribution of the relevant dimension to produce the average risk under DAIR, revision (one-stage), revision (two-stage) accounting for the uncertainty in the covariate distribution
++ form a weighted combination of the the revision (one-stage), revision (two-stage) estimates based on the distribution of preferences in the sample
++ derive the risk difference as the difference in the probability of the outcome in the revision versus DAIR groups 
+
+the difference between the sample level risk of treatment success under one-stage and two-stage revision minus the log-odds of treatment success under debridement.
 
 <!-- (Riemann-Stieltjes) -->
 
-Specifically, we approximate the following integrals based on the fitted values for the patients in the late-acute silo:
+<!-- Specifically, we approximate the following integrals based on the fitted values for the patients in the late-acute silo: -->
 
+<!--
 $$
 \begin{aligned}
 \mathbb{E}[\hat{\eta}(d_1 = 1, d_2 = 1, d_3 = 1, l)] &= \int_{\mathcal{L}} \hat{\eta}(d_1 = 1, d_2 = 1, d_3 = 1, l) d \hat{P}_L(l) \\
@@ -1656,7 +1668,8 @@ $$
 \end{aligned}
 $$
 
-where $\hat{\eta}$ denotes the linear predictor function, $d_k$ denotes the interventions in the surgical ($k=1$), duration ($k=2$) and extended prophylaxis domains ($k=3$) with the surgical domain ($d_1$) indexes corresponding to debridement, one-stage and two-stage respectively. 
+
+where $\hat{\eta}$ denotes the unit level log odds of the outcome, $d_k$ denotes the interventions in the surgical ($k=1$), duration ($k=2$) and extended prophylaxis domains ($k=3$) with the surgical domain ($d_1$) indexes corresponding to debridement, one-stage and two-stage respectively. 
 Preference for surgical type under revision is denoted by $r$ and, finally, $l$ denotes the remaining covariate set including preference where it is not explicitly conditioned on and **other domain level interventions** not fixed for the purposes of the comparison, site, time effects etc.
 We compute the effect of revision relative to debridement as:
 
@@ -1670,34 +1683,32 @@ $$
 
 where $\Delta_{d_1[1]}$ denotes the log-odds-ratio comparison of interest^[There is currently only one comparison of interest for each domain but the index gives us the ability to refer to others should the need arise.], $\mathbb{E}[r = 1]$ and $\mathbb{E}[r = 2]$ are the relevant weights based on the observed distribution of preference for revision type in the sample.
 
+-->
+
 
 ### Antibiotic duration domain 
 
-The antibiotic duration domain treatment effects are simpler to estimate than those in the surgical domain in that we can calculate the effect of 6 weeks of backbone antibiotic relative to 12 weeks directly.
-To do so, we use methods analogous to those detailed above restricting to the subset revealed to randomised antibiotic duration, all of which would have received a one-stage revision and who would therefore have not entered into the extended prophylaxis domain.
+The antibiotic duration domain treatment effects are estimated using methods analogous to those in @sec-surgical-domain, restricting to the subset revealed to randomised antibiotic duration, all of which would have received a one-stage revision and who would therefore have not entered into the extended prophylaxis domain.
 
 ### Extended prophylaxis domain 
 
-For the extended prophylaxis domain we calculate the effect of 12 weeks of extended prophylaxis relative to none again using methods analogous to those detailed above.
-The estimation procedure is restricted to the subset revealed to randomised extended prophylaxis, all of which would have received a two-stage revision and who would therefore have not entered into the antibiotic duration domain.
+The extended prophylaxis domain treatment effects are estimated using methods analogous to those in @sec-surgical-domain, restricted to the subset revealed to randomised extended prophylaxis, all of which would have received a two-stage revision and who would therefore have not entered into the antibiotic duration domain.
 
 ### Antibiotic choice domain
 
-For the antibiotic choice domain we calculate the effect of the addition of rifampacin relative to none again using methods analogous to those detailed above.
-The estimation process is restricted to the subset revealed to randomised antibiotic choice, with no restrictions on the entry into the other domains.
-
-
+The antibiotic choice domain treatment effects are estimated using methods analogous to those in @sec-surgical-domain,  restricted to the subset revealed to randomised antibiotic choice, with no restrictions on the entry into the other domains.
 
 # Decision procedures
 
 ## Overview
 
-Trial decisions are made based on probabilities associated with the comparisons of interest as characterised by the model parameters discussed earlier.
-In its current format, the trial considers:
+Trial decisions are made by calculating the probability that the posterior distributions for the treatment effects exceed or fall short of reference values and contrast this with a decision level, all nominated based on simulation studies and the clinical subject matter knowledge.
+
+The trial considers:
 
 + superiority - indicating that an intervention is beneficial relative to a comparator
 + non-inferiority - indicating that an intervention is no worse than some clinically relevant threshold to a comparator 
-+ futility - indicating a low probability with respect to a superiority or non-inferiority assessment, as applicable
++ futility - which indicates a low probability with respect to superiority or non-inferiority assessment and thus there are both futility for superiority and futility for non-inferiority assessments.
 
 The mathematical definitions of these quantities are provided below and a table of the thresholds currently in use is defined in @tbl-dec-thres.
 
@@ -1711,15 +1722,21 @@ The mathematical definitions of these quantities are provided below and a table 
 
 
 d_tbl <- tribble(
-  ~ Domain, ~ Quantity, ~ Threshold, ~ Probability,
-  "Surgical", "Superiority \n revision vs debridement", "$>0$", "$\\ge 0.99$",
-  "Surgical", "Futility \n revision vs debridement", "$>\\log(1.2)$", "$\\le 0.05$",
-  "Antibiotic duration", "Non-inferiority \n 6 weeks vs 12 weeks", "$> \\log(1/1.2)$", "$\\ge 0.99$",
-  "Antibiotic duration", "Futility \n 6 weeks vs 12 weeks", "$<\\log(1/1.2)$", "$\\le 0.2$",
-  "Extended prophylaxis", "Superiority \n 12 weeks vs none", "$>0$", "$\\ge 0.99$",
-  "Extended prophylaxis", "Futility \n 12 weeks vs none", "$>\\log(1.2)$", "$\\le 0.05$",
-  "Antibiotic choice", "Superiority \n rifampacin vs none", "$>0$", "$\\ge 0.99$",
-  "Antibiotic choice", "Futility \n rifampacin vs none", "$>\\log(1.2)$", "$\\le 0.05$"
+  ~ domain, ~ quantity, ~ threshold_probability, ~ decision_probability,
+  "Surgical", "Superiority \n revision vs DAIR", "$>0$", "$\\ge 0.92$",
+  "", "Futility \n revision vs DAIR", "$>0.05$", "$\\le 0.3$",
+  "", "", "", "",
+  
+  "Antibiotic duration", "Non-inferiority \n 6 weeks vs 12 weeks", "$> -0.05$", "$\\ge 0.925$",
+  "", "Futility \n 6 weeks vs 12 weeks", "$<0$", "$\\le 0.25$",
+  "", "", "", "",
+  
+  "Extended prophylaxis", "Superiority \n 12 weeks vs none", "$>0$", "$\\ge 0.95$",
+  "", "Futility \n 12 weeks vs none", "$>0.05$", "$\\le 0.25$",
+  "", "", "", "",
+  
+  "Antibiotic choice", "Superiority \n rifampacin vs none", "$>0$", "$\\ge 0.995$",
+  "", "Futility \n rifampacin vs none", "$>0.05$", "$\\le 0.25$"
   )
 
 
@@ -1732,11 +1749,17 @@ gt_tbl <- gt(d_tbl, groupname_col = "Domain",
   ) |>
   fmt_markdown() |>
   cols_width(
-    Domain ~ pct(15),
-    Quantity ~ pct(45),
-    Threshold ~ pct(15),
-    Probability ~ pct(15)
+    domain ~ pct(15),
+    quantity ~ pct(40),
+    threshold_probability ~ pct(20),
+    decision_probability ~ pct(20)
   ) |>
+  cols_label(
+    domain = "Domain",
+    quantity = "Quantity",
+    threshold_probability = "Threshold\nprobability",
+    decision_probability = "Decision\nprobability"
+  ) |> 
   tab_options(table.font.size = "80%")
 
 gt_tbl
@@ -1744,53 +1767,49 @@ gt_tbl
 ```
 
 
-The actions that occur when decision threshold are met have been detailed in the core protocol and will not be duplicated here.
+The actions that follow after a decision threshold has been reached are detailed in the core protocol (section 9.7) and will not be duplicated here.
 However, any occurrence of a futility decision requires that a subgroup analysis be performed as per the populations listed in @sec-subgroups using the methods detailed in @sec-subgroup-analyses for the relevant domain(s).
 
-For a futility decision to hold, it is expected that all relevant subgroups would show futility.
-
+For a futility decision to hold definitively, all relevant subgroups should show futility.
+Variations to this are permitted at the DSMC disgression.
 
 ## Superiority
 
 Superiority implies that an intervention has high probability of being beneficial relative to a comparator intervention.
-Generally, superiority is a probability assessment against a zero reference.
-For any of the treatment effect parameters obtained from the primary analysis results we define:
+Superiority is a posterior probability assessment against a threshold value (for the current domain threshold values see @tbl-dec-thres).
 
 $$
 \begin{aligned}
-\mathbb{I}_{d_k[c]}^\text{sup} = \text{Pr}(\Delta_{d_k[c]} > s_{d_k[c]}) \ge \gamma_{d_k[c]}^\text{sup}
+\text{Pr}(\Delta > \rho_{sup}) \ge \gamma_{sup}
 \end{aligned}
 $$
 
-as treatment superiority where $\mathbb{I}_{d_k[c]}^\text{sup}$ is a boolean indicator of superiority, for the comparison indexed by $c$ within the $d_k$ domain relative to a reference level $s_{d_k[c]}$ (generally zero) at a probability greater than or equal to $\gamma_{d_k[c]}^\text{sup}$.
+as a boolean indicator of treatment superiority based on the posterior estimate treatment comparison represented by $\Delta$ relative to a reference value $\rho_{sup}$ at a probability greater than or equal to a threshold value  $\gamma_{sup}$.
 
 ## Non-inferiority
 
-Non-inferiority implies that an intervention has a high probability of being no worse than some pre-specified clinical threshold relative to the comparator intervention.
-Generally, non-inferiority is a probability assessment against $\log(1/1.2)$.
-For any of the treatment effect parameters obtained from the primary analysis results we define:
+Non-inferiority implies that an intervention has a high probability of being no worse than some pre-specified threshold relative to the comparator intervention.
 
 $$
 \begin{aligned}
-\mathbb{I}_{d_k[c]}^\text{ni} = \text{Pr}(\Delta_{d_k[c]} > n_{d_k[c]}) \ge \gamma_{d_k[c]}^\text{ni}
+\text{Pr}(\Delta > \rho_{ni}) \ge \gamma_{ni}
 \end{aligned}
 $$
 
-as treatment non-inferiority where $\mathbb{I}_{d_k[c]}^\text{ni}$ is a boolean indicator of non-inferiority, for the comparison indexed by $c$ within the $d_k$ domain relative to a reference level $n_{d_k[c]}$ at a probability greater than or equal to $\gamma_{d_k[c]}^\text{ni}$.
+as a boolean indicator of treatment non-inferiority based on the posterior estimate treatment comparison represented by $\Delta$ relative to a reference value $\rho_{ni}$ at a probability greater than or equal to a threshold value  $\gamma_{ni}$.
 
 ## Futility
 
 Futility in relation to either a superiority or a non-inferiority assessment implies that an intervention has low probability relative to the comparator intervention with respect to that assessment.
 
-For any of the treatment effect parameters obtained from the primary analysis results we define:
-
 $$
 \begin{aligned}
-\mathbb{I}_{d_k[c]}^\text{fut} = \text{Pr}(\Delta_{d_k[c]} > f_{d_k[c]}) \le \gamma_{d_k[c]}^\text{fut}
+\text{Pr}(\Delta > \rho_{fut}) \le \gamma_{fut}
 \end{aligned}
 $$
 
-as treatment futility where $\mathbb{I}_{d_k[c]}^\text{fut}$ is a boolean indicator of futility with respect to the relevant assessement type, for the comparison indexed by $c$ within the $d_k$ domain relative to a reference level $f_{d_k[c]}$ at a probability greater than or equal to $\gamma_{d_k[c]}^\text{fut}$.
+as a boolean indicator of treatment futility based on the posterior estimate treatment comparison represented by $\Delta$ relative to a reference value $\rho_{fut}$ at a probability greater than or equal to a threshold value  $\gamma_{fut}$.
+Separate futility assessments are run for both superiority and non-inferiority.
 
 
 # Adaptation
@@ -1799,12 +1818,6 @@ as treatment futility where $\mathbb{I}_{d_k[c]}^\text{fut}$ is a boolean indica
 
 Three possible adaptations are currently identified, namely early stopping (due to superiority, non-inferiority or futility), the addition of interventions within existing domains and the addition of entirely new domains.
 
-
-# Simulations
-
-Simulations are run to evaluate the operating characteristics of the study with a particular focus on the repeat sample error rate (type-I errors) and 
-
-test
 
 
 <!-- The treatment regimen under evaluation is the randomised and revealed surgical treatment in combination with randomised and non-randomised treatments associated with other domains in the subset of patients that would adhere to all surgical domain interventions but that may have had specified or unspecified ICE(s) associated with other domains. -->
