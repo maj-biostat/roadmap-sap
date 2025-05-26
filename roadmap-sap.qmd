@@ -1712,6 +1712,8 @@ The trial considers:
 
 The mathematical definitions of these quantities are provided below and a table of the thresholds currently in use is defined in @tbl-dec-thres.
 
+Decisions are made with respect to the average value for any `random-effect' terms that might exist within the model.
+
 ```{r}
 #| echo: FALSE
 #| label: tbl-dec-thres
