@@ -136,12 +136,13 @@ Specifically, the co-occurrence of the following states (paraphrased from the pr
 3. No ongoing use of antibiotics for the index joint 
 4. Destination prosthesis in place 
 
-Missing elements may impact the construction of the composite primary outcome; missingness does not equate to refutation.
-Missingness could arise as a result of the source records being dated outside the permissible time windows, which is predominantly not earlier than 12 months post platform entry and up to 13 months post platform entry, although variations on this exist e.g. for antibiotic use.
+Missing elements may impact the construction of the composite primary outcome as missingness does not equate definitively to either negation or confirmation.
+Missingness could arise for several reasons, one of which is that the source records are dated outside the permissible time windows.
+In the context of the analyses, the main reference time window is not earlier than 12 months post platform entry and up to 13 months post platform entry, although variations on this exist e.g. for antibiotic use.
 
 ## Objectives and endpoints
 
-The primary goal of ROADMAP trial is to examine the effect of a range of interventions in platform-eligible patients with PJI on treatment success as defined earlier, see @sec-background.
+The primary goal of ROADMAP trial is to examine the effect of a range of interventions in platform-eligible patients with PJI on treatment success as defined earlier in @sec-background.
 @tbl-obj provides a high-level summary of each of the domain objectives.
 Additional detail can be found in the protocol.
 
@@ -174,7 +175,7 @@ gt_tbl <- gt(d_tbl) |>
     objective = "Objective",
     endpoint = "Endpoint"
   ) |>
-  tab_options(table.font.size = "80%")
+  tab_options(table.font.size = "65%")
 
 gt_tbl
 ```
@@ -184,6 +185,7 @@ gt_tbl
 
 One of the goals of the estimand framework is to create a bridge between the clinical question and the statistical analyses.
 In the following sections, we provide further detail to the specifications provided in the core protocol and DSAs with a focus on the treatment regimen, the population summaries and the intercurrent events.
+Only the primary estimands have been detailed as the statistical approach to the supportive analyses, that being a standard per-protocol analysis, has well known limitations.
 
 ### Primary estimand {#sec-primary-estimand}
 
@@ -199,9 +201,7 @@ In general, all ICEs are effectively considered to be part of the treatment regi
 
 **High-level overview:**
 
-The estimand considers the effect of removing the infected joint (irrespective of whether knee or hip) versus cleaning and leaving the joint in place on treatment success at 12 months (primary outcome), specifically within the cohort of patients with late-acute infection and
-
-*...where treatment in other domains are given according to the trial design dependencies and usual practice when in receipt of DAIR and when in receipt of revision (and for the type of revision adopted).* 
+The estimand considers the effect of removing the infected joint (irrespective of whether knee or hip) versus cleaning and leaving the joint in place on treatment success at 12 months (primary outcome), specifically within the cohort of patients with late-acute infection and where treatment in other domains are given according to the trial design dependencies and usual practice when in receipt of DAIR and when in receipt of revision (and for the type of revision adopted).
 
 **Treatment regimen:**
 
@@ -213,12 +213,13 @@ The randomised treatment arms comprise DAIR and surgical revision where the clin
 The type of revision is determined following the surgical procedure where the surgeon is required to state whether there are no plans for a second stage operation (implying a one-stage revision, see DSA for AB duration part A, section 7.2) or there is an intention to have a second stage procedure (implying two-stage revision, see DSA AB Duration part B, section 6.2.1).
 Receipt of each of the surgical interventions and specific revision types has implications for the care revealed and admitted under other domains bar the antibiotic choice domain, although all obviously necessitate survival (a post-randomisation event) through the surgical procedure.
 
-Receipt of DAIR precludes entry into either of the backbone antibiotic duration domain or extended prophylaxis domain and therefore, patients receiving DAIR receive non-randomised treatment (usual care) for these.
-However, given that DAIR is a single stage procedure, these patients have no logical progression to extended prophylaxis as is defined for two-stage revision patients^[For the purposes of the study, extended prohylaxis is only relevant following the second stage of the revision procedure].
-DAIR patients also receive an antibiotic choice domain assignment (or non-randomised care). 
+Receipt of DAIR precludes entry into the backbone antibiotic duration domain and extended prophylaxis domain.
+Patients receiving DAIR would therefore receive a form of non-randomised treatment (usual care) for their backbone antibiotic duration.  
+However, given that DAIR is a single stage procedure, these patients have no logical progression to extended prophylaxis (as is defined for two-stage revision patients^[For the purposes of the study, extended prohylaxis is only relevant following the second stage of the revision procedure]).
+DAIR patients also receive an antibiotic choice domain assignment (or non-randomised care).
 
 Receipt of one-stage revision permits (but does not require) entry into the backbone antibiotic duration domain and precludes entry into the extended prophylaxis domain.
-Similar to DAIR patients, these patients have no logical progression to extended prophylaxis as is defined for two-stage revision patients.
+Similar to DAIR patients, these patients have no logical progression to extended prophylaxis as it is defined for two-stage revision patients.
 Therefore, patients receiving one-stage revision will also receive either non-randomised treatment (usual care), 12 weeks or 6 weeks backbone antibiotic duration along with an antibiotic choice domain assignment.
 
 Receipt of two-stage revision permits (but does not require) entry into the extended prophylaxis domain and precludes entry into the backbone antibiotic duration domain.
@@ -267,7 +268,7 @@ gt_tbl <- gt(d_tbl) |>
     class = "Class",
     strategy = "Strategy"
   ) |>
-  tab_options(table.font.size = "70%") |> 
+  tab_options(table.font.size = "65%") |> 
   tab_footnote(
     footnote = md("Switchover will not generally result in the outcome variable being missing (assuming the patient followup continues to completion) but does affect the interpretation of the result due to dilution of the treatment effect. For an (admittedly contrived) example, in a two-arm trial, if the majority of units assigned to the first treatment switched over to the second treatment and none of the units assigned to the second treatment switched then an ITT/treatment policy approach would be comparing groups of units that effectively received the same treatment."),
     locations = cells_body(
@@ -326,15 +327,14 @@ Tipping point sensitivity analysis and multiple imputation schemes may be consid
 
 **High-level overview:**
 
-The estimand considers the effect of the backbone antibiotic duration on treatment success at 12 months, specifically whether 6 weeks (a short duration) of backbone antibiotic is non-inferior to 12 weeks (a long duration) in patients surviving the first stage of revision with no plans for a secondary stage (and)
+The estimand considers the effect of the backbone antibiotic duration on treatment success at 12 months, specifically whether 6 weeks (a short duration) of backbone antibiotic is non-inferior to 12 weeks (a long duration) in patients surviving the first stage of revision with no plans for a secondary stage and where treatment in other domains are given according to the trial design and usual practice under entry into the backbone antibiotic duration domain.
 
-*...where treatment in other domains are given according to the trial design and usual practice under entry into the backbone antibiotic duration domain.*
-
-The domain effectively represents a sub-study based on patients that received survive a specific type of revision procedure.
+The estimand is effectively addressing a sub-study question (for which the participant characteristics may deviate from the platform reference group, e.g. less severe disease) that is based on patients receiving and surviving a specific type of revision procedure.
 
 **Treatment regimen:**
 
-The protocol definitions of the interventions are provided in the DSA for the antibiotic duration domain following single stage revision.
+Participants are randomised to 42 +/- 7 days (6 weeks) or 84 +/- 7 days (12 weeks) backbone antibiotic, selected according to organism and patient factors.
+Further details on the protocol definitions of the interventions are provided in the relevant DSA (DSA for AB duration part A, section 7.3.1).
 
 Entry into the domain is determined based on receipt and confirmation of one-stage revision, which occurs on the conclusion of the surgery by a surgeon indicating that no secondary stage is intended (see DSA for AB duration part A, section 7.2).
 
@@ -472,7 +472,7 @@ gt_tbl <- gt(d_tbl) |>
     class = "Class",
     strategy = "Strategy"
   ) |>
-  tab_options(table.font.size = "70%")  |> 
+  tab_options(table.font.size = "65%")  |> 
   tab_footnote(
     footnote = md("Extended therapy in the 6 week group would make the responses more similar to the 12 week group leading to increase likelihood of non-inferiority decision, i.e. conclusions may anti-conservative."),
     locations = cells_body(
@@ -520,9 +520,7 @@ Per the considerations and definitions for B.1.
 
 **High-level overview:**
 
-The estimand considers the effect of the extended prophylaxis on treatment success at 12 months, specifically whether 12 weeks of extended prophylaxis is more effective than none following the second stage within a two-stage revision procedure and 
-
-*...where treatment in other domains are given according to the trial design dependencies and usual practice when in receipt of two-stage revision.*
+The estimand considers the effect of the extended prophylaxis on treatment success at 12 months, specifically whether 12 weeks of extended prophylaxis is more effective than none following the second stage within a two-stage revision procedure and where treatment in other domains are given according to the trial design dependencies and usual practice when in receipt of two-stage revision.
 
 **Treatment regimen:**
 
@@ -570,7 +568,7 @@ gt_tbl <- gt(d_tbl) |>
     class = "Class",
     strategy = "Strategy"
   ) |>
-  tab_options(table.font.size = "70%")  |> 
+  tab_options(table.font.size = "65%")  |> 
   tab_footnote(
     footnote = md("Extended therapy in the no extended prophylaxis group would make the group more similar to the 12 week group leading to increase likelihood of non-inferiority decision, i.e. conclusions may anti-conservative."),
     locations = cells_body(
@@ -667,7 +665,7 @@ gt_tbl <- gt(d_tbl) |>
     class = "Class",
     strategy = "Strategy"
   ) |>
-  tab_options(table.font.size = "70%") |> 
+  tab_options(table.font.size = "65%") |> 
   tab_footnote(
     footnote = md("Both discontinuation/non-receipt of rifampicin or addition of rifampicin to the the control group make groups more similar than they otherwise would be."),
     locations = cells_body(
@@ -705,109 +703,7 @@ Per the considerations and definitions for B.1.
 
 Per the considerations and definitions for B.1.
 
-### Supportive estimands
 
-Supportive estimands are provided to address the needs of other stakeholders giving alternative perspectives and interpretations of intervention effects.
-
-Given the number of estimands defined in the DSAs, only those where ICEs are not handled under the treatment policy strategy are discussed.
-
-#### Estimand B.2 (surgical intervention)
-
-**High-level overview:**
-
-Per the primary estimand for the surgical domain, this supportive estimand considers the effect of removing the infected joint versus cleaning and leaving the joint in place on treatment success at 12 months.
-However, the treatment regimen under consideration is tightened to a sub-population that adhered to the assigned treatment.
-
-Principal stratum via mixture model but very challenging given the dimensionality of the problem and the limited specification.
-
-**Treatment regimen:**
-
-**Intercurrent events:**
-
-ICEs are per the primary estimand for the surgical domain.
-
-
-<!-- Note to self - see earlier correspondence b/w TS and MJ in the comments at the end of this file. -->
-
-**Summary measure:**
-
-todo
-
-**Main estimator:**
-
-The population-level summary is obtained via g-computation, which provides a counterfactual comparison across the relevant cohort under a landmark analysis.
-We estimate the unit-level probability of treatment success under each randomised intervention for the antibiotic choice domain and average over the sample. 
-A Bayesian bootstrap procedure to account for uncertainty in the covariate distribution.
-
-
-**Data useful for estimand:**
-
-It is important that units continue to be followed up after the occurrence of an ICE to obtain detail on the final status of the primary outcome.
-
-Record which of the patients, assigned to revision, had loose joints such that had they been assigned to DAIR, then switchover would likely have occurred.
-
-Record which of the patients, assigned to DAIR, had indications of prosthesis that would likely be difficult to remove, such that had they been assigned to revision, then switchover would likely have occurred.
-
-Record if the patient became unstable or neared instability at any point during the procedure for both DAIR and revision.
-
-#### Estimand D.2 (antibiotic duration)
-
-**High-level overview:**
-
-This supportive estimand considers the effect of the duration of backbone antibiotics on treatment success at 12 months, specifically whether 6 weeks (a short duration) of backbone antibiotic is non-inferior to 12 weeks (a long duration) in patients receiving one-stage revision.
-However, the treatment regimen under consideration is tightened to a sub-population that adhered to the assigned treatment.
-
-todo - finalise approach
-
-**Treatment regimen:**
-
-**Intercurrent events:**
-
-**Summary measure:**
-
-**Main estimator:**
-
-**Data useful for estimand:**
-
-**Missing data:**
-
-**Sensitivity:**
-
-#### Estimand E.2 (extended prohylaxis)
-
-todo - pp finalise approach
-
-**Treatment regimen:**
-
-**Intercurrent events:**
-
-**Summary measure:**
-
-**Main estimator:**
-
-**Data useful for estimand:**
-
-**Missing data:**
-
-**Sensitivity:**
-
-#### Estimand C.2 (antibiotic choice)
-
-todo - pp finalise approach
-
-**Treatment regimen:**
-
-**Intercurrent events:**
-
-**Summary measure:**
-
-**Main estimator:**
-
-**Data useful for estimand:**
-
-**Missing data:**
-
-**Sensitivity:**
 
 ## Study design
 
@@ -854,7 +750,7 @@ Spiral are also responsible for the implementation of the randomisation processe
 
 ## Analysis sets
 
-### Intention to treat
+### Intention to treat (full analysis set)
 
 The intent to treat (ITT) principle address what participants and what data to include on each person entering the study.
 A strict interpretation of ITT demands collection and analysis of all randomised units, but in practice minor deviations from this are routinely accepted.
@@ -918,7 +814,7 @@ gt_tbl <- gt(d_tbl) |>
       rows = 5
     )
   ) |>
-  tab_options(table.font.size = "80%")
+  tab_options(table.font.size = "65%")
 
 gt_tbl
 ```
@@ -940,7 +836,7 @@ d_tbl <- tribble(
   ~ domain, ~ subgroup, 
   "Surgical", "Site of infection by joint (hip/knee) in the index prosthesis (the infected prosthesis that was present at time of platform entry and for which the patient met eligibility criteria)",
   "", "Duration of symptoms at domain entry (categorised as duration <= 7 days, 7 days < duration <= 14 days,  14 days < duration <= 21 days)", 
-  "", "At least one causative organism is S. aureus versus not", 
+  "", "At least one causative organism is known at the time of domain eligibility assessment to be Staphylococcus aureus versus not", 
   "", "Serum C-reactive protein (CRP) at platform entry <100 versus >=100", 
   "", "Time from implantation of the index prosthesis to domain entry in days", 
   "", "One stage versus two stage revision (in those who are allocated to revision surgery)", 
@@ -951,8 +847,8 @@ d_tbl <- tribble(
   
   "Extended prophylaxis", "Silo membership", 
   "", "At least one causative organism is known at the time of domain eligibility assessment to be Staphylococcus aureus versus none", 
-  "", "Duration between first-stage and reimplantation procedure", 
-  "", "Duration of antibiotic treatment between first-stage and reimplantation procedure", 
+  "", "Categorised duration between first-stage and reimplantation procedure", 
+  "", "Categorised duration of antibiotic treatment between first-stage and reimplantation procedure", 
   
   "Antibiotic choice", "Type of surgery (DAIR, one-stage, two-stage)", 
   "", "At least one causative organism is a Staphylococcus (any species) versus none"
@@ -973,7 +869,7 @@ gt_tbl <- gt(d_tbl) |>
     subgroup = "Subgroup"
   ) |>
   tab_footnote(footnote = "For the surgical domain, one versus two stage revision effects are already addressed within the primary analysis model.") |>
-  tab_options(table.font.size = "80%")
+  tab_options(table.font.size = "65%")
 
 gt_tbl
 ```
@@ -1028,36 +924,40 @@ Model fit will be considered with reference to posterior predictive checks.
 
 ## Primary analysis {#sec-primary-analysis}
 
-The primary analysis model for ROADMAP will adjust for silo, joint, preference for revision type, treatment regimen, time period of recruitment, region/site and baseline characteristics, adopting the following form (with constraints imposed for identifiability):
+The primary analysis model for ROADMAP will adjust for silo, joint, preference for revision type, treatment regimen, time period of recruitment, region/site and baseline characteristics.
+As some parameters are undefined for some intervention options, the model can be specified as follows:
 
 <!-- see the latex physics manual for vector va, vb notation -->
 <!-- in brief, for greek letters you need the * -->
 
 $$
 \begin{aligned}
-Y &\sim \text{Bernoulli}(p) \\
-\text{logit}(p) &= \mu + \lambda_s + \rho_j + \phi_q + \\
-\quad &\quad \beta_{d_1,s} + \beta_{d_2} + \beta_{d_3} + \beta_{d_4}  + \\
-\quad &\quad \tau_t + \psi_r + \zeta_{z(r)} + \delta
+Y &\sim \text{Bernoulli}(\pi) \\
+\text{logit}(\pi)  &=  \alpha + \lambda_{s} + \rho_{j} + \delta + \tau_t + \psi_r + \zeta_{z(r)} + \xi \\
+\delta &= \begin{cases}
+  \beta_{1[d1, s]} + \beta_{4[d4]} + \phi_{p}   & \text{(dair)} \\
+  \beta_{1[d1, s]} + \beta_{2[d2]} + \beta_{4[d4]}  & \text{(one-stage)} \\
+  \beta_{1[d1, s]} + \beta_{3[d3]} + \beta_{4[d4]} + \phi_{p} & \text{(two-stage)} 
+\end{cases} \\
 \end{aligned}
 $$
 
 <!-- alternatively for transpose use \va{x}_{d}^\top -->
 
-where $Y$ is a binary variable representing unit level treatment success with probability $p$ and the linear predictor terms are as follows:
+where $Y$ is a binary variable representing unit level treatment success with probability $\pi$ and the linear predictor terms are as follows:
 
-+ $\mu$	a reference level log-odds of a successful outcome
-+ $\lambda_s$ shift attributable to membership in silo $s$
-+	$\rho_j$ shift attributable site of infection $j$
-+	$\phi_q$ shift attributable to surgeon preference for one/two stage, $q$, assuming unit randomised to revision
-+	$\beta_{d_1,s}$ shift attributable to silo-specific surgical intervention 
-+	$\beta_{d_2}$ shift attributable to backbone antibiotic duration with reference level corresponding to non-randomised /non-applicable unit level treatment
-+	$\beta_{d_3}$ shift attributable to extended prophylaxis duration with reference level corresponding to non-randomised /non-applicable unit level treatment
-+	$\beta_{d_4}$ shift attributable to antibiotic choice with reference level corresponding to non-randomised /non-applicable unit level treatment
-+	$\tau_t$ shift attributable to randomisation period $t$
-+	$\psi_r$ shift attributable to region $r$ 
-+	$\zeta_{z(r)}$ shift attributable to site $z$ nested within region $r$
-+	$\delta$ shift attributable to a sum of unit specific parameters that account for heterogeneity in baseline characteristics
++ $\alpha$ reference level log-odds of a successful outcome
++ $\lambda_s$ silo membership $s$
++	$\rho_j$ site of infection $j$
++	$\beta_{1[d_1,s]}$ surgical intervention $d_1$ in silo $s$
++	$\beta_{2[d_2]}$  backbone antibiotic duration intervention $d_2$
++	$\beta_{3[d_3]}$ extended prophylaxis duration intervention $d_3$
++	$\beta_{4[d_4]}$ antibiotic choice intervention $d_4$ 
++	$\phi_{p}$ surgeon preference for one/two stage, $p$, assuming unit randomised to revision
++	$\tau_t$ randomisation period $t$
++	$\psi_r$ region $r$ 
++	$\zeta_{z(r)}$ site $z$ nested within region $r$
++	$\xi$ linear combination of parameters accounting for baseline heterogeneity
 
 Baseline characteristics include:
 
@@ -1077,17 +977,17 @@ The treatment effect estimands will be calculated from the posterior using g-com
 
 We will use weakly informative priors that aim to constrain the parameter estimates to within plausible ranges and are consistent with the belief that extreme treatment effects are unlikely.
 
-The prior for $\mu$ will be set to
+The prior for $\alpha$ will be set to
 
 $$
-\mu \sim \text{Logistic}(0.7, 0.7) \quad \text{location/scale}
+\alpha \sim \text{Logistic}(0.7, 0.7) \quad \text{location/scale}
 $$
 
-Converted to the probability scale, this gives a prior median around 0.7 and puts 90% of the prior density between 0.2 and 0.9.
+Converted to the probability scale, this gives a prior median approximately equal to 0.65 and has a 90% HDI between 0.3 and 0.99.
 
-The priors for all main effects will be set to $\text{Normal}(0, 1)$ which are centred on zero with 90% of its mass between $\pm 3$ on the log-odds scale.
+The priors for all main effects will be set to $\text{Normal}(0, 1)$.
 
-Noting that some domains may vary their active set of interventions over time, a first-order random walk may be used to model temporal variation in the background response.
+Noting that some domains may vary their active set of interventions over time, a first-order random walk may be incorproated into the model to account for temporal variation in the background response.
 The random walk prior has the following structure
 
 $$
@@ -1099,7 +999,7 @@ $$
 $$
 
 with indexes aligned with analyses and the $\tau_1$ term representing the current quarter (i.e. 3 monthly intervals).
-The time adjustment will only be included in the model if treatment is varied over time.
+The time adjustment will only be included in the model if treatment options are varied over time.
 
 The prior for region will be set as per the main effects detailed above with the first region fixed to zero. 
 Site priors will be nested within region and set as 
@@ -1112,125 +1012,46 @@ $$
 $$
 
 The primary model results will be assessed using posterior predictive checks. 
-If issues with the pre-specified models arise, the necessary modifications will be reported including justification.
+If issues with the pre-specified models arise, the necessary modifications will be reported along with any necessary justification of the rationale for the variation.
 
 ## Sensitivity analysis (applicable to primary)
 
 Sensitivity analyses of the results to the pre-specified priors will be run at each analysis and variations to the pre-specified models may be explored.
 Additional models (either simpler or more complex) may be investigated as part of checks of sensitivity, stability, and model fit.
 
+
+
 ## Subgroup analyses {#sec-subgroup-analyses}
 
 Pre-specified subgroup analyses will be restricted to the primary model with additional post-hoc exploratory subgroup analyses being discretionary.
 The general approach will be to use the complete data, incorporating first-order interactions via hierarchical modelling for each subgroup considered.
+All subgroups will be discretized into 3 categories or less.
 
 Analyses will be run at the time of final reporting for each domain, but also at interim analyses for the relevant domain-level subgroups, if a futility decision is triggered.
 The latter analysis motivated by a prior belief of clinically relevant treatment effect heterogeneity and a desire to mitigate the possibility of terminating entry into a domain for subgroups when the possibility of a positive outcome remained.
 
-To address subgroups, the primary analysis model is revised such that the parameters in the linear predictor are split for all relevant groups.
+To account for subgroups a main effect for each subgroup is introduced into the model as is first order interaction to account for subgroup by treatment heterogenity.
+The latter component is modelled as a hierarchical term with a shared domain level variance. 
+
+As a simple example, assume a two-domain setup with two distinct subgroups per domain, ignoring other terms for simplicity.
+The assumed model would take the following form:
 
 $$
 \begin{aligned}
-Y &\sim \text{Bernoulli}(p) \\
-\text{logit}(p) &= \mu + \lambda_s + \rho_j + \phi_q + \\
-\quad &\quad \beta_{d_1,s} + \beta_{d_2} + \beta_{d_3} + \beta_{d_4}  + \\
-\quad &\quad \tau_t + \psi_r + \zeta_{z(r)} + \delta
+Y &\sim \text{Bernoulli}(\pi) \\
+\text{logit}(\pi)  &=  \alpha + \beta_A + \beta_{a_1} + \gamma_{[A,a_1]} + \beta_{a_2} + \gamma_{[A,a_2]} + \beta_B + \beta_{b_1} + \gamma_{[B,b_1]} + \beta_{b_2} + \gamma_{[B,b_2]}  \\
+\\
+(\beta_A,\beta_B) &\sim \text{Normal}(0,1) \\
+(\beta_{a_1},\beta_{a_2},\beta_{b_1},\beta_{b_2}) &\sim \text{Normal}(0,1) \\
+(\gamma_{[A,a_1]}, \gamma_{[A,a_2]}) &\sim \text{Normal}(0,\sigma_{\gamma_A}) \\
+(\gamma_{[B,a_1]}, \gamma_{[B,a_2]}) &\sim \text{Normal}(0,\sigma_{\gamma_B}) \\
+\sigma_{\gamma_A} &\sim \text{Exponential}(1) \\
+\sigma_{\gamma_B} &\sim \text{Exponential}(1)
 \end{aligned}
 $$
 
-where the terms are per the original specification with the treatment effects redefined to incorporate heterogeneity associated with subgroup membership:
-
-$$
-\begin{aligned}
-\beta_{d_1,s} &= \beta_{d_1,s}^\prime + \gamma_{d_1,j} + \gamma_{d_1,a} + \gamma_{d_1,c} + \gamma_{d_1,r} 
-\end{aligned}
-$$
-
-where 
-
-+ $\beta_{d_1,s}^\prime$ fixed silo-specific surgical intervention effect in the reference subgroup
-+ $\gamma_{d_1,j}$ shift in the applicable surgical intervention associated with site of infection
-+ $\gamma_{d_1,a}$ shift in the applicable surgical intervention associated with duration of symptoms at entry
-+ $\gamma_{d_1,c}$ shift in the applicable surgical intervention associated with presence of causative organism
-+ $\gamma_{d_1,r}$ shift in the applicable surgical intervention associated with CRP at baseline
-
-which, for simplicity, is assuming that the subgroup deviations are common to all silos.
-The priors are set to:
-
-$$
-\begin{aligned}
-\beta_{d_1,s}^\prime &\sim \text{Normal}(0, 1) \\
-\gamma_{d_1, \cdot} &\sim \text{Normal}(0, \omega_{d_1}) \\
-\omega_{d_1} &\sim \text{HalfNormal}(1)
-\end{aligned}
-$$
-
-Similarly, for the backbone antibiotic duration domain:
-
-$$
-\begin{aligned}
-\beta_{d_2} = \beta_{d_2}^\prime + \gamma_{d_2,s} + \gamma_{d_2,c} 
-\end{aligned}
-$$
-
-+ $\beta_{d_2}^\prime$ fixed backbone antibiotic duration intervention effect in the reference subgroup 
-+ $\gamma_{d_2,s}$ shift in the intervention effect associated with silo membership
-+ $\gamma_{d_2,c}$ shift in the intervention effect associated with presence of causative organism
-
-The priors are set to:
-
-$$
-\begin{aligned}
-\beta_{d_2,s}^\prime &\sim \text{Normal}(0, 1) \\
-\gamma_{d_2, \cdot} &\sim \text{Normal}(0, \omega_{d_2}) \\
-\omega_{d_2} &\sim \text{HalfNormal}(1)
-\end{aligned}
-$$
-
-For the extended prophylaxis domain:
-
-$$
-\begin{aligned}
-\beta_{d_3} = \beta_{d_3}^\prime + \gamma_{d_3,s} + \gamma_{d_3,c} 
-\end{aligned}
-$$
-
-+ $\beta_{d_3}^\prime$ fixed extended prophylaxis intervention effect in the reference subgroup 
-+ $\gamma_{d_3,s}$ shift in the intervention effect associated with silo membership
-
-The priors are set to:
-
-$$
-\begin{aligned}
-\beta_{d_3,s}^\prime &\sim \text{Normal}(0, 1) \\
-\gamma_{d_3, \cdot} &\sim \text{Normal}(0, \omega_{d_3}) \\
-\omega_{d_3} &\sim \text{HalfNormal}(1)
-\end{aligned}
-$$
-
-For the antibiotic choice domain:
-
-$$
-\begin{aligned}
-\beta_{d_4} = \beta_{d_4}^\prime + \gamma_{d_4,d_1} + \gamma_{d_3,c}
-\end{aligned}
-$$
-
-+ $\beta_{d_4}^\prime$ fixed antibiotic choice intervention effect in the reference subgroup 
-+ $\gamma_{d_4,d_1}$ shift in the intervention effect associated with type of surgery
-+ $\gamma_{d_4,c}$ shift in the intervention effect associated with presence of causative organism
-
-The priors are set to:
-
-$$
-\begin{aligned}
-\beta_{d_4,s}^\prime &\sim \text{Normal}(0, 1) \\
-\gamma_{d_4, \cdot} &\sim \text{Normal}(0, \omega_{d_4}) \\
-\omega_{d_4} &\sim \text{HalfNormal}(1)
-\end{aligned}
-$$
-
-that is, with shared variance components for the domain level subgroup terms.
+where $\beta_A$, $\beta_B$ represent domain level treatment effects, $\beta_{a_1}$, $\beta_{a_2}$, $\beta_{b_1}$, $\beta_{b_2}$ represent main effects for subgroups for domains A and B respectively and $\gamma_{[A,a_1]}$, $\gamma_{[A,a_2]}$, $\gamma_{[B,B_1]}$, $\gamma_{[B,b_2]}$ represent the first order interaction terms.
+For the case where heterogeneity for the same subgroup is explored across domains, a single main effect will be included along with the first order interactions with each relevant domain level treatment.
 
 
 <!-- minutes from 2024-09-09 -->
@@ -1239,8 +1060,17 @@ that is, with shared variance components for the domain level subgroup terms.
 
 ## Supportive (domain agnostic) analyses
 
-The following sections detail analyses applying to all domains (hence *domain agnostic*) - interest is in treatment effects associated with all domain level interventions.
+The following sections detail analyses applying to all domains and interest is in treatment effects over all domains.
 
+Unless otherwise stated:
+
++ the models will be fit using the full analysis set
++ the model linear predictor and priors will be equivalent to those used in the primary analysis
++ ICEs will be handled via the treatment policy strategy
+
+### Treatment success at 12 months
+
+Treatment success at 12 months will be analysed based on the same composite outcome variable for the primary analysis but using the per protocol analysis set where per protocol is define with reference to all domains simultaneously.
 
 ### Desirability of outcome ranking
 
@@ -1293,25 +1123,14 @@ gt_tbl <- gt(d_tbl) |>
     footnote = md("Treatment Success relates to primary outcome definition."),
     locations = cells_column_labels(columns = TrtSuccss) 
   ) |>
-  tab_options(table.font.size = "80%")
+  tab_options(table.font.size = "65%")
 
 gt_tbl
   
 ```
 
-The DOOR analysis approach targets what has been called a *DOOR probability* but is more broadly referred to as a Probabilistic Index (PI), see @DeSchryver2018 and is equivalent to the Mann-Whitney-U statistic.
-To calculate the PI we will enumerate all pairwise comparisons between all patients (win, loss, tie) and then the PI is given by
-
-$$
-\begin{aligned}
-PI &= \frac{ (n_{win} + 0.5 n_{tie}) } { n_e n_c } 
-\end{aligned}
-$$
-
-where $n_{win}$ and $n_{tie}$ are the number of instances where the experimental units do *better* than the control patients or have equivalent ranking respectively for all pairs and $n_e$ and $n_c$ are the number of patients in each of the two arms being compared.
-We will produce confidence intervals via a bootstrap procedure or other methods.
-
-We note that the PI refers to the probability that the outcome of a randomly selected subject in one group exceeds the outcome of another randomly selected subject in another group (plus half of the probability of a tied DOOR), see @Evans2015.
+The DOOR analysis approach targets a *DOOR probability*, more broadly referred to as a Probabilistic Index (PI), see @DeSchryver2018 and is closely related to the Mann-Whitney-U statistic.
+The PI refers to the probability that the outcome of a randomly selected subject in one group exceeds the outcome of another randomly selected subject in another group (plus half of the probability of a tied DOOR), see @Evans2015.
 In principle, it targets:
 
 $$
@@ -1322,18 +1141,25 @@ $$
 
 where $Y_e$ is a random variable describing the outcome under an experimental treatment and $Y_c$ is a corresponding outcome under the control.
 
+To calculate the PI we will enumerate all pairwise comparisons between all patients (win, loss, tie) and then the PI is given by
 
+$$
+\begin{aligned}
+PI &= \frac{ (n_{\text{win}} + 0.5 n_{\text{tie}}) } { n_\text{trt} n_\text{ref} } 
+\end{aligned}
+$$
+
+where $n_{\text{win}}$ and $n_{\text{tie}}$ denote the number of instances where the experimental units do *better* than the control patients or have equivalent ranking respectively for all pairs and $n_\text{trt}$ and $n_\text{ref}$ denote the number of patients in each of the two arms being compared.
+Confidence intervals will be derived via a bootstrap procedure.
 
 Separate DOOR analyses will be run on strata based on the assessment and ranking of the relevant outcomes at 12-months.
-That is, in the DOOR analysis, we are comparing a subset of units over the interventions specific to a given domain.
+That is, in the DOOR analysis, we will compare a subset of units over the interventions specific to a given domain.
 Specifically:
 
-+ For the surgical domain, the PI will be computed for only the units within the late-acute silo revealed to randomised treatment for this domain
++ For the surgical domain, the PI will be computed for only the units within the late-acute silo revealed to randomised treatment for this domain (and restricted to those that entered non-randomised treatment in the duration and extended prophylaxis domain in order to avoid inducing bias in the surgical domain)
 + For the antibiotic duration domain, the PI will be computed for only the units that received one-stage revision and revealed to randomised treatment for this domain
 + For the extended prophylaxis domain, the PI will be computed for only the units that received two-stage revision and revealed to randomised treatment for this domain
 + For the antibiotic choice domain, the PI will be computed for all units revealed to randomised treatment for this domain
-
-
 
 ### Patient-reported joint function
 
@@ -1362,7 +1188,8 @@ $$
 <!-- $$ -->
 
 and where the linear predictor (generically stated in the above) would have terms and priors analogous to those used in the primary analysis.
-The priors for the intercept terms would be based on a weakly informative dirichlet prior.
+The priors for the intercept terms would be based on a weakly informative Dirichlet distribution.
+If scores are sparse, then aggregation may be adopted.
 
 ### Patient-reported quality of life (EQ5D5L)
 
@@ -1392,47 +1219,27 @@ where $\eta$ takes the same form as the primary analysis, see @sec-primary-analy
 
 ### Clinical cure to 12 months {#sec-clinical-cure}
 
-
-
-The occurrence of clinical cure, defined in the master protocol as no clinical or microbiological evidence of infection, is subject to the competing risk of death.
+The occurrence of clinical cure, defined in the master protocol as no clinical or microbiological evidence of infection, is subject to the competing risks of death and replacement of the initial prosthesis.
 We will use a logistic regression model to analyse clinical cure to 12-months after platform entry following an analogous approach to @sec-all-cause-mortality.
 
-Given the possibility of death, this analysis actually yields a comparison of clinical cure (as defined within the context of the primary outcome) versus *either* clinical failure or death.
-That is, if the patient dies then we will consider them a failure, irrespective of whether they were clinically cured or not at the time of death.
+Given the possibilities of death and surgical removal of the initial prosthesis, this analysis actually yields a comparison of clinical cure (as defined within the context of the primary outcome) versus *either* clinical failure or death or replaced prosthesis.
+This approach preserves the randomisation, whereas a conditional approach based on the set of participants that did not die and did had their initial joint replacement removed could induce selection bias.
 
 ### No longer taking any antibiotics for the index joint to 12 months {#sec-prop-ab-free}
 
-The ability to observe whether antibiotics are being used for the index joint is subject to  competing risks.
-
-We will use a logistic regression model to analyse antibiotic use to 12-months after platform entry following an analogous approach to @sec-all-cause-mortality.
-
-Given the possibility of competing risks, this analysis actually yields a comparison of no longer taking antibiotics (as defined within the context of the primary outcome) versus *either* taking antibiotics, joint removal, amputation or death.
-That is, if the patient dies then we will consider them a failure, irrespective of whether they were taking antibiotics or not at the time of death.
+Logistic regression will be used to analyse antibiotic use to 12-months after platform entry following an analogous approach to @sec-clinical-cure.
 
 ### Destination prosthesis still in place to 12 months {#sec-joint-in-place}
 
-The ability to observe whether the destination prosthesis is still in place is subject to the competing risk of death - we do not observe, counter to fact, whether those that die would or would not have had the destination prosthesis still in place.
-
-We will use a logistic regression model to analyse destination prosthesis still in place to 12-months after platform entry following an analogous approach to @sec-all-cause-mortality.
-
-Given the possibility of competing risks, this analysis actually yields a comparison of destination prosthesis still in place (as defined within the context of the primary outcome) versus *either* destination prosthesis no longer still in place or death.
-That is, if the patient dies then we will consider them a failure, irrespective of whether the destination prosthesis was or was not in place at the time of death.
+Logistic regression will be used to analyse the destination prosthesis status to 12-months after platform entry following an analogous approach to @sec-clinical-cure.
 
 ### Microbiological relapse b/w 100 days and 12 months {#sec-microbiological-relapse}
 
-The occurrence of microbiological relapse, indicated by positive joint fluid or tissue culture for one or more of the index isolates, between 100 days and 12 months after platform entry, is subject to the competing risk of death. 
-We will use a logistic regression model to analyse microbiological relapse to 12-months after platform entry following an analogous approach to @sec-all-cause-mortality.
-
-Given the possibility of competing risks, this analysis actually yields a comparison of the presence of no microbiological relapse (with the prosthesis in place) versus *either* microbiological relapse or death (with or without the prosthesis in place).
-That is, if the patient dies then we will consider them a failure, irrespective of whether there had been a microbiological relapse or not at the time of death.
+Logistic regression will be used to analyse the microbiological relapse status between 100 days and 12-months after platform entry following an analogous approach to @sec-clinical-cure.
 
 ### Microbiological reinfection b/w 100 days and 12 months
 
-The occurrence of microbiological reinfection, indicated by positive joint fluid or tissue culture with a different organism to the index isolates, between 100 days and 12 months after platform entry, is subject to the competing risk of death. 
-We will use a logistic regression model to analyse microbiological reinfection to 12-months after platform entry following an analogous approach to @sec-all-cause-mortality.
-
-Given the possibility of competing risks, this analysis actually yields a comparison of the presence of no microbiological reinfection (with the prosthesis in place) versus *either* microbiological reinfection or death (with or without the prosthesis in place).
-That is, if the patient dies then we will consider them a failure, irrespective of whether there had been a microbiological reinfection or not at the time of death.
+Logistic regression will be used to analyse the microbiological reinfection status between 100 days and 12-months after platform entry following an analogous approach to @sec-clinical-cure.
 
 ### Time alive and free from revision procedure to 24 months {#sec-time-alive-24}
 
@@ -1454,157 +1261,133 @@ h(t) = \sum_{l = 1}^L \gamma_l M_l(t; \vec{k}, \delta) \exp(x^\top \beta)
 \end{aligned}
 $$
 
-where $M_l(t; \vec{k}, \delta)$ denotes the $l^{\text{th}}$ basis term for a degree $\delta$ M-spline function evaluated at knots locations $\vec{k}$ and $\gamma_l$ denoting the $l^{\text{th}}$ M-spline coefficient.
+where $M_l(t; \vec{k}, \delta)$ denotes the $l^{\text{th}}$ basis term for a degree $\delta$ M-spline function evaluated at knot locations $\vec{k}$ and $\gamma_l$ denoting the $l^{\text{th}}$ M-spline coefficient.
 
-
-
-In the event of clear violation of proportional-hazards, appropriate model adjustments will be made as a sensitivity analysis.
+In the event of violation of proportional-hazards, appropriate model adjustments will be made as a sensitivity analysis.
 Alternatively, other model formulations may be explored, such as an accelerated failure time models under a log-logistic or Weibull distributional assumptions.
 Such models characterise effects in terms of survival times rather than hazards.
 
-We will characterise treatment effects via the Restricted Mean Survival Time (RMST), defined as the area under the survival curve up to a specific time point.
-The RMST can be interpreted as the average time to event during the defined period to 24-months.
+Treatment effects may be characterised in terms of differences in median time to event, hazard ratios, acceleration ratios, Restricted Mean Survival Time (RMST), as appropriate.
+The RMST is defined as the area under the survival curve up to a specific time point and can be interpreted as the average time to event to 24-months.
 
+
+{{< pagebreak >}}
 ## Supportive (domain specific) analyses
 
 The following sections detail analyses that are domain-specific, i.e. where the interest is in treatment effects that are restricted to a given domain.
-For example, we are not interested in the effect of duration of antibiotic in the context of unplanned re-operation.
 
 All these map to estimands are briefly outlined in the relevant DSAs.
 
+Unless otherwise stated:
 
++ the models will be fit using the full analysis set
++ the model linear predictor and priors will be equivalent to those used in the primary analysis
++ ICEs will be handled via the treatment policy strategy
+
+
+
+
+{{< pagebreak >}}
 ### Surgical domain
 
 For the following, irrespective of the modelling approach, the effects of interest are only those relating to the surgical domain.
 
-#### Treatment success at 12 months
-
-todo - see notes
-
-
 #### Unplanned re-operation
 
-We will use logistic regression to analyse the occurrence of unplanned re-operation on the index joint more than 14 days after the initial definitive procedure.
-The analyses will be based on all patients irrespective of any occurrence of specified or unspecifed ICEs.
-The outcome is subject to the competing risk of death.
+Logistic regression will be used to analyse the occurrence of unplanned re-operation on the index joint more than 14 days after the initial definitive procedure to 12 months.
 
 #### Dislocation of index joint
 
-We will use logistic regression to analyse the occurrence of dislocation of the index joint on all patients irrespective of any occurrence of specified or unspecifed ICEs.
-The analyses will be based on all patients irrespective of any occurrence of specified or unspecifed ICEs.
-The outcome is subject to the competing risk of death.
+Logistic regression will be used to analyse the occurrence of dislocation of the index joint to 12 months.
 
 #### Unplanned or unexpected periprosthetic fracture
 
-We will use logistic regression to analyse the occurrence of unplanned or unexpected periprosthetic fracture (either intraoperative or later on, requiring attendance at a hospital). 
-The analyses will be based on all patients irrespective of any occurrence of specified or unspecifed ICEs.
-The outcome is subject to the competing risk of death.
+Logistic regression will be used to analyse the occurrence of unplanned or unexpected periprosthetic fracture (either intraoperative or later on, requiring attendance at a hospital) to 12 months.
 
+
+
+
+{{< pagebreak >}}
 ### Antibiotic duration domain
 
 For the following, irrespective of the modelling approach, the effects of interest are only those relating to the antibiotic duration domain.
 
-#### Treatment success at 12 months
-
-todo - finalise approach for this alternative to itt.
-
-
 #### Acute liver injury following platform entry to 90 days
 
-We will use logistic regression to analyse the occurrence of acute liver injury to 90 days post platform entry. 
-The analyses will be based on all patients irrespective of any occurrence of specified or unspecifed ICEs.
-The outcome is subject to the competing risk of death.
+Logistic regression will be used to analyse the occurrence of acute liver injury to 90 days post platform entry.
 
+#### Acute kidney injury following platform entry to 90 days
 
+Logistic regression will be used to analyse the occurrence of acute kidney injury to 90 days post platform entry.
 
 #### Laboratory-proven *Clostridium difficile* diarrhoea to x days
 
-We will use logistic regression to analyse the occurrence of laboratory-proven *Clostridium difficile* diarrhoea.
-The analyses will be based on all patients irrespective of any occurrence of specified or unspecifed ICEs.
-The outcome is subject to the competing risk of death.
+Logistic regression will be used to analyse the occurrence of laboratory-proven *Clostridium difficile* diarrhoea to x days.
 
 #### Antibiotics ceased due to suspected adverse reaction to 90 days
 
-We will use logistic regression to analyse the occurrence of ceasing antibiotics due to other suspected adverse reaction between the time of domain entry to day 90.
-The analyses will be based on all patients irrespective of any occurrence of specified or unspecifed ICEs.
-The outcome is subject to the competing risk of death.
+Logistic regression will be used to analyse the occurrence of ceasing at least one antibiotic due to other suspected adverse reaction between the time of domain entry to day 90.
 
 
+
+
+{{< pagebreak >}}
 ### Extended prophylaxis domain
 
-#### Treatment success at 12 months
-
-todo - finalise approach for this alternative to itt.
-
+For the following, irrespective of the modelling approach, the effects of interest are only those relating to the extended prophylaxis domain.
 
 #### Time alive and free from any revision procedure to 12-months
 
-
 Time alive and free from any revision procedure on the index joint captured by a national joint replacement registry within 12 months of domain entry will be analysed via a proportional hazards survival model, using an analogous approach to that detailed in @sec-time-alive-24.
-
-
 
 #### Time alive and free from any revision procedure to 24-months
 
-
 Time alive and free from any revision procedure on the index joint captured by a national joint replacement registry within 24 months of domain entry will be analysed via a cause-specific hazard survival model, using an analogous approach to that detailed in @sec-time-alive-24.
 
-#### Laboratory-proven *Clostridium difficile* diarrhoea to x days
+#### Laboratory-proven *Clostridium difficile* diarrhoea to 12-months
+
+Logistic regression will be used to analyse the occurrence of laboratory-proven *Clostridium difficile* diarrhoea to 12-months.
+
+#### Antibiotics ceased due to suspected adverse reaction to 12-months
+
+Logistic regression will be used to analyse the occurrence of ceasing antibiotics due to *other* suspected adverse reaction between the time of domain entry to 12-months.
 
 
-We will use logistic regression to analyse the occurrence of laboratory-proven *Clostridium difficile* diarrhoea.
-The analyses will be based on all patients irrespective of any occurrence of specified or unspecifed ICEs.
-The outcome is subject to the competing risk of death.
-
-#### Antibiotics ceased due to suspected adverse reaction to 90 days
 
 
-We will use logistic regression to analyse ceasing antibiotics due to *other* suspected adverse reaction between the time of domain entry to day 90 post platform entry.
-The analyses will be based on all patients irrespective of any occurrence of specified or unspecifed ICEs.
-The outcome is subject to the competing risk of death.
-
+{{< pagebreak >}}
 ### Antibiotic choice domain
 
-#### Treatment success at 12 months
-
-todo - finalise approach for this alternative to itt.
-
+For the following, irrespective of the modelling approach, the effects of interest are only those relating to the antibiotic choice domain.
 
 #### Acute liver injury to day 100
 
+Logistic regression will be used to analyse the occurrence of acute liver injury to day 100 post platform entry.
 
-We will use logistic regression to analyse the occurrence of acute liver injury to day 100 post platform entry.
-The analyses will be based on all patients irrespective of any occurrence of specified or unspecifed ICEs.
-The outcome is subject to the competing risk of death.
+#### Acute kidney injury to day 100
 
-#### Acute liver injurty to day 100
+Logistic regression will be used to analyse the occurrence of acute kidney injury to day 100 post platform entry.
 
+#### Laboratory-proven *Clostridium difficile* diarrhoea to 12-months
 
-#### Laboratory-proven *Clostridium difficile* diarrhoea to x days
-
-We will use logistic regression to analyse the occurrence of laboratory-proven *Clostridium difficile* diarrhoea.
-The analyses will be based on all patients irrespective of any occurrence of specified or unspecifed ICEs.
-The outcome is subject to the competing risk of death.
+Logistic regression will be used to analyse the occurrence of laboratory-proven *Clostridium difficile* diarrhoea to 12-months.
 
 #### Antibiotics ceased due to suspected adverse reaction to 100 days
 
+Logistic regression will be used to analyse the occurrence of ceasing antibiotics due to *other* suspected adverse reaction between the time of domain entry to 100 days.
 
-We will use logistic regression to analyse ceasing antibiotics due to other suspected adverse reaction between the time of domain entry to day 100 post platform entry.
-The analyses will be based on all patients irrespective of any occurrence of specified or unspecifed ICEs.
-The outcome is subject to the competing risk of death.
-
-
+{{< pagebreak >}}
 ## Missing data
 
 ### Primary outcome variable
 
 Given the use of a composite outcome variable for the primary analysis, missingness for the different composite elements could lead to different implications on the interpretation of the outcome.
-The composite is ascertained through the use of hospital databases, followup with healthcare provider and/or patient and/or data linkage with death registries.
+The composite variable components (alive, no infection, no antibiotics, index prosthetic in place) are ascertained through the use of hospital databases, followup with healthcare provider and/or patient and/or data linkage with death registries.
 
 Treatment failure is indicated if any of the four composite elements are observed to fail. 
 That is, if we see any of death, absence of clinical cure, ongoing antibiotic use or destination prosthesis absent, then the unit is a failure and whether other elements of the composite are observed or missing is irrelevant.
 
-If direct evidence is missing of the patient being alive, this can be implied by the existence of any of observation of the other elements in the composite^[Although being alive is only up until the time of the surrogate observation, which may or may not be prior to the 12 month endpoint.].
+Direct evidence of the patient being alive will be implied either by the absence of a death certificate or the existence of any of medical follow up that gives information on the other elements of the composite^[Although being alive is only up until the time of the surrogate observation, which may or may not be prior to the 12 month endpoint.].
 If all other elements are missing and death cannot be confirmed by other sources then the unit could either be alive or dead (e.g. they might have died out of country although this seems highly improbable).
 More likely is that if a patient cannot be found in a death registry, then they are alive (unless they moved overseas).
 
@@ -1634,26 +1417,28 @@ Also software used will be disclosed in the reports.
 
 ## Treatment effects
 
-Interest is primarily geared towards estimating effects of treatments under the specified analyses.
-In general, we consider randomised treatment whereby groups are exchangeable (i.e. the potential outcome associated with any treatment is independent of the treatment that was assigned).
-For the surgical domain, the choice of revision is left to the clinician and those groups are not exchangeable.
+The primary focus of inference is on estimating treatment effects for the randomised interventions.
+As such, we consider comparisons amongst groups that are exchangeable (i.e. the potential outcome associated with any treatment is independent of the treatment that was assigned).
+For the surgical domain, the choice of revision is left to the clinician and so, within revision type, we do not have exchangeability.
 This is because what leads a surgeon to prefer one versus two-stage revision will likely be informative of outcome, making those that receive one-stage systematically different from those that receive two.
 
 The following descriptions relate to the calculation of treatment effects for the primary analysis.
-All domains adopt g-computation and a Bayesian bootstrap that aims to account for the uncertainty in the joint covariate distribution.
+All domains adopt g-computation and a Bayesian bootstrap with that aims account for the uncertainty in the joint covariate distribution.
 
 ### Surgical domain {#sec-surgical-domain}
 
 For the surgical domain, we calculate the effect of revision relative to debridement using g-computation and a Bayesian bootstrap as follows:
 
-+ for each unit within the late acute silo, compute the predicted probability of the outcome assuming they are assigned to the DAIR group with each of their covariates set at their natural values, which, if necessary, are implied via reference to original allocation
-+ for each unit within the late acute silo and preferenced to one-stage revision, compute the predicted probability of the outcome assuming they are assigned to the revision group (and type determined from clinical preference) with each of their covariates set at their natural values, which, if necessary, are implied via reference to original allocation
-+ for each unit within the late acute silo and preferenced to two-stage revision, compute the predicted probability of the outcome assuming they are assigned to the revision group (and type determined from clinical preference) with each of their covariates set at their natural values, which, if necessary, are implied via reference to original allocation
-+ for each set of predicted probabilities, form the scalar product with draws from a Dirichlet distribution of the relevant dimension to produce the average risk under DAIR, revision (one-stage), revision (two-stage) accounting for the uncertainty in the covariate distribution
-+ form a weighted combination of the the revision (one-stage), revision (two-stage) estimates based on the distribution of preferences in the sample
-+ derive the risk difference as the difference in the probability of the outcome in the revision versus DAIR groups 
+1. for each unit within the late acute silo, compute the posterior predicted probability of the outcome assuming they are assigned to DAIR and using the appropriate linear predictor (and transform) and where each of the remaining covariates are set at their natural values
+2. for each unit within the late acute silo and preferenced to one-stage revision, compute the posterior predicted probability of the outcome assuming they are assigned to the revision group (and type determined from clinical preference) and using the appropriate linear predictor (and transform) with the antibiotic duration fixed at the non-randomised level and with each of the remaining covariates set at their natural values 
+3. for each unit within the late acute silo and preferenced to two-stage revision, compute the predicted probability of the outcome assuming they are assigned to the revision group (and type determined from clinical preference) and using the appropriate linear predictor (and transform) with the extended prophylaxis fixed at the non-randomised level and with each of the remaining covariates set at their natural values 
 
-the difference between the sample level risk of treatment success under one-stage and two-stage revision minus the log-odds of treatment success under debridement.
+4. for each set of predicted probabilities, form the scalar product with draws from a Dirichlet distribution of the relevant dimension to produce the average risk under DAIR, revision (one-stage), revision (two-stage) accounting for the uncertainty in the covariate distribution
+
+5. form a weighted combination of the the revision (one-stage), revision (two-stage) estimates based on the distribution of preferences in the sample
+
+6. derive the risk difference as the difference in the posterior probability of the outcome in the revision versus DAIR groups 
+
 
 <!-- (Riemann-Stieltjes) -->
 
@@ -1696,19 +1481,27 @@ The extended prophylaxis domain treatment effects are estimated using methods an
 
 ### Antibiotic choice domain
 
-The antibiotic choice domain treatment effects are estimated using methods analogous to those in @sec-surgical-domain,  restricted to the subset revealed to randomised antibiotic choice, with no restrictions on the entry into the other domains.
+The antibiotic choice domain treatment effects are estimated using methods analogous to those in @sec-surgical-domain, restricted to the subset revealed to randomised antibiotic choice, with no restrictions on the entry into the other domains.
+In the case of the antibiotic choice, the predicted posterior probability of the outcome is derived from the linear predictor applicable to the type of surgical intervention received.
+
+### Subgroups
+
+All subgroup effects are estimated using analogous methods to those above, but using an extended model as detailed in @sec-subgroup-analyses as the basis for prediction.
+In brief, the predicted posterior probability of the outcome is calculated for each unit and each treatment arm across all subgroups.
+Next, Dirichlet weights are drawn and used to compute the average subgroup specific risk, which in turn are used to calculate the treatment effects associated with the comparisons of interest.
 
 # Decision procedures
 
 ## Overview
 
 Trial decisions are made by calculating the probability that the posterior distributions for the treatment effects exceed or fall short of reference values and contrast this with a decision level, all nominated based on simulation studies and the clinical subject matter knowledge.
+Simulation methods and results are provided in a separate report.
 
 The trial considers:
 
 + superiority - indicating that an intervention is beneficial relative to a comparator
 + non-inferiority - indicating that an intervention is no worse than some clinically relevant threshold to a comparator 
-+ futility - which indicates a low probability with respect to superiority or non-inferiority assessment and thus there are both futility for superiority and futility for non-inferiority assessments.
++ futility - which indicates a low probability with respect to the relevant superiority or non-inferiority assessment (i.e. there are futility triggers for both superiority and futility for non-inferiority assessments)
 
 The mathematical definitions of these quantities are provided below and a table of the thresholds currently in use is defined in @tbl-dec-thres.
 
@@ -1725,20 +1518,20 @@ Decisions are made with respect to the average value for any `random-effect' ter
 
 d_tbl <- tribble(
   ~ domain, ~ quantity, ~ threshold_probability, ~ decision_probability,
-  "Surgical", "Superiority \n revision vs DAIR", "$>0$", "$\\ge 0.92$",
+  "Surgical", "Superiority \n revision vs DAIR", "$>0$", "$\\ge 0.96$",
   "", "Futility \n revision vs DAIR", "$>0.05$", "$\\le 0.3$",
   "", "", "", "",
   
   "Antibiotic duration", "Non-inferiority \n 6 weeks vs 12 weeks", "$> -0.05$", "$\\ge 0.925$",
-  "", "Futility \n 6 weeks vs 12 weeks", "$<0$", "$\\le 0.25$",
+  "", "Futility \n 6 weeks vs 12 weeks", "$<0$", "$\\le 0.1$",
   "", "", "", "",
   
-  "Extended prophylaxis", "Superiority \n 12 weeks vs none", "$>0$", "$\\ge 0.95$",
-  "", "Futility \n 12 weeks vs none", "$>0.05$", "$\\le 0.25$",
+  "Extended prophylaxis", "Superiority \n 12 weeks vs none", "$>0$", "$\\ge 0.96$",
+  "", "Futility \n 12 weeks vs none", "$>0.05$", "$\\le 0.3$",
   "", "", "", "",
   
-  "Antibiotic choice", "Superiority \n rifampacin vs none", "$>0$", "$\\ge 0.995$",
-  "", "Futility \n rifampacin vs none", "$>0.05$", "$\\le 0.25$"
+  "Antibiotic choice", "Superiority \n rifampacin vs none", "$>0$", "$\\ge 0.99$",
+  "", "Futility \n rifampacin vs none", "$>0.05$", "$\\le 0.3$"
   )
 
 
@@ -1762,56 +1555,57 @@ gt_tbl <- gt(d_tbl, groupname_col = "Domain",
     threshold_probability = "Threshold\nprobability",
     decision_probability = "Decision\nprobability"
   ) |> 
-  tab_options(table.font.size = "80%")
+  tab_options(table.font.size = "65%")
 
 gt_tbl
 
 ```
 
 
-The actions that follow after a decision threshold has been reached are detailed in the core protocol (section 9.7) and will not be duplicated here.
-However, any occurrence of a futility decision requires that a subgroup analysis be performed as per the populations listed in @sec-subgroups using the methods detailed in @sec-subgroup-analyses for the relevant domain(s).
+The actions that follow after a decision threshold has been reached are detailed in the core protocol (section 9.7).
 
-For a futility decision to hold definitively, all relevant subgroups should show futility.
+Any occurrence of a futility decision requires that a subgroup analysis be performed as per the populations listed in @sec-subgroups using the methods detailed in @sec-subgroup-analyses for the domain(s) for which futility is indicated.
+For a futility decision to hold definitively, all subgroups within the relevant domain should show futility, consistent with the decision thresholds as detailed above.
+Any subgroups that are not futile may be permitted to continue to enrol into the study. 
+For example, if revision is shown to be futile relative to DAIR in the main comparison, but the subgroup analysis indicates that revision is not futile for those participants where the infection site is the hip (rather than knee), then randomised assignment in the surgical domain may continue for participants with hip infections.
 Variations to this are permitted at the DSMC disgression.
 
 ## Superiority
 
 Superiority implies that an intervention has high probability of being beneficial relative to a comparator intervention.
-Superiority is a posterior probability assessment against a threshold value (for the current domain threshold values see @tbl-dec-thres).
+Superiority is a posterior probability assessment against a threshold value (for the current domain threshold values see @tbl-dec-thres) defined as:
 
 $$
 \begin{aligned}
-\text{Pr}(\Delta > \rho_{sup}) \ge \gamma_{sup}
+\text{Pr}(\pi_{\text{trt}} - \pi_{\text{ref}} > \rho_{\text{sup}}) \ge \gamma_{\text{sup}}
 \end{aligned}
 $$
 
-as a boolean indicator of treatment superiority based on the posterior estimate treatment comparison represented by $\Delta$ relative to a reference value $\rho_{sup}$ at a probability greater than or equal to a threshold value  $\gamma_{sup}$.
+which resolves to a boolean indicator of treatment superiority based on the posterior estimate treatment comparison represented by an absolute difference between treatment and reference groups, $\pi_{\text{trt}} - \pi_{\text{ref}}$, relative to a reference value $\rho_{\text{sup}}$ at a probability greater than or equal to a threshold value  $\gamma_{\text{sup}}$.
 
 ## Non-inferiority
 
-Non-inferiority implies that an intervention has a high probability of being no worse than some pre-specified threshold relative to the comparator intervention.
+Non-inferiority implies that an intervention has a high probability of being no worse than some pre-specified threshold relative to the comparator intervention defined as
 
 $$
 \begin{aligned}
-\text{Pr}(\Delta > \rho_{ni}) \ge \gamma_{ni}
+\text{Pr}(\pi_{\text{trt}} - \pi_{\text{ref}} > \rho_{\text{ni}}) \ge \gamma_{\text{ni}}
 \end{aligned}
 $$
 
-as a boolean indicator of treatment non-inferiority based on the posterior estimate treatment comparison represented by $\Delta$ relative to a reference value $\rho_{ni}$ at a probability greater than or equal to a threshold value  $\gamma_{ni}$.
+which resolves to a boolean indicator of treatment non-inferiority based on the posterior estimate treatment comparison represented by an absolute difference between treatment and reference groups, $\pi_{\text{trt}} - \pi_{\text{ref}}$, relative to a reference value $\rho_{\text{ni}}$ at a probability greater than or equal to a threshold value  $\gamma_{\text{ni}}$.
 
 ## Futility
 
-Futility in relation to either a superiority or a non-inferiority assessment implies that an intervention has low probability relative to the comparator intervention with respect to that assessment.
+Futility in relation to either a superiority or a non-inferiority assessment implies that an intervention has low probability relative to the comparator intervention with respect to that assessment defined as 
 
 $$
 \begin{aligned}
-\text{Pr}(\Delta > \rho_{fut}) \le \gamma_{fut}
+\text{Pr}(\pi_{\text{trt}} - \pi_{\text{ref}} > \rho_{\text{fut}}) \le \gamma_{\text{fut}}
 \end{aligned}
 $$
 
-as a boolean indicator of treatment futility based on the posterior estimate treatment comparison represented by $\Delta$ relative to a reference value $\rho_{fut}$ at a probability greater than or equal to a threshold value  $\gamma_{fut}$.
-Separate futility assessments are run for both superiority and non-inferiority.
+which resolves to a boolean indicator of treatment futility based on the posterior estimate treatment comparison represented by an absolute difference between treatment and reference groups, $\pi_{\text{trt}} - \pi_{\text{ref}}$, relative to a reference value $\rho_{\text{fut}}$ at a probability greater than or equal to a threshold value  $\gamma_{\text{fut}}$ and where both $\rho_{\text{fut}}$ and $\gamma_{\text{fut}}$ can be specific to superiority and non-inferiority assessments.
 
 
 # Adaptation
@@ -1819,8 +1613,7 @@ Separate futility assessments are run for both superiority and non-inferiority.
 ## Adaption considerations
 
 Three possible adaptations are currently identified, namely early stopping (due to superiority, non-inferiority or futility), the addition of interventions within existing domains and the addition of entirely new domains.
-
-
+The operational procedures associated with each of these adaptations are defined within the protocol.
 
 <!-- The treatment regimen under evaluation is the randomised and revealed surgical treatment in combination with randomised and non-randomised treatments associated with other domains in the subset of patients that would adhere to all surgical domain interventions but that may have had specified or unspecified ICE(s) associated with other domains. -->
 

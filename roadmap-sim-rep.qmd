@@ -109,11 +109,14 @@ Data is generated based on the empirical distributions obtained from the PIANO s
 
 We simulate silo membership from a multinomial distribution with probabilities 0.3, 0.5 and 0.2 for early, late and chronic. Conditional on silo membership, we simulate site of infection from a multinomial distribution with probabilities 0.4, 0.6 (knee, hip | early), 0.7, 0.3 (knee, hip | late) and 0.5, 0.5 (knee, hip | chronic).
 
-For the surgical domain, we simulate preference towards revision from a multinomial distribution with probabilities 0.66, 0.33 (rev(1), rev(2) | early), 0.3, 0.7 (rev(1), rev(2) | late), 0.25, 0.75 (rev(1), rev(2) | chronic).
+For the surgical domain, we simulate preference towards revision from a multinomial distribution with probabilities 0.65, 0.35 (rev(1), rev(2) | early), 0.3, 0.7 (rev(1), rev(2) | late), 0.25, 0.75 (rev(1), rev(2) | chronic).
 
 We simulate surgical intervention from a multinomial distribution with probabilities 0.85, 0.15 (DAIR, revision | early), 0.5, 0.5 (DAIR, revision | late), 0.2, 0.8 (DAIR, revision | chronic). Revision is subsequently decomposed into one and two-stage via the preferences.
 
 A silo-specific index can be computed as 
+
+*todo*
+
  where 
  is the treatment allocation (DAIR, rev(1), rev(2)), 
  is the number of surgical treatment types and 
