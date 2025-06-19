@@ -63,7 +63,7 @@ if(toks[length(toks)] == "roadmap-sap"){
 # Load all the files into a single list.
 
 # files of interest
-sim_lab <- "sim07-04"
+sim_lab <- "sim07-05"
 
 flist <- list.files(paste0("data/", sim_lab), pattern = "sim07")
 toks <- list()
@@ -74,6 +74,7 @@ for(i in 1:length(flist)){
   toks[[i]] <-  unlist(tstrsplit(flist[i], "[-.]"))
 }
 
+N_sims <- l[[1]]$cfg$nsim
 ```
 
 {{< pagebreak >}}
@@ -135,6 +136,8 @@ In this report, reference to the current statistical analysis report, means refe
 # Introduction
 
 Data generation assumptions, modelling approaches, scenarios and results that were used to explore the ROADMAP design operating characteristics.
+
+These results are based on simulation ID `r sim_lab` with `r N_sims` trials run per scenario.
 
 # Data generation
 
