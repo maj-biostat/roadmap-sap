@@ -19,6 +19,7 @@ link-citations: true
 format:
   pdf: 
     pdf-engine: xelatex
+    keep-tex: true
     documentclass: scrreprt
     papersize: a4
     fontsize: 12pt
