@@ -12,6 +12,8 @@ Are documented in the SAP, but to repeat:
 
 Note that for this repository, all changes can likely be made on main and push directly.
 
+See https://github.com/maj-biostat/roadmap-sap/releases for the full set of releases.
+
 ## Rendering
 
 To render reports you can either run the relevant quarto commands or (assuming you have just installed) invoke
