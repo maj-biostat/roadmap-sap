@@ -248,13 +248,7 @@ Reference some of the subgroups for ideas.
 
 # Section 2.9 - Supportive analyses
 
-TODO - Query the competing risks, what is relevant/sensible to consider?
-
 For logistic regression models, update treatment effect to risk difference so that we are consistent with the primary analysis.
-
-Should we revise the estimand definition such that we state clearly the issue of competing risk and that it is a part of the estimand that is being targeted (or change the estimand and estimation approach completely)?
-
-
 
 # Section 2.9.1 - Treatment success
 
@@ -273,33 +267,33 @@ A Bayesian approach to the MWU does exist, but has not been widely adopted to da
 For the strata specific derivations, should the surgical domain revision group be restricted to those that entered duration and extended prophylaxis as non-randomised?
 Not doing this may lead to bias in the surgical domain in the scenario where there is no effect of revision but an effect within the duration or extended prophylaxis domain that will only be apparent for those that receive revision.
 
-*The estimand in the core protocol assumes a cumulative logit analysis whereas here we assume a 'classical' door analysis.*
+*The estimand in the core protocol assumes a cumulative logit analysis whereas in the sap we assume a 'standard' door analysis.*
 
 # Section 2.9.3 - Patient reported joint function
 
 Would a conversion to a mean difference be conceivable based on the distribution of scores or is this too complicated given the conditional model?
-Currently the treatment effect is in terms of the cumulative odds ratio. 
-
-# Section 2.9.6 - Clinical cure to 12 months
-
-Update the estimand measure of effect to a risk difference.
+Currently the treatment effect is in terms of the cumulative odds ratio.
 
 # Section 2.9.7 - Clinical cure to 12 months
 
-Or is it the intention to restrict this to the subset that don't die and don't get their initial prosthetic replaced.
+Update the estimand measure of effect to a risk difference.
+
+Should this be approached as stated or was the intention to restrict this to the subset that don't die and don't get their initial prosthetic replaced.
 Personally, I think it should be based on the full analysis set because this allows the result to be compared with the primary analysis and it preserves randomisation.
 
 # Section 2.9.12 - Time alive and free from revision procedure to 24 months
 
 The M-spline should include an intercept so that $h(t)$ is not constrained to zero at the origin and the coefficients are constrained to a simplex for identifiability.
-todo - go back and review M-spline vs B-spline differences in approach, stability, fit for purpose and so on.
 
-todo - This deviates from the current estimand specification A.12 (Pg 39 ROADMAP Core Protocol_V1.1_01Aug2024_clean.pdf) which, I believe, intends a descriptive summary.
+Todo - go back and review M-spline vs B-spline differences in approach, stability, fit for purpose and so on.
 
+Todo - The sap deviates from the current estimand specification A.12 (Pg 39 ROADMAP Core Protocol_V1.1_01Aug2024_clean.pdf) median difference in time to revision.
+Was this intended to be median survival?
 
 # Section 2.10 - Supportive (domain specific) analyses
 
-Get the DSA estimand specifications update to indicate that these are all up to 12 months.
+Get the DSA estimand specifications update to indicate that these are all up to 12 months if they haven't already.
+Double check anyway.
 
 # Section 2.10.1.1 - Unplanned re-operation
 
@@ -319,31 +313,26 @@ Presumably also 90 days...
 Check whether this was meant to be 90 days post commencement of antibiotics.
 
 What is meant by "ceased due to other suspected adverse reaction"? 
-Specifically, what is with the other prefix? This applies to the equivalent estimand in the extended proph domain.
+Specifically, what is with the 'other' prefix? 
+This question also applies to the equivalent estimand in the extended proph domain.
 
-# Section 2.10.3.2 - Time alive and free from any revision procedure to 12-months
+# Section 2.10.3.1 - Time alive and free from any revision procedure to 12-months
 
-todo - This seems like it would be domain agnostic. 
-Not sure what it is doing in the DSA for ExP
+This seems like it would be domain agnostic, why is it specific to the extended prophylaxis domain?
 
-# Section 2.10.3.3 - Time alive and free from any revision procedure to 24-months
+# Section 2.10.3.2 - Time alive and free from any revision procedure to 24-months
 
-todo - Again, this seems like it would be domain agnostic. 
-Not sure what it is doing in the DSA for ExP
+As above, this seems like it would be domain agnostic. 
+Get clarification.
 
-# Section 2.10.3.4 - Laboratory-proven *Clostridium difficile* diarrhoea to x days
 
-todo - Check whether this should have a time limit on it. 
-Presumably 90 days as per ab duration domain
+# Section 2.10.3.4 - Antibiotics ceased due to suspected adverse reaction to 12 months
 
-# Section 2.10.3.5 - Antibiotics ceased due to suspected adverse reaction to 90 days
-
-todo - What is meant by other?  
-Check whether this was meant to be 90 days post commencement of extended prophylaxis.
+Again, what is meant by other?  
 
 # Section 2.10.4.1 - Acute liver injury to day 100
 
-todo - Check whether this should be **post commencement of rif**. 
+Check whether this should be **post commencement of rif**. 
 
 # Section 2.10.4.3 - Laboratory-proven *Clostridium difficile* diarrhoea to x days
 
@@ -351,29 +340,20 @@ Check whether this should have a time limit on it.
 
 # Section 2.10.4.4 - Antibiotics ceased due to suspected adverse reaction to 100 days
 
-todo - Check why this is 100 days and others are 90.
+Check why this is 100 days and others are 90.
 Should these all be made the same?
 Also check which antibiotics we are talking about here. Is it just rif under consideration or does it apply across all antibiotics, in which case isn't this a domain agnostic question?
 
 # Section 3.1 - Treatment effects
 
-Old notes - review and recast if necessary:
+## Reference notes
 
 To expand on the above, assume that when a unit is randomised to revision and the clinical decision of what type of revision to do is based solely on disease severity with more severe units receiving one-stage and those that are less severe receive two-stage.
 This violates the exchangeability assumption in that if $\mathbb{E}[Y|T = 1] = y_1$ and $\mathbb{E}[Y|T = 2] = y_2$ (with $Y$ denoting the observed outcomes and $T = 1$, $T = 2$ denoting receipt of one and two-stage) then we would not obtain the same expectations if the sets of treatment units were switched.
 In other words, $\mathbb{E}[Y(1) | T = 1] \ne \mathbb{E}[Y(1) | T = 2] \ne \mathbb{E}[Y(1)]$ and $\mathbb{E}[Y(2) | T = 1] \ne \mathbb{E}[Y(2) | T = 2] \ne \mathbb{E}[Y(2)]$.
 To remedy this, we adjust for a covariate set (in this example, disease severity but in the primary analysis we adjust for revision type preference and additional patient characteristics) with the goal of achieving conditional exchangeability.
 
-
-# Section 3.1.1 - Surgical domain 
-
-Question - Would it be more sensible to compute $\mathbb{E}[Y|\dots]$ from the inverse link transformed linear predictor and then compute the log-odds ratios from there or is the above acceptable??
-
-
 # Section 4.1 - Decision procedures overview 
-
-Define what happens to subsequent participants within a domain for which the decision has been dealt with.
-Presumably, the simplest approach is to simply add them into a non-randomised comparison for the domain for which the decision was made, but to introduce them into other domains based on the design dependencies.
 
 Unsure whether it is sensible to be examining all subgroups in order to determine the outcome of futility, especially given the number of subgroups to be evaluated.
 
