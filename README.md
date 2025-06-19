@@ -10,6 +10,8 @@ Are documented in the SAP, but to repeat:
 2. If there is no github release, then create one and give it a sensible release identifier.
 3. If a release already exists that is aligned with the present design, then that is the one that should be referenced for the analysis.
 
+Note that for this repository, all changes can likely be made on main and push directly.
+
 ## Rendering
 
 To render reports you can either run the relevant quarto commands or (assuming you have just installed) invoke
