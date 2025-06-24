@@ -924,7 +924,8 @@ Model fit will be considered with reference to posterior predictive checks.
 
 ## Primary analysis {#sec-primary-analysis}
 
-The primary analysis model for ROADMAP will adjust for silo, joint, preference for revision type, treatment regimen, time period of recruitment, region/site and baseline characteristics.
+The primary analysis model for ROADMAP adopts an at-the-margins analysis, that is making the assumption of no interactions across domains (e.g. the effect of revision relative to DAIR in the surgical domain is the same irrespective of whether the participant is allocated to no-rifampacin or rifampacin in the AB choice domain), see @kahan2022.
+The model will adjust for silo, joint, preference for revision type, treatment regimen, time period of recruitment, region/site and baseline characteristics.
 As some parameters are undefined for some intervention options, the model can be specified as follows:
 
 <!-- see the latex physics manual for vector va, vb notation -->
@@ -976,8 +977,8 @@ The treatment effect estimands will be calculated from the posterior using g-com
 ### Priors
 
 We will use weakly informative priors that aim to constrain the parameter estimates to within plausible ranges and are consistent with the belief that extreme treatment effects are unlikely.
-
-The prior for $\alpha$ will be set to
+Priors remain the same throughout the study.
+The prior for reference log-odds, $\alpha$, will be set to
 
 $$
 \alpha \sim \text{Logistic}(0.7, 0.7) \quad \text{location/scale}
@@ -1017,8 +1018,12 @@ If issues with the pre-specified models arise, the necessary modifications will 
 ## Sensitivity analysis (applicable to primary)
 
 Sensitivity analyses of the results to the pre-specified priors will be run at each analysis and variations to the pre-specified models may be explored.
-Additional models (either simpler or more complex) may be investigated as part of checks of sensitivity, stability, and model fit.
 
+These analyses may include exploration of whether treatment interactions are apparent across domains.
+For example, analyses may consider the interaction of the surgical by AB choice domains.
+While these results may be reported, no formal prespecifications of what constitutes evidence of  interaction effects are given.
+
+Additional models (either simpler or more complex) may be investigated as part of checks of sensitivity, stability, and model fit.
 
 
 ## Subgroup analyses {#sec-subgroup-analyses}
@@ -1504,7 +1509,7 @@ The trial considers:
 + futility - which indicates a low probability with respect to the relevant superiority or non-inferiority assessment (i.e. there are futility triggers for both superiority and futility for non-inferiority assessments)
 
 The mathematical definitions of these quantities are provided below and a table of the thresholds currently in use is defined in @tbl-dec-thres.
-
+Decision threshold and decision probabilities (the evidential requirements) remain fixed throughout the study at all analysis points.
 Decisions are made with respect to the average value for any `random-effect' terms that might exist within the model.
 
 ```{r}
@@ -1512,8 +1517,6 @@ Decisions are made with respect to the average value for any `random-effect' ter
 #| label: tbl-dec-thres
 #| tbl-pos: H
 #| tbl-cap: "Decision thresholds"
-
-
 
 
 d_tbl <- tribble(

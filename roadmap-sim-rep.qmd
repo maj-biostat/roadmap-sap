@@ -468,15 +468,16 @@ g_tbl
 
 ## Sample size
 
-### Expected sample size for randomised comparisons
+### Randomised comparisons
 
-@tbl-n-by-rand-comp and @fig-n-by-rand-comp show the expected sample size by interim analysis for the randomised comparisons in each domain.
+@tbl-n-by-rand-comp and @fig-n-by-rand-comp show the expected sample size by interim analysis for the randomised comparisons within each domain.
 When domain level decisions are triggered, subsequent enrolments are redirected to the remaining arms, which leads to the observed divergence between arms.
 The figures are to give a sense of how much information is available for estimating quantities that lead to trial decisions.
+Subsequent tables give the expected number of participants by treatment group within each domain when a decision is triggered.
 
 ```{r, echo = F}
 #| label: sample_size_rand_comparisons
-#| code-summary: Number of participants for each randomised comparison over time
+#| code-summary: Number of participants for each domain over time
 
 # 
 
@@ -635,16 +636,16 @@ d_tbl_3_cur[domain == "Surgical", arm := fcase(
     arm == "4", "Revision"
 )]
 d_tbl_3_cur[domain == "AB Duration", arm := fcase(
-    arm == "2", "12 weeks",
-    arm == "3", "6 weeks"
+    arm == "2", "12 wks",
+    arm == "3", "6 wks"
 )]
 d_tbl_3_cur[domain == "AB Ext-proph", arm := fcase(
     arm == "2", "none",
-    arm == "3", "12 weeks"
+    arm == "3", "12 wks"
 )]
 d_tbl_3_cur[domain == "AB Choice", arm := fcase(
-    arm == "2", "No-rif",
-    arm == "3", "Rif"
+    arm == "2", "no-rif",
+    arm == "3", "rif"
 )]
 d_tbl_3_cur <- d_tbl_3_cur[, .SD, .SDcols = !("scenario")]
 
@@ -846,7 +847,9 @@ for(i in 1:length(l)){
   d_1_dec_a <- d_1_dec[decision %in% c("sup", "fut_sup"), .SD[1], keyby = .(sim)][
     , .(sim, ia, decision)
   ]
-  d_1_dec_b <- d_1_dec[!(sim %in% d_1_dec_a$sim), .SD[1], keyby = .(sim)][
+  
+  # todo - should be the max sample size for this one.....
+  d_1_dec_b <- d_1_dec[!(sim %in% d_1_dec_a$sim), .SD[.N], keyby = .(sim)][
     , .(sim, ia, decision = "-")
   ]
   d_1_dec <- rbind(d_1_dec_a, d_1_dec_b)[order(sim, ia)]
@@ -879,7 +882,7 @@ for(i in 1:length(l)){
     , .(sim, ia, decision)
   ]
   # indeterminate trials
-  d_2_dec_b <- d_2_dec[!(sim %in% d_2_dec_a$sim), .SD[1], keyby = .(sim)][
+  d_2_dec_b <- d_2_dec[!(sim %in% d_2_dec_a$sim), .SD[.N], keyby = .(sim)][
     , .(sim, ia, decision = "-")
   ]
   d_2_dec <- rbind(d_2_dec_a, d_2_dec_b)[order(sim, ia)]
@@ -912,7 +915,7 @@ for(i in 1:length(l)){
     , .(sim, ia, decision)
   ]
   # indeterminate trials
-  d_3_dec_b <- d_3_dec[!(sim %in% d_3_dec_a$sim), .SD[1], keyby = .(sim)][
+  d_3_dec_b <- d_3_dec[!(sim %in% d_3_dec_a$sim), .SD[.N], keyby = .(sim)][
     , .(sim, ia, decision = "-")
   ]
   d_3_dec <- rbind(d_3_dec_a, d_3_dec_b)[order(sim, ia)]
@@ -944,7 +947,7 @@ for(i in 1:length(l)){
     , .(sim, ia, decision)
   ]
   # indeterminate trials
-  d_4_dec_b <- d_4_dec[!(sim %in% d_4_dec_a$sim), .SD[1], keyby = .(sim)][
+  d_4_dec_b <- d_4_dec[!(sim %in% d_4_dec_a$sim), .SD[.N], keyby = .(sim)][
     , .(sim, ia, decision = "-")
   ]
   d_4_dec <- rbind(d_4_dec_a, d_4_dec_b)[order(sim, ia)]
@@ -968,13 +971,15 @@ for(i in 1:length(l)){
 }
 ```
 
+@tbl-n-at-trigger shows the expected number of participants on each treatment arm until a decision is triggered, for each domain and each decision type.
+For example, for the surgical domain, some of the simulated trials will result in a superiority decision, some will result in a futility (of superiority) decision and some of the simulated trials will run until their maximum sample size without any decision being made.
+Earlier results show approximately what proportion of decision types are made under each scenario.
 
 ```{r}
 #| echo: FALSE
 #| label: tbl-n-at-trigger
 #| tbl-cap: 'Expected number of participants entering into randomised comparisons'
 #| tbl-pos: H
-
 
 d_tbl_1_cur <- d_N_by_rand[
   , .(N_mu = mean(N)), 
@@ -988,7 +993,7 @@ d_tbl_1_cur <- dcast(
 d_tbl_1_cur[, decision := factor(
   decision, 
   levels = c("sup", "fut_sup", "ni", "fut_ni", "-"),
-  labels = c("superiority", "futility (sup)", "ni", "futility (ni)", "-"))]
+  labels = c("superiority", "futility (sup)", "ni", "futility (ni)", "no decision"))]
 
 d_tbl_1_cur <- d_tbl_1_cur[order(scenario, decision)]
 d_tbl_1_cur <- d_tbl_1_cur[, .SD, .SDcols = !c("scenario")]
@@ -1009,11 +1014,11 @@ g_tbl <- d_tbl_1_cur |>
     }
   ) |>
   cols_align(
-    columns = 1,
+    columns = 1:2,
     align = "left"
   )  |> 
   cols_align(
-    columns = 2:ncol(d_tbl_1_cur),
+    columns = 3:ncol(d_tbl_1_cur),
     align = "center"
   ) |>
   tab_spanner(
@@ -1061,15 +1066,13 @@ g_tbl <- d_tbl_1_cur |>
   fmt_number(decimals = 0, drop_trailing_zeros = TRUE)
 
 g_tbl
-
-
 ```
 
 
 {{< pagebreak >}}
-### Expected sample size
+### Total enrolments
 
-@tbl-sample-size shows the expected sample size at which each decision is made by domain and scenario and, in parentheses, the proportion of trials on which the decision type was made.
+@tbl-sample-size shows the average total number of enrolments until each decision type by domain and scenario and, in parentheses, the proportion of trials on which the decision type was made.
 
 ```{r, echo = F}
 #| label: sample_size
@@ -1170,7 +1173,7 @@ d_tbl_2_cur <- dcast(d_tbl_2_cur, scenario + desc + quant ~ domain, value.var = 
 d_tbl_2_cur[, quant := factor(
   quant, 
   levels = c("sup", "fut_sup", "ni", "fut_ni", "na"),
-  labels = c("superiority", "futility (sup)", "ni", "futility (ni)", "-"))]
+  labels = c("superiority", "futility (sup)", "ni", "futility (ni)", "no decision"))]
 
 d_tbl_2_cur <- d_tbl_2_cur[order(scenario, quant)]
 d_tbl_2_cur <- d_tbl_2_cur[, .SD, .SDcols = !c("scenario")]
@@ -1329,6 +1332,7 @@ for(i in 1:length(l)){
 
 ```
 
+{{< pagebreak >}}
 ## Parameter estimation
 
 @tbl-post-rd and @fig-expected-rd show the expected value of the posterior means for the treatment effects by domain and interim analyse under each scenario along with the 95% interval of the posterior means.
