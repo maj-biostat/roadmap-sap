@@ -1,10 +1,10 @@
-render-sap:
+sap:
   quarto render roadmap-sap.qmd --to pdf
 
-render-notes:
+notes:
   quarto render roadmap-notes.qmd --to pdf
 
-render-sim:
+sim:
   quarto render roadmap-sim-rep.qmd --to pdf
 
-all: render-sap render-notes render-sim
+all: sap notes sim
