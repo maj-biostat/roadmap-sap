@@ -25,6 +25,9 @@ bibliography: etc/refs.bib
 csl: etc/elsevier-harvard.csl
 ---
 
+
+# Introduction 
+
 These notes represent items relating to the study specification that should be considered and discussed prior to finalising the protocol, DSAs and SAP.
 
 Asterisks (\*, \**, \*\*\*) as used to denote importance by section, more asterisks implied higher importance.
