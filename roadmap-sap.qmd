@@ -1525,16 +1525,16 @@ d_tbl <- tribble(
   "", "Futility \n revision vs DAIR", "$>0.05$", "$\\le 0.3$",
   "", "", "", "",
   
-  "Antibiotic duration", "Non-inferiority \n 6 weeks vs 12 weeks", "$> -0.05$", "$\\ge 0.925$",
-  "", "Futility \n 6 weeks vs 12 weeks", "$<0$", "$\\le 0.1$",
+  "Antibiotic", "Non-inferiority \n 6 weeks vs 12 weeks", "$> -0.05$", "$\\ge 0.945$",
+  "duration", "Futility \n 6 weeks vs 12 weeks", "$<0$", "$\\le 0.1$",
   "", "", "", "",
   
-  "Extended prophylaxis", "Superiority \n 12 weeks vs none", "$>0$", "$\\ge 0.96$",
-  "", "Futility \n 12 weeks vs none", "$>0.05$", "$\\le 0.3$",
+  "Extended", "Superiority \n 12 weeks vs none", "$>0$", "$\\ge 0.96$",
+  "prophylaxis", "Futility \n 12 weeks vs none", "$>0.05$", "$\\le 0.3$",
   "", "", "", "",
   
-  "Antibiotic choice", "Superiority \n rifampacin vs none", "$>0$", "$\\ge 0.99$",
-  "", "Futility \n rifampacin vs none", "$>0.05$", "$\\le 0.3$"
+  "Antibiotic", "Superiority \n rifampacin vs none", "$>0$", "$\\ge 0.99$",
+  "choice", "Futility \n rifampacin vs none", "$>0.05$", "$\\le 0.3$"
   )
 
 
@@ -1547,10 +1547,10 @@ gt_tbl <- gt(d_tbl, groupname_col = "Domain",
   ) |>
   fmt_markdown() |>
   cols_width(
-    domain ~ pct(15),
+    domain ~ pct(20),
     quantity ~ pct(40),
-    threshold_probability ~ pct(20),
-    decision_probability ~ pct(20)
+    threshold_probability ~ pct(15),
+    decision_probability ~ pct(15)
   ) |>
   cols_label(
     domain = "Domain",
