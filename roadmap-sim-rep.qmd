@@ -210,8 +210,8 @@ Bar the surgical domain, for which 'by silo' deviations are implicit in the exis
 
 # Decision procedures
 
-Decision procedures follow those that are documented in the current SAP.
-In brief, at each interim, we assess the posterior and if a decision threshold is met, we make claims as directed by the results.
+Decision procedures, including thresholds and decision probabilities, follow those that are documented in the current SAP.
+At each interim, we assess the posterior and if a decision threshold is met, we make claims as directed by the results.
 Within the simulations, we assume the decisions are binding and constrain the subsequent data generation options.
 Specifically, if a superiority decision is reached in one of the domains for which this decision type is relevant, then we consider that domain complete and all subsequent participants are assigned to receive the superior intervention.
 Non-inferiority is handled in an analogous manner.
